@@ -40,6 +40,111 @@ async def accept(ctx, member: discord.Member):
     await member.add_roles(members)
     await channel.send(f'Please welcome {member.mention} to **Hydro Vanilla SMP**! Our IP and Information can be found in {info}! :smiley:')
 
+@client.event
+async def on_raw_reaction_add(payload):
+    message_id = payload.message_id
+    if message_id == 771112912643031070:
+        guild_id = payload.guild_id
+        guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
+        member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
+
+        if payload.emoji.name == 'Hydropepecglock':
+            role = discord.utils.get(guild.roles, name='True Server Crasher...')
+        elif payload.emoji.name == 'tehlo':
+            role = discord.utils.get(guild.roles, name="Story of Teflon'")
+        elif payload.emoji.name == 'blamenate':
+            role = discord.utils.get(guild.roles, name='#PraiseNate')
+        elif payload.emoji.name == '🛒':
+            role = discord.utils.get(guild.roles, name='Shopaholics')
+        elif payload.emoji.name == '🇳🇱':
+            role = discord.utils.get(guild.roles, name='Dutchie')
+        elif payload.emoji.name == '🍰':
+            role = discord.utils.get(guild.roles, name='Food Addicts')
+        elif payload.emoji.name == 'reddit':
+            role = discord.utils.get(guild.roles, name='Subreddit Member')
+        elif payload.emoji.name == 'HydroTwitch':
+            role = discord.utils.get(guild.roles, name='Stream Fans')
+        elif payload.emoji.name == '1️⃣':
+            role = discord.utils.get(guild.roles, name='Season 1 OG')
+        elif payload.emoji.name == '2️⃣':
+            role = discord.utils.get(guild.roles, name='Season 2 OG')
+        elif payload.emoji.name == '3️⃣':
+            role = discord.utils.get(guild.roles, name='Season 3 OG')
+        elif payload.emoji.name == '4️⃣':
+            role = discord.utils.get(guild.roles, name='Season 4 OG')
+        elif payload.emoji.name == '5️⃣':
+            role = discord.utils.get(guild.roles, name='Season 5 OG')
+        elif payload.emoji.name == '6️⃣':
+            role = discord.utils.get(guild.roles, name='Season 6 OG')
+        else:
+            role = discord.utils.get(guild.roles, name=payload.emoji.name)
+
+        if role in member.roles:
+            await member.send(f"You already have {role} role.")
+        else:
+            if role is not None:
+                if member is not None:
+                    await member.add_roles(role)
+                    await member.send(f"You've been given {role} role")
+                else:
+                    pass
+            else:
+                await member.send('Role not found.')
+
+@client.event
+async def on_raw_reaction_remove(payload):
+    message_id = payload.message_id
+    if message_id == 771112912643031070:
+        guild_id = payload.guild_id
+        guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
+        member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
+
+        if payload.emoji.name == 'Hydropepecglock':
+            role = discord.utils.get(guild.roles, name='True Server Crasher...')
+        elif payload.emoji.name == 'tehlo':
+            role = discord.utils.get(guild.roles, name="Story of Teflon'")
+        elif payload.emoji.name == 'blamenate':
+            role = discord.utils.get(guild.roles, name='#PraiseNate')
+        elif payload.emoji.name == '🛒':
+            role = discord.utils.get(guild.roles, name='Shopaholics')
+        elif payload.emoji.name == '🇳🇱':
+            role = discord.utils.get(guild.roles, name='Dutchie')
+        elif payload.emoji.name == '🍰':
+            role = discord.utils.get(guild.roles, name='Food Addicts')
+        elif payload.emoji.name == 'reddit':
+            role = discord.utils.get(guild.roles, name='Subreddit Member')
+        elif payload.emoji.name == 'HydroTwitch':
+            role = discord.utils.get(guild.roles, name='Stream Fans')
+        elif payload.emoji.name == '1️⃣':
+            role = discord.utils.get(guild.roles, name='Season 1 OG')
+        elif payload.emoji.name == '2️⃣':
+            role = discord.utils.get(guild.roles, name='Season 2 OG')
+        elif payload.emoji.name == '3️⃣':
+            role = discord.utils.get(guild.roles, name='Season 3 OG')
+        elif payload.emoji.name == '4️⃣':
+            role = discord.utils.get(guild.roles, name='Season 4 OG')
+        elif payload.emoji.name == '5️⃣':
+            role = discord.utils.get(guild.roles, name='Season 5 OG')
+        elif payload.emoji.name == '6️⃣':
+            role = discord.utils.get(guild.roles, name='Season 6 OG')
+        else:
+            role = discord.utils.get(guild.roles, name=payload.emoji.name)
+
+        if role in member.roles:
+            if role is not None:
+                if member is not None:
+                    await member.remove_roles(role)
+                    await member.send(f"{role} role has been taken from you.")
+                else:
+                    pass
+            else:
+                await member.send('Role not found.')
+        else:
+            if role is not None:
+                await member.send(f"You don't have {role} role.")    
+            else:
+                await member.send('Role not found.')
+
 
 if __name__ == '__main__':
     import config
