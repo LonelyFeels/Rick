@@ -51,7 +51,7 @@ async def on_raw_reaction_add(payload):
         if payload.emoji.name == 'Hydropepecglock':
             role = discord.utils.get(guild.roles, name='True Server Crasher...')
         elif payload.emoji.name == 'tehlo':
-            role = discord.utils.get(guild.roles, name="Story of Teflon'")
+            role = discord.utils.get(guild.roles, name="'Story of Teflon'")
         elif payload.emoji.name == 'blamenate':
             role = discord.utils.get(guild.roles, name='#PraiseNate')
         elif payload.emoji.name == '🛒':
@@ -102,7 +102,7 @@ async def on_raw_reaction_remove(payload):
         if payload.emoji.name == 'Hydropepecglock':
             role = discord.utils.get(guild.roles, name='True Server Crasher...')
         elif payload.emoji.name == 'tehlo':
-            role = discord.utils.get(guild.roles, name="Story of Teflon'")
+            role = discord.utils.get(guild.roles, name="'Story of Teflon'")
         elif payload.emoji.name == 'blamenate':
             role = discord.utils.get(guild.roles, name='#PraiseNate')
         elif payload.emoji.name == '🛒':
