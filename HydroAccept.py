@@ -14,7 +14,7 @@ async def on_ready():
 
 @client.event
 async def on_member_join(member):
-    role = discord.utils.get(member.guild.roles, name='Applicants')
+    role = discord.utils.get(member.guild.roles, id='770977190250545152')
     welcome = client.get_channel(621326188555796481)
     applications = client.get_channel(494184460275941377)
     info = '<#584777370557349898>'
