@@ -40,6 +40,11 @@ async def accept(ctx, member: discord.Member):
     await member.add_roles(members)
     await channel.send(f'Please welcome {member.mention} to **Hydro Vanilla SMP**! Our IP and Information can be found in {info}! :smiley:')
 
+@accept.error
+async def accept_error(member, error):
+    if isinstance(error, commands.MissingRole):
+        await member.send("You don't have the permissions to do that!")
+
 @client.event
 async def on_raw_reaction_add(payload):
     message_id = payload.message_id
@@ -144,6 +149,38 @@ async def on_raw_reaction_remove(payload):
                 await member.send(f"You don't have {role} role.")    
             else:
                 await member.send('Role not found.')
+
+@client.command(aliases=['8ball'])
+async def _8ball(ctx, *, question):
+    responses = ['It is certain.',
+                 'It is decidedly so.',
+                 'Without a douubt.',
+                 'Yes - definitely.',
+                 'You may rely on it.',
+                 'As I see it, yes',
+                 'Most likely.',
+                 'Outlook good.',
+                 'Yes.',
+                 'Signs point to yes.',
+                 'Reply hazy, try again.',
+                 'Ask again later.',
+                 'Better not tell you now.',
+                 'Cannot predict now.',
+                 'Concentrate and ask again.',
+                 "Don't count on it.",
+                 'My reply is no.',
+                 'My sources say no.',
+                 'Outlook not so good',
+                 'Very doubtful.']
+    await ctx.send(f'{random.choice(responses)}')
+    
+@client.command()
+async def clear(ctx, amount=5):
+    authorperms_clear = ctx.author.permissions_in(ctx.channel)
+    if authorperms_clear.manage_messages:
+        await ctx.channel.purge(limit=amount+1)
+    else:
+        await ctx.send("You don't have the permissions to do that!")
 
 
 if __name__ == '__main__':
