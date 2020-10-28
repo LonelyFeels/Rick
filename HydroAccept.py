@@ -20,7 +20,7 @@ async def on_member_join(member):
     info = '<#584777370557349898>'
     await member.add_roles(role)
     await welcome.send(f'Welcome {member.mention} to **Hydro Vanilla SMP!** :hydrosmp:')
-    await applications.send(f'Welcome {member.mention} to **Hydro Vanilla SMP** :hydrosmp:! \n**Make sure to read** {info} **to check on how to Apply!**')
+    await applications.send(f'Welcome {member.mention} to **Hydro Vanilla SMP** <:hydrosmp:579754809272434695>! \n**Make sure to read** {info} **to check on how to Apply!**')
     await applications.send('```IGN?:\nLocation?:\nWhat year were you born?:\n\nHow long have you been playing Minecraft SMP?:\nWhat do you primarily do while playing Minecraft?:\nHow many past servers have you played on?:\nWill you be active in Discord and do you want to participate in group events?:\nHow much time can you play a week? (estimated):\nBriefly explain your plans for this server:\n\nWhere did you find out about Hydro SMP? (If it is a website, post the link):\nIf it was on Reddit, what is your Reddit username?```')
     await applications.send('Copy this template ^ and post it in this channel when you are done filling it in! :white_check_mark:')
 
