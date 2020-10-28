@@ -43,7 +43,7 @@ async def accept(ctx, member: discord.Member):
 @client.event
 async def on_raw_reaction_add(payload):
     message_id = payload.message_id
-    if message_id == 771112912643031070:
+    if message_id == 771114709603713035:
         guild_id = payload.guild_id
         guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
         member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
@@ -94,7 +94,7 @@ async def on_raw_reaction_add(payload):
 @client.event
 async def on_raw_reaction_remove(payload):
     message_id = payload.message_id
-    if message_id == 771112912643031070:
+    if message_id == 771114709603713035:
         guild_id = payload.guild_id
         guild = discord.utils.find(lambda g: g.id == guild_id, client.guilds)
         member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
