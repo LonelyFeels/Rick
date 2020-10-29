@@ -30,5 +30,10 @@ class Suggestions(commands.Cog):
         await suggestion_message.add_reaction(emoji='\N{THUMBS UP SIGN}')
         await suggestion_message.add_reaction(emoji='\N{THUMBS DOWN SIGN}')
 
+    @suggest.error
+    async def suggest_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('You have to suggest something in order to use this command.')
+
 def setup(client):
     client.add_cog(Suggestions(client))

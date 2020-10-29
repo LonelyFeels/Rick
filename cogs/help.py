@@ -26,7 +26,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='.dynmap', value='Use this command to get the Official Hydro Vanilla SMP Dynmap!', inline=False)
         embedhelp.add_field(name='.8ball <your question>', value='Undecided about something? Ask our 8ball (:', inline=False)
         embedhelp.add_field(name='.hug <@USER>', value='Show someone how much you love them :heart:', inline=False)
-        embedhelp.add_field(name='.suggest <SUGGESTION', value='Suggest something you think it would be a cool addition to the server.', inline=False)
+        embedhelp.add_field(name='.suggest <SUGGESTION>', value='Suggest something you think it would be a cool addition to the server.', inline=False)
         embedhelp.add_field(name='_ _', value='_ _', inline=False)
         embedhelp.add_field(name='.load <category>', value='Loads the category.', inline=False)
         embedhelp.add_field(name='.unload <category>', value='Unloads the category.', inline=False)
