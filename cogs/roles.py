@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 
-class Clear(commands.Cog):
+class Roles(commands.Cog):
 
     def __init__(self,client):
         self.client = client
@@ -150,4 +150,4 @@ class Clear(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Clear(client))
+    client.add_cog(Roles(client))
