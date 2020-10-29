@@ -56,7 +56,8 @@ class Help(commands.Cog):
 
         embeddonate.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embeddonate.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
-        embeddonate.add_field(name='Here you go! The link to donate to Hydro Vanilla SMP!', value='Thanks in advance if you are donating! We really appreciate it :heart:\nhttps://www.paypal.me/HydroVanillaSMP\nIf you do not use PayPal, but are European and use iDeal you can message @Tehlo on Discord, I am Dutch too :smiley:')
+        embeddonate.add_field(name='Here you go! The link to donate to Hydro Vanilla SMP!', value='Thanks in advance if you are donating! We really appreciate it :heart:')
+        embeddonate.add_field(name='https://www.paypal.me/HydroVanillaSMP', value='If you do not use PayPal, but are European and use iDeal you can message @Tehlo on Discord, I am Dutch too :smiley:')
 
         await ctx.send(embed=embeddonate)
 
