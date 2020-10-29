@@ -25,7 +25,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='.invite', value='Get the invite link.', inline=False)
         embedhelp.add_field(name='.dynmap', value='Use this command to get the Official Hydro Vanilla SMP Dynmap!', inline=False)
         embedhelp.add_field(name='.8ball <your question>', value='Undecided about something? Ask our 8ball (:', inline=False)
-        embedhelp.add_field(name='______________________________________________________________', value='______________________________________________________________', inline=False)
+        embedhelp.add_field(name='--------------------------------------------------------------', value='--------------------------------------------------------------', inline=False)
         embedhelp.add_field(name='.load <category>', value='Loads the category.', inline=False)
         embedhelp.add_field(name='.unload <category>', value='Unloads the category.', inline=False)
         embedhelp.add_field(name='.accept <@USER>', value='Use this to accept Applicants and give them Member role.', inline=False)
