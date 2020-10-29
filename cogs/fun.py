@@ -34,6 +34,17 @@ class Fun(commands.Cog):
                     'Very doubtful.']
         await ctx.send(f'{random.choice(responses)}')
 
+        @commands.command()
+        async def hug(self, ctx, member: discord.Member):
+            embedhug = discord.Embed(
+                colour = discord.Colour.from_rgb(12,235,241)
+            )
+
+            embedhug.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+            embedhug.set_image(url='https://imgur.com/kSWpxnG')
+            
+            await ctx.send(embed=embedhug)
+
 
 def setup(client):
     client.add_cog(Fun(client))
