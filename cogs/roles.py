@@ -144,9 +144,12 @@ class Roles(commands.Cog):
         await channel.send(f'Please welcome {member.mention} to **Hydro Vanilla SMP**! Our IP and Information can be found in {info}! :smiley:')
 
     @accept.error
-    async def accept_error(self, member, error):
+    async def accept_error_role(self, member, error):
         if isinstance(error, commands.MissingRole):
             await member.send("You don't have the permissions to do that!")
+    async def accept_error_arg(self, member, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await member.send('You have to mention the Applicant you want to accept!')
 
 
 def setup(client):
