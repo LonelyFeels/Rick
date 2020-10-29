@@ -15,7 +15,7 @@ class Suggestions(commands.Cog):
         author = ctx.message.author
         author_icon = author.avatar_url
         embedsuggest = discord.Embed(
-            title = 'Upvode | Downvote',
+            title = '👍 Upvote | 👎 Downvote',
             description = 'Suggest features to Hydro with `-suggest <suggestion>`',
             colour = discord.Colour.from_rgb(12,235,241)
         )
@@ -25,9 +25,9 @@ class Suggestions(commands.Cog):
         embedsuggest.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedsuggest.add_field(name=f'Suggestion', value=f'{suggestion}', inline=False)
 
-        suggestion_message = channel.send(embedsuggest)
-        await suggestion_message.add_reaction('\N{THUMBS UP SIGN}')
-        await suggestion_message.add_reaction('\N{THUMBS DOWN SIGN}')
+        suggestion_message = await channel.send(embed=embedsuggest)
+        await self.client.add_reaction(suggestion_message, emoji='\N{THUMBS UP SIGN}')
+        await self.client.add_reaction(suggestion_message, emoji='\N{THUMBS DOWN SIGN}')
 
 def setup(client):
     client.add_cog(Suggestions(client))
