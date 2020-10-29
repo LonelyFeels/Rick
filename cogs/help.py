@@ -21,7 +21,7 @@ class Help(commands.Cog):
         embedhelp.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
         embedhelp.add_field(name='.help', value='Shows this message.', inline=False)
         embedhelp.add_field(name='!status', value='Shows Minecraft Server Status', inline=False)
-        embedhelp.add_field(name='donate', value='Shows information about how to donate.', inline=False)
+        embedhelp.add_field(name='.donate', value='Shows information about how to donate.', inline=False)
         embedhelp.add_field(name='.invite', value='Get the invite link.', inline=False)
         embedhelp.add_field(name='.dynmap', value='Use this command to get the Official Hydro Vanilla SMP Dynmap!', inline=False)
         embedhelp.add_field(name='.8ball <your question>', value='Undecided about something? Ask our 8ball (:', inline=False)
@@ -64,8 +64,8 @@ class Help(commands.Cog):
     @commands.command()
     async def invite(self, ctx):
         member = ctx.message.author
-        ctx.send(f'{member.mention}, You got mail! 📬')
-        member.send('Here you go, our Discord Invite!\nhttps://discordapp.com/invite/CAQ9p8y')
+        await ctx.send(f'{member.mention}, You got mail! 📬')
+        await member.send('Here you go, our Discord Invite!\nhttps://discordapp.com/invite/CAQ9p8y')
 
 
 def setup(client):
