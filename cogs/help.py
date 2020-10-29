@@ -20,7 +20,7 @@ class Help(commands.Cog):
         embedhelp.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedhelp.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
         embedhelp.add_field(name='.help', value='Shows this message.', inline=False)
-        embedhelp.add_field(name='!status', value='Shows Minecraft Server Status', inline=False)
+        embedhelp.add_field(name='.status', value='Shows Minecraft Server Status', inline=False)
         embedhelp.add_field(name='.donate', value='Shows information about how to donate.', inline=False)
         embedhelp.add_field(name='.invite', value='Get the invite link.', inline=False)
         embedhelp.add_field(name='.dynmap', value='Use this command to get the Official Hydro Vanilla SMP Dynmap!', inline=False)
