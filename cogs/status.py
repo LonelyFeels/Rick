@@ -29,6 +29,8 @@ class Status(commands.Cog):
         embedstatus.add_field(name='Message of the day:', value=f'{motd}')
         embedstatus.add_field(name='Current Minecraft Version:', value=f'{version}')
 
+        await ctx.send(embed=embedstatus)
+
 
 def setup(client):
     client.add_cog(Status(client))
