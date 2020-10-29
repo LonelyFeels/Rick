@@ -7,6 +7,7 @@ class Clear(commands.Cog):
     def __init__(self,client):
         self.client = client
 
+
     #Commands
     @commands.command()
     async def clear(self, ctx, amount=5):
@@ -15,6 +16,7 @@ class Clear(commands.Cog):
           await ctx.channel.purge(limit=amount+1)
         else:
          await ctx.send("You don't have the permissions to do that!")
+
 
 def setup(client):
     client.add_cog(Clear(client))
