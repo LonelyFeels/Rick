@@ -13,11 +13,9 @@ class Help(commands.Cog):
     async def help(self, ctx):
         embedhelp = discord.Embed(
             title = '**All Hydro Accept commands**',
-            colour = discord.Colour.blue(),
-            icon_url = 'https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png'
             )
 
-        embedhelp.set_footer(text=f'@ Hydro Vanilla SMP')
+        embedhelp.set_footer(text=f'@ Hydro Vanilla SMP',icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedhelp.add_field(name='.help', value='Shows this message.', inline=False)
         embedhelp.add_field(name='!status', value='Shows Minecraft Server Status', inline=False)
         embedhelp.add_field(name='!donate', value='Shows information about how to donate.', inline=False)
@@ -28,7 +26,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='.unload <category>', value='Unloads the category.', inline=False)
         embedhelp.add_field(name='.accept <@USER>', value='Use this to accept Applicants and give them Member role.', inline=False)
         embedhelp.add_field(name='.clear <amount=5>', value='Use this to clear messages.', inline=False)
-        embedhelp.add_field(name='Categories:', value='Roles: Accept, Reaction Roles; Clear: Clear, Fun: 8ball')
+        embedhelp.add_field(name='Categories:', value='Help: Help, Roles: Accept, Reaction Roles; Clear: Clear, Fun: 8ball')
 
         await ctx.send(embed=embedhelp)
         
