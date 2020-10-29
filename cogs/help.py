@@ -21,7 +21,7 @@ class Help(commands.Cog):
         embedhelp.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
         embedhelp.add_field(name='.help', value='Shows this message.', inline=False)
         embedhelp.add_field(name='!status', value='Shows Minecraft Server Status', inline=False)
-        embedhelp.add_field(name='.donate', value='Shows information about how to donate.', inline=False)
+        embedhelp.add_field(name='donate', value='Shows information about how to donate.', inline=False)
         embedhelp.add_field(name='!invite', value='Get the invite link.', inline=False)
         embedhelp.add_field(name='.dynmap', value='Use this command to get the Official Hydro Vanilla SMP Dynmap!', inline=False)
         embedhelp.add_field(name='.8ball <your question>', value='Undecided about something? Ask our 8ball (:', inline=False)
@@ -56,7 +56,10 @@ class Help(commands.Cog):
 
         embeddonate.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embeddonate.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
-        embeddonate.add_field(name='Here you go! The link to donate to Hydro Vanilla SMP!', value='Thanks in advance if you are donating! We really appreciate it :heart:\nhttps://www.paypal.me/HydroVanillaSMP')
+        embeddonate.add_field(name='Here you go! The link to donate to Hydro Vanilla SMP!', value='Thanks in advance if you are donating! We really appreciate it :heart:\nhttps://www.paypal.me/HydroVanillaSMP\nIf you do not use PayPal, but are European and use iDeal you can message @Tehlo on Discord, I am Dutch too :smiley:')
+
+        await ctx.send(embed=embeddonate)
+
 
 def setup(client):
     client.add_cog(Help(client))
