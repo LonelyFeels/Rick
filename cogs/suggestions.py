@@ -23,6 +23,7 @@ class Suggestions(commands.Cog):
         embedsuggest.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedsuggest.set_thumbnail(url=f'{author_icon}')
         embedsuggest.set_author(name=f'{author}', icon_url=f'{author_icon}')
+        embedsuggest.add_field(name=f'_ _', value='_ _', inline=False)
         embedsuggest.add_field(name=f'Suggestion', value=f'{suggestion}', inline=False)
 
         suggestion_message = await channel.send(embed=embedsuggest)
