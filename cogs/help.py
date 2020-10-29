@@ -12,9 +12,9 @@ class Help(commands.Cog):
     @commands.command()
     async def help(self, ctx):
         embedhelp = discord.Embed(
-            title = '**All Hydro Accept commands**',
+            title = 'All Hydro Accept commands',
             url = 'https://hydrovanillasmp.com',
-            colour = discord.Colour.from_rgb(12,235,241),
+            colour = discord.Colour.from_rgb(12,235,241)
             )
 
         embedhelp.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')

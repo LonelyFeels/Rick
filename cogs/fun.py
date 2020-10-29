@@ -39,7 +39,7 @@ class Fun(commands.Cog):
         author = ctx.message.author
         author_icon = author.avatar_url
         embedhug = discord.Embed(
-            colour = discord.Colour.from_rgb(12,235,241),
+            colour = discord.Colour.from_rgb(12,235,241)
             )
 
         embedhug.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
