@@ -37,7 +37,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='*Clear:*', value='', inline=False)
         embedhelp.add_field(name='**.clear <amount=5>**', value='Use this to clear messages.', inline=False)
 
-        await self.client.say(embed=embedhelp)
+        await self.ctx.send(embed=embedhelp)
         
 
 def setup(client):
