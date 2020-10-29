@@ -4,8 +4,8 @@ import json
 
 
 class ServerStatus:
-    def __init__(self, server_address: 'play.hydrovanillasmp.com') -> None:
-        response = urllib.request.urlopen("https://api.mcsrvstat.us/1/%s" % server_address)
+    def __init__(self) -> None:
+        response = urllib.request.urlopen("https://api.mcsrvstat.us/1/play.hydrovanillasmp.com")
         data = json.load(response)
         self.online: bool = data['debug']['ping']
         # If not online skip this
