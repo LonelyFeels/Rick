@@ -12,7 +12,7 @@ class Status(commands.Cog):
     #Commands
     @commands.command()
     async def status(self, ctx):
-        status = ServerStatus('')
+        status = ServerStatus()
         online_players = status.online_players
         max_players = status.max_players
         motd = status.motd
