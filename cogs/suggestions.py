@@ -25,9 +25,9 @@ class Suggestions(commands.Cog):
         embedsuggest.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedsuggest.add_field(name=f'Suggestion', value=f'{suggestion}', inline=False)
 
-        suggestion_message = await channel.send(embedsuggest)
-        await self.client.add_reaction(suggestion_message, emoji='👍')
-        await self.client.add_reaction(suggestion_message, emoji='👎')
+        suggestion_message = channel.send(embedsuggest)
+        await suggestion_message.add_reaction('\N{THUMBS UP SIGN}')
+        await suggestion_message.add_reaction('\N{THUMBS DOWN SIGN}')
 
 def setup(client):
     client.add_cog(Suggestions(client))
