@@ -147,6 +147,8 @@ class Roles(commands.Cog):
     async def accept_error(self, member, error):
         if isinstance(error, commands.MissingRole):
             await member.send("You don't have the permissions to do that!")
+        if isinstance(error, commands.MissingRequiredArgument):
+            await member.send('You have to mention the Applicant you want to accept!')
 
 
 def setup(client):
