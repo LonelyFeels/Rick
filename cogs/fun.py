@@ -49,6 +49,11 @@ class Fun(commands.Cog):
 
         await ctx.send(embed=embedhug)
 
+    @hug.error
+    async def hug_error(self, member, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await member.send('You have to mention the Member you want to hug.')
+
 
 def setup(client):
     client.add_cog(Fun(client))
