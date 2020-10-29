@@ -30,7 +30,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='.unload <category>', value='Unloads the category.', inline=False)
         embedhelp.add_field(name='.accept <@USER>', value='Use this to accept Applicants and give them Member role.', inline=False)
         embedhelp.add_field(name='.clear <amount=5>', value='Use this to clear messages.', inline=False)
-        embedhelp.add_field(name='Categories:', value='Help: Help, Dynmap, Donate; Roles: Accept, Reaction Roles; Clear: Clear; Fun: 8ball')
+        embedhelp.add_field(name='Categories:', value='Help: Help, Dynmap, Donate; Roles: Accept, Reaction Roles; Clear: Clear; Fun: 8ball', inline=False)
 
         await ctx.send(embed=embedhelp)
         
@@ -43,7 +43,7 @@ class Help(commands.Cog):
 
         embeddynmap.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embeddynmap.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
-        embeddynmap.add_field(name='Dynmap Link', value='Here you go! The link to our Dynmap,\nhttps://map.hydrovanillasmp.com')
+        embeddynmap.add_field(name='Dynmap Link', value='Here you go! The link to our Dynmap,\nhttps://map.hydrovanillasmp.com', inline=False)
 
         await ctx.send(embed=embeddynmap)
 
@@ -56,8 +56,8 @@ class Help(commands.Cog):
 
         embeddonate.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embeddonate.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
-        embeddonate.add_field(name='Here you go! The link to donate to Hydro Vanilla SMP!', value='Thanks in advance if you are donating! We really appreciate it :heart:')
-        embeddonate.add_field(name='https://www.paypal.me/HydroVanillaSMP', value='If you do not use PayPal, but are European and use iDeal you can message @Tehlo on Discord, I am Dutch too :smiley:')
+        embeddonate.add_field(name='Here you go! The link to donate to Hydro Vanilla SMP!', value='Thanks in advance if you are donating! We really appreciate it :heart:', inline=False)
+        embeddonate.add_field(name='https://www.paypal.me/HydroVanillaSMP', value='If you do not use PayPal, but are European and use iDeal you can message @Tehlo on Discord, I am Dutch too :smiley:', inline=False)
 
         await ctx.send(embed=embeddonate)
 
