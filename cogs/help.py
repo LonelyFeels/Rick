@@ -31,7 +31,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='.unload <category>', value='Unloads the category.', inline=False)
         embedhelp.add_field(name='.accept <@USER>', value='Use this to accept Applicants and give them Member role.', inline=False)
         embedhelp.add_field(name='.clear <amount=5>', value='Use this to clear messages.', inline=False)
-        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Status: Status; Roles: Accept, Reaction Roles; Clear: Clear; Fun: 8ball', inline=False)
+        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Status: Status; Roles: Accept, Reaction Roles; Clear: Clear; Fun: 8ball, Hug', inline=False)
 
         await ctx.send(embed=embedhelp)
         

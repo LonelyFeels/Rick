@@ -37,13 +37,12 @@ class Fun(commands.Cog):
     @commands.command()
     async def hug(self, ctx, member: discord.Member):
         author = ctx.message.author
-        author_icon = author.avatar_url()
         embedhug = discord.Embed(
             colour = discord.Colour.from_rgb(12,235,241),
             )
 
         embedhug.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embedhug.set_author(name=f'{author}', icon_url=f'{author_icon}')
+        embedhug.set_author(name=f'{author}')
         embedhug.set_image(url='https://i.imgur.com/kSWpxnG.gif')
         embedhug.add_field(name=f'{member.mention} I just hugged you in my thoughts :heart:', value='Hope you felt the squeeze! :teddy_bear:', inline=False)
 
