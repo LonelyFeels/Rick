@@ -22,7 +22,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='.help', value='Shows this message.', inline=False)
         embedhelp.add_field(name='!status', value='Shows Minecraft Server Status', inline=False)
         embedhelp.add_field(name='donate', value='Shows information about how to donate.', inline=False)
-        embedhelp.add_field(name='!invite', value='Get the invite link.', inline=False)
+        embedhelp.add_field(name='.invite', value='Get the invite link.', inline=False)
         embedhelp.add_field(name='.dynmap', value='Use this command to get the Official Hydro Vanilla SMP Dynmap!', inline=False)
         embedhelp.add_field(name='.8ball <your question>', value='Undecided about something? Ask our 8ball (:', inline=False)
         embedhelp.add_field(name='______________________________________________________________', value='______________________________________________________________', inline=False)
@@ -30,7 +30,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='.unload <category>', value='Unloads the category.', inline=False)
         embedhelp.add_field(name='.accept <@USER>', value='Use this to accept Applicants and give them Member role.', inline=False)
         embedhelp.add_field(name='.clear <amount=5>', value='Use this to clear messages.', inline=False)
-        embedhelp.add_field(name='Categories:', value='Help: Help, Dynmap, Donate; Roles: Accept, Reaction Roles; Clear: Clear; Fun: 8ball', inline=False)
+        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Roles: Accept, Reaction Roles; Clear: Clear; Fun: 8ball', inline=False)
 
         await ctx.send(embed=embedhelp)
         
@@ -60,6 +60,12 @@ class Help(commands.Cog):
         embeddonate.add_field(name='https://www.paypal.me/HydroVanillaSMP', value='If you do not use PayPal, but are European and use iDeal you can message @Tehlo on Discord, I am Dutch too :smiley:', inline=False)
 
         await ctx.send(embed=embeddonate)
+
+    @commands.command()
+    async def invite(self, ctx):
+        member = ctx.message.author
+        ctx.send(f'{member.mention}, You got mail! 📬')
+        member.send('Here you go, our Discord Invite!\nhttps://discordapp.com/invite/CAQ9p8y')
 
 
 def setup(client):
