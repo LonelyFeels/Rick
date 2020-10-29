@@ -1,16 +1,17 @@
 import discord
+import os
 from discord.ext import commands
 import random
 
 intents = discord.Intents.default()
 intents.members = True
-client = commands.Bot(command_prefix = '!', intents=intents)
+client = commands.Bot(command_prefix = '.', intents=intents)
 
 
 @client.event
 async def on_ready():
     await client.change_presence(status=discord.Status.do_not_disturb,
-    activity=discord.Activity(type=discord.ActivityType.watching, name="Commands | !help"))
+    activity=discord.Activity(type=discord.ActivityType.listening, name="to Hydro Applications"))
     print('Bot is ready.')
 
 @client.event
@@ -174,14 +175,18 @@ async def _8ball(ctx, *, question):
                  'Outlook not so good',
                  'Very doubtful.']
     await ctx.send(f'{random.choice(responses)}')
-    
+
 @client.command()
-async def clear(ctx, amount=5):
-    authorperms_clear = ctx.author.permissions_in(ctx.channel)
-    if authorperms_clear.manage_messages:
-        await ctx.channel.purge(limit=amount+1)
-    else:
-        await ctx.send("You don't have the permissions to do that!")
+async def load(ctx, extension):
+    client.load_extension(f'cogs.{extension}')
+
+@client.command()
+async def unload(ctx, extension):
+    client.unload_extension(f'cogs{extension}')
+
+for filename in os.listdir('cogs'):
+    if filename.endswith('.py'):
+        client.load_extension(f'cogs.{filename[:-3]}')
 
 
 if __name__ == '__main__':
