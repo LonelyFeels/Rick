@@ -17,6 +17,7 @@ class Status(commands.Cog):
         max_players = status.max_players
         motd = status.motd
         version = status.version
+        players_list = status.players_list
 
         embedstatus = discord.Embed(
             url = 'https://hydrovanillasmp.com',
@@ -26,6 +27,7 @@ class Status(commands.Cog):
         embedstatus.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedstatus.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
         embedstatus.add_field(name='Hydro Vanilla SMP Season 6 is online!', value=f'Currently there are {online_players} / {max_players} playing.', inline=False)
+        embedstatus.add_field(name='Playerlist:', value=f'{players_list}')
         embedstatus.add_field(name='Message of the day:', value=f'{motd}', inline=False)
         embedstatus.add_field(name='Current Minecraft Version:', value=f'{version}', inline=False)
 
