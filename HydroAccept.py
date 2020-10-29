@@ -177,12 +177,24 @@ async def _8ball(ctx, *, question):
     await ctx.send(f'{random.choice(responses)}')
 
 @client.command()
+@commands.has_role('botadmin')
 async def load(ctx, extension):
     client.load_extension(f'cogs.{extension}')
 
 @client.command()
+@commands.has_role('botadmin')
 async def unload(ctx, extension):
-    client.unload_extension(f'cogs{extension}')
+    client.unload_extension(f'cogs.{extension}')
+
+@load.error
+async def load_error(ctx, error):
+    if isinstance(error, commands.MissingRole):
+        await ctx.send("You don't have the permissions to do that!")
+
+@unload.error
+async def unload_error(ctx, error):
+    if isinstance(error, commands.MissingRole):
+        await ctx.send("You don't have the permissions to do that!")
 
 for filename in os.listdir('cogs'):
     if filename.endswith('.py'):
