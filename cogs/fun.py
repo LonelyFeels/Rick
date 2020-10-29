@@ -42,7 +42,9 @@ class Fun(commands.Cog):
 
         embedhug.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedhug.set_image(url='https://imgur.com/kSWpxnG')
-        embedhug.add_field(title='I just hugged you in my thoughts <3', value='Hope you felt the squeeze! :teddy_bear:', indent=False)
+        embedhug.add_field(name='I just hugged you in my thoughts <3', value='Hope you felt the squeeze! :teddy_bear:', inline=False)
+
+        await ctx.send(embed=embedhug)
 
 
 def setup(client):
