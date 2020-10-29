@@ -17,8 +17,8 @@ class Help(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241),
             )
 
-        embedhelp.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embedhelp.set_thumbnail(url="https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png")
+        embedhelp.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/10/HydroLogo.png')
+        embedhelp.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedhelp.add_field(name='.help', value='Shows this message.', inline=False)
         embedhelp.add_field(name='!status', value='Shows Minecraft Server Status', inline=False)
         embedhelp.add_field(name='!donate', value='Shows information about how to donate.', inline=False)
@@ -41,8 +41,8 @@ class Help(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
-        embeddynmap.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embeddynmap.set_thumbnail(url="https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png")
+        embeddynmap.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/10/HydroLogo.png')
+        embeddynmap.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embeddynmap.add_field(name='Dynmap Link', value='Here you go! The link to our Dynmap,\nhttps://map.hydrovanillasmp.com')
 
         await ctx.send(embed=embeddynmap)
