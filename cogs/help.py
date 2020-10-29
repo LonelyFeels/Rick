@@ -13,10 +13,12 @@ class Help(commands.Cog):
     async def help(self, ctx):
         embedhelp = discord.Embed(
             title = '**All Hydro Accept commands**',
+            url = 'https://hydrovanillasmp.com',
             colour = discord.Colour.from_rgb(12,235,241),
             )
 
         embedhelp.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedhelp.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedhelp.add_field(name='.help', value='Shows this message.', inline=False)
         embedhelp.add_field(name='!status', value='Shows Minecraft Server Status', inline=False)
         embedhelp.add_field(name='!donate', value='Shows information about how to donate.', inline=False)
@@ -35,11 +37,12 @@ class Help(commands.Cog):
     @commands.command()
     async def dynmap(self,ctx):
         embeddynmap = discord.Embed(
+            url = 'https://map.hydrovanillasmp.com'
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
         embeddynmap.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embeddynmap.set_image(url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embeddynmap.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embeddynmap.add_field(name='Dynmap Link', value='Here you go! The link to our Dynmap,\nhttps://map.hydrovanillasmp.com')
 
         await ctx.send(embed=embeddynmap)
