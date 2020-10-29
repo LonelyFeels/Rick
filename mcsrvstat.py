@@ -14,4 +14,4 @@ class ServerStatus:
             self.version: int = data['version']
             self.online_players: int = data['players']['online']    
             self.max_players: int = data['players']['max']
-            self.players_list: str = data['players']['list'][0].replace("'",'')
+            self.players_list: str = data['players']['list'].replace("'",'')
