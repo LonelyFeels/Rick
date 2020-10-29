@@ -37,7 +37,7 @@ class Help(commands.Cog):
     @commands.command()
     async def dynmap(self,ctx):
         embeddynmap = discord.Embed(
-            url = 'https://map.hydrovanillasmp.com'
+            url = 'https://map.hydrovanillasmp.com',
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
