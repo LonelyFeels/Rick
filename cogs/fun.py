@@ -61,8 +61,11 @@ class Fun(commands.Cog):
         page = requests.get('http://randomwaifu.altervista.org')
         soup = bs(page.content)
         url = str(soup.find_all(class_="center-fit")[0])[-18:][:15]
+        name = str(soup.find_all(align="center")[0]).split(' from')[0][55:]
 
         embedwaifu = discord.Embed(
+            title = f'{name}',
+            url = f'http://randomwaifu.altervista.org/{url}',
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
