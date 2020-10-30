@@ -67,7 +67,7 @@ class Fun(commands.Cog):
         )
 
         embedwaifu.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embedhug.set_image(url=f'http://randomwaifu.altervista.org{url}')
+        embedhug.set_image(url=f'http://randomwaifu.altervista.org/{url}')
 
         await ctx.send(embed=embedwaifu)
 
