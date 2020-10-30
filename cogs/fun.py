@@ -57,7 +57,6 @@ class Fun(commands.Cog):
             await member.send('You have to mention the Member you want to hug.')
 
     @commands.command()
-    @commands.
     async def waifu(self, ctx):
         page = requests.get('http://randomwaifu.altervista.org')
         soup = bs(page.content, features='html.parser')
