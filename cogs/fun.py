@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 import random
+from bs4 import BeautifulSoup as bs
+import requests
 
 
 class Fun(commands.Cog):
@@ -53,6 +55,21 @@ class Fun(commands.Cog):
     async def hug_error(self, member, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await member.send('You have to mention the Member you want to hug.')
+
+    @commands.command()
+    async def waifu(self, ctx):
+        page = requests.get('http://randomwaifu.altervista.org')
+        soup = bs(page.content)
+        url = str(soup.find_all(class_="center-fit")[0])[-18:][:15]
+
+        embedwaifu = discord.Embed(
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+
+        embedwaifu.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedwaifu.set_image(url=f'http://randomwaifu.altervista.org/{url}')
+
+        await ctx.send(embed=embedwaifu)
 
 
 def setup(client):
