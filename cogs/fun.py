@@ -71,7 +71,7 @@ class Fun(commands.Cog):
 
         embedwaifu.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedwaifu.set_image(url=f'http://randomwaifu.altervista.org/{url}')
-        embedwaifu.add_field(name='_ _', value='If the picutre doesn\'t load, that means it\'s too big. Click the name and it will open on your browser.', inline=False)
+        embedwaifu.add_field(name='_ _', value='If the picutre doesn\'t load, that means it\'s too big.\nClick the name and it will open on your browser.', inline=False)
 
         await ctx.send(embed=embedwaifu)
 
