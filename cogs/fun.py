@@ -64,7 +64,7 @@ class Fun(commands.Cog):
         name = str(soup.find_all(align="center")[0]).split(' from')[0][55:]
         channel = self.client.get_channel(771725747480035358)
 
-        if ctx.channel.id == channel:
+        if ctx.channel.id == channel.id:
             embedwaifu = discord.Embed(
                 title = f'{name}',
                 url = f'http://randomwaifu.altervista.org/{url}',
