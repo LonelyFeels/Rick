@@ -1,8 +1,6 @@
 import discord
 from discord.ext import commands
 import random
-from bs4 import BeautifulSoup as bs
-import requests
 
 
 class Fun(commands.Cog):
