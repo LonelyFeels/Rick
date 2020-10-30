@@ -18,7 +18,7 @@ class Help(commands.Cog):
             )
 
         embedhelp.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embedhelp.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
+        embedhelp.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedhelp.add_field(name='.help', value='Shows this message.', inline=False)
         embedhelp.add_field(name='.status', value='Shows Minecraft Server Status', inline=False)
         embedhelp.add_field(name='.donate', value='Shows information about how to donate.', inline=False)
@@ -46,7 +46,7 @@ class Help(commands.Cog):
         )
 
         embeddynmap.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embeddynmap.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
+        embeddynmap.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embeddynmap.add_field(name='Dynmap Link', value='Here you go! The link to our Dynmap,\nhttps://map.hydrovanillasmp.com', inline=False)
 
         await ctx.send(embed=embeddynmap)
@@ -59,7 +59,7 @@ class Help(commands.Cog):
         )
 
         embeddonate.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embeddonate.set_thumbnail(url='https://hydrovanillasmp.com/wp-content/uploads/2019/03/HydroSMP_Discord-1.png')
+        embeddonate.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embeddonate.add_field(name='Here you go! The link to donate to Hydro Vanilla SMP!', value='Thanks in advance if you are donating! We really appreciate it :heart:', inline=False)
         embeddonate.add_field(name='https://www.paypal.me/HydroVanillaSMP', value='If you do not use PayPal, but are European and use iDeal you can message @Tehlo on Discord, I am Dutch too :smiley:', inline=False)
 
