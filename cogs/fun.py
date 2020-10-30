@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import random
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup('html.parser') as bs
 import requests
 
 
