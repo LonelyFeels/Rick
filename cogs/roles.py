@@ -10,7 +10,7 @@ class Roles(commands.Cog):
 
     #Events
     @commands.Cog.listener()
-    async def on_member_join(self, member):
+    async def on_member_join(self, member: discord.Member):
         role = discord.utils.get(member.guild.roles, name='Applicants')
         welcome = self.client.get_channel(621326188555796481)
         applications = self.client.get_channel(494184460275941377)
@@ -22,7 +22,7 @@ class Roles(commands.Cog):
         await applications.send('Copy this template ^ and post it in this channel when you are done filling it in! :white_check_mark:')
 
     @commands.Cog.listener()
-    async def on_member_remove(self, member):
+    async def on_member_remove(self, member: discord.Member):
         welcome = self.client.get_channel(621326188555796481)
         await welcome.send(f'Goodbye @{member}... May we meet again :sob:')
 
