@@ -57,23 +57,28 @@ class Fun(commands.Cog):
             await member.send('You have to mention the Member you want to hug.')
 
     @commands.command()
+    @commands.
     async def waifu(self, ctx):
         page = requests.get('http://randomwaifu.altervista.org')
         soup = bs(page.content, features='html.parser')
         url = str(soup.find_all(class_="center-fit")[0])[-18:][:15]
         name = str(soup.find_all(align="center")[0]).split(' from')[0][55:]
+        channel = self.client.get_channel(771725747480035358)
 
-        embedwaifu = discord.Embed(
-            title = f'{name}',
-            url = f'http://randomwaifu.altervista.org/{url}',
-            colour = discord.Colour.from_rgb(12,235,241)
-        )
+        if ctx.channel.id == channel:
+            embedwaifu = discord.Embed(
+                title = f'{name}',
+                url = f'http://randomwaifu.altervista.org/{url}',
+                colour = discord.Colour.from_rgb(12,235,241)
+            )
 
-        embedwaifu.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embedwaifu.set_image(url=f'http://randomwaifu.altervista.org/{url}')
-        embedwaifu.add_field(name='_ _', value='If the picutre doesn\'t load, that means it\'s too big.\nClick the name and it will open on your browser.', inline=False)
+            embedwaifu.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+            embedwaifu.set_image(url=f'http://randomwaifu.altervista.org/{url}')
+            embedwaifu.add_field(name='_ _', value='If the picutre doesn\'t load, that means it\'s too big.\nClick the name and it will open on your browser.', inline=False)
 
-        await ctx.send(embed=embedwaifu)
+            await ctx.send(embed=embedwaifu)
+        else:
+            await ctx.send(f'You can only use this command in {channel.mention}.')
 
 
 def setup(client):
