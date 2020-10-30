@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import random
-from bs4 import BeautifulSoup('html.parser') as bs
+from bs4 import BeautifulSoup as bs
 import requests
 
 
@@ -59,7 +59,7 @@ class Fun(commands.Cog):
     @commands.command()
     async def waifu(self, ctx):
         page = requests.get('http://randomwaifu.altervista.org')
-        soup = bs(page.content)
+        soup = bs(page.content, features='html.parser')
         url = str(soup.find_all(class_="center-fit")[0])[-18:][:15]
         name = str(soup.find_all(align="center")[0]).split(' from')[0][55:]
 
