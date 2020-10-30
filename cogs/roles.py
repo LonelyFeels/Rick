@@ -24,7 +24,7 @@ class Roles(commands.Cog):
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         welcome = self.client.get_channel(621326188555796481)
-        await welcome.send(f'Goodbye {member.mention}... May we meet again :sob:')
+        await welcome.send(f'Goodbye @{member}... May we meet again :sob:')
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
