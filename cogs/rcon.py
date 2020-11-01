@@ -61,6 +61,8 @@ class RCON(commands.Cog):
         server = Server(ip, port, password, connect_on_send=True)
         print(await server.send(f'ban {ign}'))
         await member.ban(reason=None)
+
+        await server.close()
         
         author = ctx.message.author
         author_icon = author.avatar_url
@@ -74,8 +76,6 @@ class RCON(commands.Cog):
         embedban.add_field(name=f'Successfully banned @{member}.', value='They\'ve been such a prick, innit?', inline=False)
 
         await ctx.send(embed=embedban)
-
-        await server.close()
 
     @ban.error
     async def ban_error(self, member, error):
@@ -91,20 +91,30 @@ class RCON(commands.Cog):
         port = rconcredentials.port
         password = rconcredentials.password
 
-        banned_users = await ctx.guild.bans()
-        member_name, member_discriminator = member.split('#')
-
         server = Server(ip, port, password, connect_on_send=True)
         print(await server.send(f'pardon {ign}'))
 
         await server.close()
+
+        banned_users = await ctx.guild.bans()
+        member_name, member_discriminator = member.split('#')
 
         for ban_entry in banned_users:
             user = ban_entry.user
 
             if (user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
-                await ctx.send(f'Unbanned {user.mention}')
+                
+                author = ctx.message.author
+                author_icon = author.avatar_url
+                embedunban = discord.Embed(
+                    colour = discord.Colour.from_rgb(12,235,241)
+                    )
+
+                embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+                embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
+                embedunban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772480429034569739/tenor.gif')
+                embedunban.add_field(name=f'Successfully unbanned @{member}.', value='Maybe they haven\'t been such a prick?', inline=False)
                 return
 
     @unban.error
@@ -112,7 +122,7 @@ class RCON(commands.Cog):
         if isinstance(error, commands.MissingRole):
             await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
-            await member.send('You have put down Member\'s Username#Discriminator and IGN that you want to unban!')
+            await member.send('You have put down Member\'s IGN and Username#Discriminator that you want to unban!')
     
     @commands.command()
     @commands.has_role('Staff')
