@@ -2,6 +2,7 @@ import discord
 import os
 from discord.ext import commands
 
+
 intents = discord.Intents.default()
 intents.members = True
 client = commands.Bot(command_prefix = '.', intents=intents, help_command=None)
@@ -34,6 +35,16 @@ async def load_error(ctx, error):
 async def unload_error(ctx, error):
     if isinstance(error, commands.MissingRole):
         await ctx.send("You don't have the permissions to do that!")
+
+@client.command()
+async def iam(ctx, *, role):
+    user = ctx.message.author
+    role = discord.utils.get(ctx.guild.roles, name=f'{role}')
+    if role in user.roles:
+        await ctx.send(f"You already have {role} role.")
+    else:
+        await user.add_roles(role)
+        await ctx.send(f"You've been given {role} role.")
 
 for filename in os.listdir('cogs'):
     if filename.endswith('.py'):
