@@ -8,14 +8,16 @@ class RCON(commands.Cog):
     def __init__(self,client):
         self.client = client
 
+    if __name__ = '__main__':
+        import config
 
     #Commands
     @commands.command()
     @commands.has_role('Staff')
     async def whitelist(self, ctx, player):
-        ip = '46.4.13.165'
-        port = 25567
-        password = '@LdY%U430G8NVS8sqsJAR$z#m08763'
+        ip = config.ip
+        port = config.port
+        password = config.password
 
         server = Server(ip, port, password, connect_on_send=True)
         print(await server.send(f'whitelist add {player}'))
