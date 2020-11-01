@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from minecraft import Server
-import credentials
+import rconcredentials
 
 
 class RCON(commands.Cog):
