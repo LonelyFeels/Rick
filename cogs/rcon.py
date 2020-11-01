@@ -86,28 +86,18 @@ class RCON(commands.Cog):
 
     @commands.command()
     @commands.has_role('Staff')
-    async def unban(self, ctx, ign):
+    async def unban(self, ctx, *, member, ign):
         ip = rconcredentials.ip
         port = rconcredentials.port
         password = rconcredentials.password
+
+        banned_users = await ctx.guild.bans()
+        member_name, member_discriminator = member.split('#')
 
         server = Server(ip, port, password, connect_on_send=True)
         print(await server.send(f'pardon {ign}'))
 
         await server.close()
-
-    @unban.error
-    async def unban_error(self, member, error):
-        if isinstance(error, commands.MissingRole):
-            await member.send('You don\'t have the permissions to do that!')
-        if isinstance(error, commands.MissingRequiredArgument):
-            await member.send('You have put down Member\'s Username#Discriminator and IGN that you want to unban!')
-    
-    @commands.command()
-    @commands.has_role('Staff')
-    async def unban2(self, ctx, member):
-        banned_users = await ctx.guild.bans()
-        member_name, member_discriminator = member.split('#')
 
         for ban_entry in banned_users:
             user = ban_entry.user
@@ -116,6 +106,13 @@ class RCON(commands.Cog):
                 await ctx.guild.unban(user)
                 await ctx.send(f'Unbanned {user.mention}')
                 return
+
+    @unban.error
+    async def unban_error(self, member, error):
+        if isinstance(error, commands.MissingRole):
+            await member.send('You don\'t have the permissions to do that!')
+        if isinstance(error, commands.MissingRequiredArgument):
+            await member.send('You have put down Member\'s Username#Discriminator and IGN that you want to unban!')
     
     @commands.command()
     @commands.has_role('Staff')
