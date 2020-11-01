@@ -103,7 +103,7 @@ class RCON(commands.Cog):
         member = await self.client.wait_for('message', check=check)
 
         banned_users = await ctx.guild.bans()
-        member_name, member_discriminator = member.split('#')
+        member_name, member_discriminator = member.content.split('#')
 
         for ban_entry in banned_users:
             user = ban_entry.user
