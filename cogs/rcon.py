@@ -97,7 +97,7 @@ class RCON(commands.Cog):
         await server.close()
 
         channel = ctx.channel
-        await channel.send('Alright, now give me Username#Discriminator.')
+        await channel.send('Alright, now give me USERNAME#DISCRIMINATOR.')
         def check(message):
             return message.author == ctx.message.author
         member = await self.client.wait_for('message', check=check)
