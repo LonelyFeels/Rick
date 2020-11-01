@@ -78,12 +78,11 @@ class RCON(commands.Cog):
         await server.close()
 
     @ban.error
-    async def ban_error(self, member, ign, error):
+    async def ban_error(self, member, error):
         if isinstance(error, commands.MissingRole):
             await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
-            await member.send('You have to mention the Member you want to ban!')
-            await ign.send('You have to put member\'s IGN that you want to ban!')
+            await member.send('You have to mention the Member you want to ban and put down their IGN!')
     
     @commands.command()
     @commands.has_role('Staff')
