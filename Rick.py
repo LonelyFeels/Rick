@@ -10,8 +10,9 @@ client = commands.Bot(command_prefix = '.', intents=intents, help_command=None)
 
 @client.event
 async def on_ready():
+    member_count = sum(1 for _ in client.get_all_members())
     await client.change_presence(status=discord.Status.do_not_disturb,
-    activity=discord.Activity(type=discord.ActivityType.watching, name=f'Amount Hydro Members'))
+    activity=discord.Activity(type=discord.ActivityType.watching, name=f'{member_count} Hydro Members'))
     print('Bot is ready.')
 
 @client.command()
