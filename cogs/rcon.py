@@ -1,8 +1,6 @@
 import discord
 from discord.ext import commands
 from minecraft import Server
-import json
-import os
 
 
 class RCON(commands.Cog):
@@ -15,12 +13,9 @@ class RCON(commands.Cog):
     @commands.command()
     @commands.has_role('Staff')
     async def whitelist(self, ctx, player):
-        if os.path.exists('config.json'):
-            with open('config.json') as file:
-                config = json.load(file)
-        ip = config['IP']
-        port = config['port']
-        password = config['password']
+        ip = '46.4.13.165'
+        port = 25567
+        password = '@LdY%U430G8NVS8sqsJAR$z#m08763'
 
         server = Server(ip, port, password, connect_on_send=True)
         print(await server.send(f'whitelist add {player}'))
@@ -38,12 +33,9 @@ class RCON(commands.Cog):
     @commands.command()
     @commands.has_role('Staff')
     async def unwhitelist(self, ctx, player):
-        if os.path.exists('config.json'):
-            with open('config.json') as file:
-                config = json.load(file)
-        ip = config['IP']
-        port = config['port']
-        password = config['password']
+        ip = '46.4.13.165'
+        port = 25567
+        password = '@LdY%U430G8NVS8sqsJAR$z#m08763'
 
         server = Server(ip, port, password, connect_on_send=True)
         print(await server.send(f'whitelist remove {player}'))
