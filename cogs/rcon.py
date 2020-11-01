@@ -11,26 +11,36 @@ class Rcon(commands.Cog):
 
     #Commands
     @commands.command()
-    async def whitelist(self, ctx):
+    async def whitelist(self, ctx, player):
         ip = '46.4.13.165'
         port = 25567
         password = '@LdY%U430G8NVS8sqsJAR$z#m08763'
 
         server = Server(ip, port, password, connect_on_send=True)
-        print(await server.send(f'whitelist add {ctx}'))
+        print(await server.send(f'whitelist add {player}'))
 
-        await Server.close(self)
+        await server.close()
 
     @commands.command()
-    async def unwhitelist(self, ctx):
+    async def unwhitelist(self, ctx, player):
         ip = '46.4.13.165'
         port = 25567
         password = '@LdY%U430G8NVS8sqsJAR$z#m08763'
 
         server = Server(ip, port, password, connect_on_send=True)
-        print(await server.send(f'whitelist add {ctx}'))
+        print(await server.send(f'whitelist add {player}'))
 
-        await Server.close(self)
+        await server.close()
+    
+    @commands.command()
+    async def close(self, ctx):
+        ip = '46.4.13.165'
+        port = 25567
+        password = '@LdY%U430G8NVS8sqsJAR$z#m08763'
+
+        server = Server(ip, port, password, connect_on_send=True)
+
+        await server.close()
 
 
 def setup(client):
