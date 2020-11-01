@@ -131,6 +131,8 @@ class RCON(commands.Cog):
             await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
             await member.send('You have put down Member\'s IGN and Username#Discriminator that you want to unban!')
+        else:
+            raise error
     
     @commands.command()
     @commands.has_role('Staff')
