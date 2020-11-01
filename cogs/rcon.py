@@ -60,6 +60,7 @@ class RCON(commands.Cog):
 
         server = Server(ip, port, password, connect_on_send=True)
         print(await server.send(f'ban {ign}'))
+        await member.ban(reason=None)
         
         author = ctx.message.author
         author_icon = author.avatar_url
@@ -70,14 +71,16 @@ class RCON(commands.Cog):
         embedban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedban.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772449306560430110/tenor.gif')
-        embedban.add_field(name=f'Successfuly banned @{member}', value='He\'s been such a prick, innit?', inline=False)
+        embedban.add_field(name=f'Successfuly banned @{member}', value='They\'ve been such a prick, innit?', inline=False)
 
         await ctx.send(embed=embedban)
 
+        await server.close()
+
     @ban.error
-    async def ban_error(self, ctx, member, ign, error):
+    async def ban_error(self, member, ign, error):
         if isinstance(error, commands.MissingRole):
-            await ctx.send('You don\'t have the permissions to do that!')
+            await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
             await member.send('You have to mention the Member you want to ban!')
         if isinstance(error, commands.MissingRequiredArgument):
