@@ -106,6 +106,7 @@ class RCON(commands.Cog):
                 await ctx.guild.unban(user)
                 await ctx.send(f'Unbanned {user.mention}')
                 return
+            print(user.name)
 
     @unban.error
     async def unban_error(self, member, error):
