@@ -71,7 +71,7 @@ class RCON(commands.Cog):
         embedban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedban.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772449306560430110/tenor.gif')
-        embedban.add_field(name=f'Successfuly banned @{member}', value='They\'ve been such a prick, innit?', inline=False)
+        embedban.add_field(name=f'Successfully banned @{member}.', value='They\'ve been such a prick, innit?', inline=False)
 
         await ctx.send(embed=embedban)
 
@@ -83,6 +83,31 @@ class RCON(commands.Cog):
             await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
             await member.send('You have to mention the Member you want to ban and put down their IGN!')
+
+    @commands.command()
+    @commands.has_role('Staff')
+    async def unban(self, ctx, ign):
+        ip = rconcredentials.ip
+        port = rconcredentials.port
+        password = rconcredentials.password
+
+        server = Server(ip, port, password, connect_on_send=True)
+        print(await server.send(f'pardon {ign}'))
+
+        author = ctx.message.author
+        author_icon = author.avatar_url
+        embedunban = discord.Embed(
+            colour = discord.Colour.from_rgb(12,235,241)
+            )
+
+        embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
+        embedunban.set_image(url='https://tenor.com/bhFZp.gif')
+        embedunban.add_field(name=f'Successfully unbanned {ign}.', value='Maybe they haven\'t been such a prick?', inline=False)
+
+        await ctx.send(embed=embedunban)
+
+        await server.close()
     
     @commands.command()
     @commands.has_role('Staff')
