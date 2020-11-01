@@ -102,19 +102,6 @@ class RCON(commands.Cog):
 
             if(user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
-
-                author = ctx.message.author
-                author_icon = author.avatar_url
-                embedunban = discord.Embed(
-                    colour = discord.Colour.from_rgb(12,235,241)
-                    )
-
-                embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-                embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
-                embedunban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772480429034569739/tenor.gif')
-                embedunban.add_field(name=f'Successfully unbanned @{user.name}#{user.discriminator}.', value='Maybe they haven\'t been such a prick?', inline=False)
-
-                await ctx.send(embed=embedunban)
                 return
 
         await server.close()
