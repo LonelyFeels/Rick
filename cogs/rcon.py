@@ -86,7 +86,7 @@ class RCON(commands.Cog):
 
     @commands.command()
     @commands.has_role('Staff')
-    async def unban(self, ctx, ign):
+    async def unban(self, ctx, *, member, ign):
         ip = rconcredentials.ip
         port = rconcredentials.port
         password = rconcredentials.password
@@ -95,6 +95,17 @@ class RCON(commands.Cog):
         print(await server.send(f'pardon {ign}'))
 
         await server.close()
+
+        banned_users = await ctx.guild.bans()
+        member_name, member_discriminator = member.split('#')
+
+        for ban_entry in banned_users:
+            user = ban_entry.user
+
+            if (user.name, user.discriminator) == (member_name, member_discriminator):
+                await ctx.guild.unban(user)
+                await ctx.send(f'Unbanned {user.mention}')
+                return
 
     @unban.error
     async def unban_error(self, member, error):
