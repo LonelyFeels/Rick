@@ -102,6 +102,8 @@ class RCON(commands.Cog):
             return message.author == ctx.message.author
         member = await self.client.wait_for('message', check=check)
 
+        print(member.content.split('#'))
+
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.content.split('#')
 
