@@ -103,11 +103,12 @@ class RCON(commands.Cog):
         member = await self.client.wait_for('message', check=check)
 
         banned_users = await ctx.guild.bans()
+        (member_name, member_discriminator) = tuple(member.content.split('#'))
 
         for ban_entry in banned_users:
             user = ban_entry.user
 
-            if (user.name, user.discriminator) == tuple(member.content.split('#'))
+            if (user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
                 return
                 
