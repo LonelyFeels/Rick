@@ -83,7 +83,6 @@ class RCON(commands.Cog):
             await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
             await member.send('You have to mention the Member you want to ban!')
-        if isinstance(error, commands.MissingRequiredArgument):
             await ign.send('You have to put member\'s IGN that you want to ban!')
     
     @commands.command()
