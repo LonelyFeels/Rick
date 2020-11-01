@@ -134,7 +134,7 @@ class RCON(commands.Cog):
 
     @commands.command()
     @commands.has_role('Staff')
-    async def kick(self, ctx, member = discord.Member):
+    async def kick(self, ctx, member: discord.Member):
         await member.kick(reason=None)
 
         author = ctx.message.author
