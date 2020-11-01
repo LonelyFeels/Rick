@@ -31,10 +31,13 @@ class Help(commands.Cog):
         embedhelp.add_field(name='_ _', value='_ _', inline=False)
         embedhelp.add_field(name='.load <category>', value='Loads the category.', inline=False)
         embedhelp.add_field(name='.unload <category>', value='Unloads the category.', inline=False)
+        embedhelp.add_field(name='.close', value='Close accidentally opened RCON.', inline=False)
         embedhelp.add_field(name='.accept <@USER>', value='Use this to accept Applicants and give them Member role.', inline=False)
+        embedhelp.add_field(name='.whitelist <IGN>', value='Use this to whitelist the member.', inline=False)
+        embedhelp.add_field(name='.unwhitelist <IGN>', value='Use this to unwhitelist the member.', inline=False)
         embedhelp.add_field(name='.clear <amount=5>', value='Use this to clear messages.', inline=False)
         embedhelp.add_field(name='_ _', value='_ _', inline=False)
-        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Status: Status; Roles: Accept, Reaction Roles; Suggestions: Suggest; Clear: Clear; Fun:  Hug, 8ball, Waifu', inline=False)
+        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Status: Status; Roles: Accept, Reaction Roles; RCON: Whitelist, Unwhitelist, Close; Suggestions: Suggest; Clear: Clear; Fun:  Hug, 8ball, Waifu', inline=False)
 
         await ctx.send(embed=embedhelp)
         
