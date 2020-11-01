@@ -103,32 +103,27 @@ class RCON(commands.Cog):
         member = await self.client.wait_for('message', check=check)
 
         banned_users = await ctx.guild.bans()
-        print(tuple(member.content.split('#')))
         (member_name, member_discriminator) = tuple(member.content.split('#'))
-        print(member_name)
-        print(member_discriminator)
 
         for ban_entry in banned_users:
             user = ban_entry.user
-            print(user.name)
-            print(user.discriminator)
 
             if (user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
                 return
                 
-        author = ctx.message.author
-        author_icon = author.avatar_url
-        embedunban = discord.Embed(
-            colour = discord.Colour.from_rgb(12,235,241)
-            )
+                author = ctx.message.author
+                author_icon = author.avatar_url
+                embedunban = discord.Embed(
+                    colour = discord.Colour.from_rgb(12,235,241)
+                    )
 
-        embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
-        embedunban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772480429034569739/tenor.gif')
-        embedunban.add_field(name=f'Successfully unbanned @{member}.', value='Maybe they haven\'t been such a prick?', inline=False)
+                embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+                embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
+                embedunban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772480429034569739/tenor.gif')
+                embedunban.add_field(name=f'Successfully unbanned @{member}.', value='Maybe they haven\'t been such a prick?', inline=False)
 
-        await ctx.send(embed=embedunban)
+                await ctx.send(embed=embedunban)
 
     @unban.error
     async def unban_error(self, member, error):
