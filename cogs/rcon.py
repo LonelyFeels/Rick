@@ -105,6 +105,8 @@ class RCON(commands.Cog):
         banned_users = await ctx.guild.bans()
         print(tuple(member.content.split('#')))
         (member_name, member_discriminator) = tuple(member.content.split('#'))
+        print(member_name)
+        print(member_discriminator)
 
         for ban_entry in banned_users:
             user = ban_entry.user
