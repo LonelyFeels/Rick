@@ -104,6 +104,7 @@ class RCON(commands.Cog):
 
             if (user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
+                return
                 
                 author = ctx.message.author
                 author_icon = author.avatar_url
@@ -115,7 +116,8 @@ class RCON(commands.Cog):
                 embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
                 embedunban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772480429034569739/tenor.gif')
                 embedunban.add_field(name=f'Successfully unbanned @{member}.', value='Maybe they haven\'t been such a prick?', inline=False)
-                return
+
+                await ctx.send(embed=embedunban)
 
     @unban.error
     async def unban_error(self, member, error):
