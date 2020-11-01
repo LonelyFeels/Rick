@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from mcrcon import MCRcon
+from mctools import RCONClient
 
 
 class Rcon(commands.Cog):
@@ -12,23 +12,23 @@ class Rcon(commands.Cog):
     #Commands
     @commands.command()
     async def whitelist(self, ctx):
-        mcr = MCRcon('46.4.13.165:25567', '@LdY%U430G8NVS8sqsJAR$z\#m08763')
-        mcr.connect()
-        wh = mcr.command(f'/whitelist add {ctx}')
-        print(wh)
-        mcr.disconnect
+        HOST = '46.4.13.165'
+        PORT = 25567
 
-        await ctx.send(f'Added {ctx} to the whitelist.')
+        rcon = RCONClient(HOST, port=PORT)
+        if rcon.login('@LdY%U430G8NVS8sqsJAR$z#m08763'):
+            rcon.command(f'whitelist add {ctx}')
+            await ctx.say(f'Added {ctx} to the whitelist.')
 
     @commands.command()
     async def unwhitelist(self, ctx):
-        mcr = MCRcon('46.4.13.165:25567', '@LdY%U430G8NVS8sqsJAR$z\#m08763')
-        mcr.connect()
-        unwh = mcr.command(f'/whitelist remove {ctx}')
-        print(unwh)
-        mcr.disconnect
+        HOST = '46.4.13.165'
+        PORT = 25567
 
-        await ctx.send(f'Removed {ctx} to the whitelist.')
+        rcon = RCONClient(HOST, port=PORT)
+        if rcon.login('@LdY%U430G8NVS8sqsJAR$z#m08763'):
+            rcon.command(f'whitelist add {ctx}')
+            await ctx.say(f'Removed {ctx} from the whitelist.')
 
 
 def setup(client):
