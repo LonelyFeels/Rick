@@ -111,6 +111,8 @@ class RCON(commands.Cog):
             if (user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
                 return
+
+        print('test')
                 
         author = ctx.message.author
         author_icon = author.avatar_url
