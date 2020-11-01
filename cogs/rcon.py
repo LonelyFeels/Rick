@@ -28,7 +28,7 @@ class Rcon(commands.Cog):
         rcon = RCONClient(HOST, port=PORT)
         if rcon.login('@LdY%U430G8NVS8sqsJAR$z#m08763'):
             rcon.command(f'whitelist add {ctx}')
-            await ctx.say(f'Removed {ctx} from the whitelist.')
+            await ctx.send(f'Removed {ctx} from the whitelist.')
 
 
 def setup(client):
