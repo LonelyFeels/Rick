@@ -86,7 +86,7 @@ class RCON(commands.Cog):
 
     @commands.command()
     @commands.has_role('Staff')
-    async def unban(self, ctx, ign):
+    async def unban(self, ctx, *, member, ign):
         ip = rconcredentials.ip
         port = rconcredentials.port
         password = rconcredentials.password
@@ -94,20 +94,37 @@ class RCON(commands.Cog):
         server = Server(ip, port, password, connect_on_send=True)
         print(await server.send(f'pardon {ign}'))
 
-        author = ctx.message.author
-        author_icon = author.avatar_url
-        embedunban = discord.Embed(
-            colour = discord.Colour.from_rgb(12,235,241)
-            )
+        banned_users = await ctx.guild.bans()
+        member_name, member_discriminator = member.split('#')
 
-        embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
-        embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
-        embedunban.set_image(url='https://tenor.com/bhFZp.gif')
-        embedunban.add_field(name=f'Successfully unbanned {ign}.', value='Maybe they haven\'t been such a prick?', inline=False)
+        for ban_entry in banned_users:
+            user = ban_entry.user
 
-        await ctx.send(embed=embedunban)
+            if(user.name, user.discriminator) == (member_name, member_discriminator):
+                await ctx.guild.unban(user)
+
+                author = ctx.message.author
+                author_icon = author.avatar_url
+                embedunban = discord.Embed(
+                    colour = discord.Colour.from_rgb(12,235,241)
+                    )
+
+                embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+                embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
+                embedunban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772480429034569739/tenor.gif')
+                embedunban.add_field(name=f'Successfully unbanned @{user.name}#{user.discriminator}.', value='Maybe they haven\'t been such a prick?', inline=False)
+
+                await ctx.send(embed=embedunban)
+                return
 
         await server.close()
+
+    @unban.error
+    async def unban_error(self, member, error):
+        if isinstance(error, commands.MissingRole):
+            await member.send('You don\'t have the permissions to do that!')
+        if isinstance(error, commands.MissingRequiredArgument):
+            await member.send('You have put down Member\'s Username#Discriminator and IGN that you want to unban!')
     
     @commands.command()
     @commands.has_role('Staff')
