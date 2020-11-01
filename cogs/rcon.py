@@ -8,7 +8,7 @@ class RCON(commands.Cog):
     def __init__(self,client):
         self.client = client
 
-    if __name__ = '__main__':
+    if __name__ == '__main__':
         import config
 
     #Commands
