@@ -110,6 +110,8 @@ class RCON(commands.Cog):
 
         for ban_entry in banned_users:
             user = ban_entry.user
+            print(user.name)
+            print(user.discriminator)
 
             if (user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
