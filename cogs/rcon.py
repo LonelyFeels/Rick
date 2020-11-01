@@ -121,7 +121,7 @@ class RCON(commands.Cog):
         embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedunban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772480429034569739/tenor.gif')
-        embedunban.add_field(name=f'Successfully unbanned.', value='Maybe they haven\'t been such a prick?', inline=False)
+        embedunban.add_field(name=f'Successfully unbanned @{member.content}.', value='Maybe they haven\'t been such a prick?', inline=False)
 
         await ctx.send(embed=embedunban)
 
@@ -131,8 +131,31 @@ class RCON(commands.Cog):
             await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
             await member.send('You have put down Member\'s IGN and Username#Discriminator that you want to unban!')
-        else:
-            raise error
+
+    @commands.command()
+    @commands.has_role('Staff')
+    async def kick(self, ctx, member = discord.Member):
+        await member.kick(reason=None)
+
+        author = ctx.message.author
+        author_icon = author.avatar_url
+        embedkick = discord.Embed(
+            colour = discord.Colour.from_rgb(12,235,241)
+            )
+
+        embedkick.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedkick.set_author(name=f'{author}', icon_url=f'{author_icon}')
+        embedkick.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772572339916242944/gif.gif')
+        embedkick.add_field(name=f'Successfully kicked @{member}.', value='They\'ve been such a prick, innit?', inline=False)
+
+        await ctx.send(embed=embedkick)
+
+    @kick.error
+    async def kick_error(self, member, error):
+        if isinstance(error, commands.MissingRole):
+            await member.send('You don\'t have the permissions to do that!')
+        if isinstance(error, commands.MissingRequiredArgument):
+            await member.send('You have to mention the Member you want to kick!')
     
     @commands.command()
     @commands.has_role('Staff')
