@@ -28,7 +28,7 @@ class RCON(commands.Cog):
         if isinstance(error, commands.MissingRole):
             await player.send("You don't have the permissions to do that!")
         if isinstance(error, commands.MissingRequiredArgument):
-            await player.send('You have to put member\'s IGN that you want to whitelist.!')
+            await player.send('You have to put member\'s IGN that you want to whitelist!')
 
     @commands.command()
     @commands.has_role('Staff')
@@ -48,7 +48,7 @@ class RCON(commands.Cog):
         if isinstance(error, commands.MissingRole):
             await player.send("You don't have the permissions to do that!")
         if isinstance(error, commands.MissingRequiredArgument):
-            await player.send('You have to put member\'s IGN that you want to unwhitelist.!')
+            await player.send('You have to put member\'s IGN that you want to unwhitelist!')
     
     @commands.command()
     @commands.has_role('Staff')
