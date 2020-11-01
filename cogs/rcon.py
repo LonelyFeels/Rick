@@ -13,50 +13,82 @@ class RCON(commands.Cog):
     #Commands
     @commands.command()
     @commands.has_role('Staff')
-    async def whitelist(self, ctx, player):
-        ip = credentials.ip
-        port = credentials.port
-        password = credentials.password
+    async def whitelist(self, ctx, ign):
+        ip = rconcredentials.ip
+        port = rconcredentials.port
+        password = rconcredentials.password
 
         server = Server(ip, port, password, connect_on_send=True)
-        print(await server.send(f'whitelist add {player}'))
-        await ctx.send(f'Added {player} to the whitelist.')
+        print(await server.send(f'whitelist add {ign}'))
+        await ctx.send(f'Added {ign} to the whitelist.')
 
         await server.close()
 
     @whitelist.error
-    async def whitelist_error(self, player, error):
+    async def whitelist_error(self, ign, error):
         if isinstance(error, commands.MissingRole):
-            await player.send("You don't have the permissions to do that!")
+            await ign.send("You don't have the permissions to do that!")
         if isinstance(error, commands.MissingRequiredArgument):
-            await player.send('You have to put member\'s IGN that you want to whitelist!')
+            await ign.send('You have to put member\'s IGN that you want to whitelist!')
 
     @commands.command()
     @commands.has_role('Staff')
-    async def unwhitelist(self, ctx, player):
-        ip = credentials.ip
-        port = credentials.port
-        password = credentials.password
+    async def unwhitelist(self, ctx, ign):
+        ip = rconcredentials.ip
+        port = rconcredentials.port
+        password = rconcredentials.password
 
         server = Server(ip, port, password, connect_on_send=True)
-        print(await server.send(f'whitelist remove {player}'))
-        await ctx.send(f'Removed {player} to the whitelist.')
+        print(await server.send(f'whitelist remove {ign}'))
+        await ctx.send(f'Removed {ign} to the whitelist.')
 
         await server.close()
     
     @unwhitelist.error
-    async def unwhitelist_error(self, player, error):
+    async def unwhitelist_error(self, ign, error):
         if isinstance(error, commands.MissingRole):
-            await player.send("You don't have the permissions to do that!")
+            await ign.send("You don't have the permissions to do that!")
         if isinstance(error, commands.MissingRequiredArgument):
-            await player.send('You have to put member\'s IGN that you want to unwhitelist!')
+            await ign.send('You have to put member\'s IGN that you want to unwhitelist!')
+
+    @commands.command()
+    @commands.has_role('Staff')
+    async def ban(self, ctx, member: discord.Member, ign):
+        ip = rconcredentials.ip
+        port = rconcredentials.port
+        password = rconcredentials.password
+
+        server = Server(ip, port, password, connect_on_send=True)
+        print(await server.send(f'ban {ign}'))
+        
+        author = ctx.message.author
+        author_icon = author.avatar_url
+        embedban = discord.Embed(
+            colour = discord.Colour.from_rgb(12,235,241)
+            )
+
+        embedban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedban.set_author(name=f'{author}', icon_url=f'{author_icon}')
+        embedban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772449306560430110/tenor.gif')
+        embedban.add_field(name=f'Successfuly banned @{member}', value='He\'s been such a prick, innit?', inline=False)
+
+        await ctx.send(embed=embedban)
+
+    @ban.error
+    async def ban_error(self, ctx, member, ign, error):
+        if isinstance(error, commands.MissingRole):
+            await ctx.send('You don\'t have the permissions to do that!')
+        if isinstance(error, commands.MissingRequiredArgument):
+            await member.send('You have to mention the Member you want to ban!')
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ign.send('You have to put member\'s IGN that you want to ban!')
     
     @commands.command()
     @commands.has_role('Staff')
     async def close(self, ctx):
-        ip = credentials.ip
-        port = credentials.port
-        password = credentials.password
+        ip = rconcredentials.ip
+        port = rconcredentials.port
+        password = rconcredentials.password
 
         server = Server(ip, port, password, connect_on_send=True)
 
