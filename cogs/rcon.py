@@ -121,7 +121,7 @@ class RCON(commands.Cog):
         embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedunban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772480429034569739/tenor.gif')
-        embedunban.add_field(name=f'Successfully unbanned @{member.content}.', value='Maybe they haven\'t been such a prick?', inline=False)
+        embedunban.add_field(name=f'Successfully unbanned.', value='Maybe they haven\'t been such a prick?', inline=False)
 
         await ctx.send(embed=embedunban)
 
