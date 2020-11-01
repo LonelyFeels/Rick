@@ -86,7 +86,7 @@ class RCON(commands.Cog):
 
     @commands.command()
     @commands.has_role('Staff')
-    async def unban(self, ctx, *, member, ign):
+    async def unban(self, ctx, ign, *, member):
         ip = rconcredentials.ip
         port = rconcredentials.port
         password = rconcredentials.password
@@ -106,7 +106,6 @@ class RCON(commands.Cog):
                 await ctx.guild.unban(user)
                 await ctx.send(f'Unbanned {user.mention}')
                 return
-            print(ban_entry)
 
     @unban.error
     async def unban_error(self, member, error):
