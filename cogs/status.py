@@ -19,7 +19,6 @@ class Status(commands.Cog):
             max_players = status.max_players
             motd = status.motd
             version = status.version
-            players_list = status.players_list
             embedstatus = discord.Embed(
                 url = 'https://hydrovanillasmp.com',
                 colour = discord.Color.from_rgb(12,235,241)
