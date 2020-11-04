@@ -14,12 +14,12 @@ class Status(commands.Cog):
     async def status(self, ctx):
         status = ServerStatus()
         online_players = status.online_players
-        max_players = status.max_players
-        motd = status.motd
-        version = status.version
-        players_list = status.players_list
 
         if online_players == None:
+            max_players = status.max_players
+            motd = status.motd
+            version = status.version
+            players_list = status.players_list
             embedstatus = discord.Embed(
                 url = 'https://hydrovanillasmp.com',
                 colour = discord.Color.from_rgb(12,235,241)
@@ -37,6 +37,10 @@ class Status(commands.Cog):
 
             await ctx.send(embed=embedstatus)
         else:
+            max_players = status.max_players
+            motd = status.motd
+            version = status.version
+            players_list = status.players_list
             embedstatus = discord.Embed(
                 url = 'https://hydrovanillasmp.com',
                 colour = discord.Color.from_rgb(12,235,241)
