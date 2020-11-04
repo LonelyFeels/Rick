@@ -14,7 +14,4 @@ class ServerStatus:
             self.version: int = data['version']
             self.online_players: int = data['players']['online']    
             self.max_players: int = data['players']['max']
-            if self.online_players: int = data['players']['online'] == None:
-                return
-            else:
-                self.players_list: str = '\n'.join(data['players']['list'])
+            self.players_list: str = '\n'.join(data['players']['list'])
