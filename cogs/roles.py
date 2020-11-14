@@ -152,14 +152,14 @@ class Roles(commands.Cog):
 
     @commands.command()
     @commands.has_role('Staff')
-    async def permdenied(self, ctx, member: discord.Member):
+    async def permdeny(self, ctx, member: discord.Member):
         role = discord.utils.get(ctx.guild.roles, name='Permanently Denied')
         channel = self.client.get_channel(494184460275941377)
         await member.add_roles(role)
         await channel.send(f'Permanently denied {member.mention}.')
 
-    @permdenied.error
-    async def permdenied_error(self, member, error):
+    @permdeny.error
+    async def permdeny_error(self, member, error):
         if isinstance(error, commands.MissingRole):
             await member.send('You don\'t have the permission to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
