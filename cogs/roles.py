@@ -150,6 +150,14 @@ class Roles(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await member.send('You have to mention the Applicant you want to accept!')
 
+    @commands.command()
+    @commands.has_role('Staff')
+    async def permdenied(self, ctx, member: discord.Member):
+        role = discord.utils.get(ctx.guild.roles, name='Permanently Dnied')
+        channel = self.client.get_channel(494184460275941377)
+        await member.add_roles(role)
+        await channel.send(f'Permanently denied {member.mention}.')
+
 
 def setup(client):
     client.add_cog(Roles(client))
