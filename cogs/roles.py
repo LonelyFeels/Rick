@@ -146,7 +146,7 @@ class Roles(commands.Cog):
     @accept.error
     async def accept_error(self, member, error):
         if isinstance(error, commands.MissingRole):
-            await member.send("You don't have the permissions to do that!")
+            await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
             await member.send('You have to mention the Applicant you want to accept!')
 
@@ -157,6 +157,13 @@ class Roles(commands.Cog):
         channel = self.client.get_channel(494184460275941377)
         await member.add_roles(role)
         await channel.send(f'Permanently denied {member.mention}.')
+
+    @permdenied.error
+    async def permdenied_error(self, member, error):
+        if isinstance(error, commands.MissingRole):
+            await member.send('You don\'t have the permission to do that!')
+        if isinstance(error, commands.MissingRequiredArgument):
+            await member.send('You have to mention the Applicant you want to permanently denied!')
 
 
 def setup(client):

@@ -33,6 +33,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='.unload <category>', value='Unloads the category.', inline=False)
         embedhelp.add_field(name='.close', value='Close accidentally opened RCON.', inline=False)
         embedhelp.add_field(name='.accept <@USER>', value='Use this to accept Applicants and give them Member role.', inline=False)
+        embedhelp.add_field(name='.permdenied <@USER>', value='Use this to permanently deny Applicants.', inline=False)
         embedhelp.add_field(name='.whitelist <IGN>', value='Use this to whitelist the member.', inline=False)
         embedhelp.add_field(name='.unwhitelist <IGN>', value='Use this to unwhitelist the member.', inline=False)
         embedhelp.add_field(name='.ban <@USER> <IGN>', value='Use this to ban the member both from Discord and Minecraft server.', inline=False)
@@ -40,7 +41,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='.kick <IGN>', value='Use this to kick the member from Discord server.', inline=False)
         embedhelp.add_field(name='.clear <amount=5>', value='Use this to clear messages.', inline=False)
         embedhelp.add_field(name='_ _', value='_ _', inline=False)
-        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Status: Status; Roles: Accept, Reaction Roles; RCON: Whitelist, Unwhitelist, Ban, Unban, Kick, Close; Suggestions: Suggest; Clear: Clear; Fun:  Hug, 8ball, Waifu', inline=False)
+        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Status: Status; Roles: Accept, PermDenied, Reaction Roles; RCON: Whitelist, Unwhitelist, Ban, Unban, Kick, Close; Suggestions: Suggest; Clear: Clear; Fun:  Hug, 8ball, Waifu', inline=False)
 
         await ctx.send(embed=embedhelp)
         
