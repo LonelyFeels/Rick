@@ -153,7 +153,7 @@ class Roles(commands.Cog):
     @commands.command()
     @commands.has_role('Staff')
     async def permdenied(self, ctx, member: discord.Member):
-        role = discord.utils.get(ctx.guild.roles, name='Permanently Dnied')
+        role = discord.utils.get(ctx.guild.roles, name='Permanently Denied')
         channel = self.client.get_channel(494184460275941377)
         await member.add_roles(role)
         await channel.send(f'Permanently denied {member.mention}.')
