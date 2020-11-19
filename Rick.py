@@ -10,6 +10,9 @@ client = commands.Bot(command_prefix = '!', intents=intents, help_command=None)
 
 @client.event
 async def on_ready():
+    member_count = sum(1 for _ in client.get_all_members())
+    await client.change_presence(status=discord.Status.do_not_disturb,
+    activity=discord.Activity(type=discord.ActivityType.watching, name=f'{member_count} Hydro Members'))
     print('Bot is ready.')
 
 @client.event
@@ -26,7 +29,7 @@ async def on_member_join(member: discord.Member):
 async def on_member_remove(member: discord.Member):
     total_users = sum(1 for _ in client.get_all_members())
     total_channel = client.get_channel(615522151742701590)
-    
+
     await client.change_presence(status=discord.Status.do_not_disturb,
     activity=discord.Activity(type=discord.ActivityType.watching, name=f'{total_users} Hydro Members'))
     
