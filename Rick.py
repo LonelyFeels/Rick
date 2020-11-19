@@ -18,17 +18,13 @@ async def on_ready():
 @client.event
 async def on_member_join(member: discord.Member):
     total_users = sum(1 for _ in client.get_all_members())
-    print(total_users)
     total_channel = client.get_channel(615522151742701590)
-    print(total_users)
     await total_channel.edit(name = f'Total Users: {total_users}')
 
 @client.event
 async def on_member_remove(member: discord.Member):
     total_users = sum(1 for _ in client.get_all_members())
-    print(total_users)
     total_channel = client.get_channel(615522151742701590)
-    print(total_channel)
     await total_channel.edit(name = f'Total Users: {total_users}')
 
 @client.command()
