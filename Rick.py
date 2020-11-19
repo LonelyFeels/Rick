@@ -15,6 +15,18 @@ async def on_ready():
     activity=discord.Activity(type=discord.ActivityType.watching, name=f'{member_count} Hydro Members'))
     print('Bot is ready.')
 
+@client.event
+async def on_member_join():
+    total_users = sum(1 for _ in client.get_all_members())
+    channel = client.get_channel(615522151742701590)
+    await channel.edit(name = f'Total Users: {total_users}')
+
+@client.event
+async def on_member_remove():
+    total_users = sum(1 for _ in client.get_all_members())
+    channel = client.get_channel(615522151742701590)
+    await channel.edit(name = f'Total Users: {total_users}')
+
 @client.command()
 @commands.has_role('botadmin')
 async def load(ctx, extension):
