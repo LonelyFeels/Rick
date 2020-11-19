@@ -22,14 +22,10 @@ async def on_member_join(member: discord.Member):
 
     await total_channel.edit(name = f'Total Users: {total_users}')
 
-    await client.change_presence(status=discord.Status.do_not_disturb,
-    activity=discord.Activity(type=discord.ActivityType.watching, name=f'{total_users} Hydro Members'))
-
 @client.event
 async def on_member_remove(member: discord.Member):
     total_users = sum(1 for _ in client.get_all_members())
     total_channel = client.get_channel(615522151742701590)
-
     await total_channel.edit(name = f'Total Users: {total_users}')
 
     await client.change_presence(status=discord.Status.do_not_disturb,
