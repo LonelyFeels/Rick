@@ -17,15 +17,13 @@ async def on_ready():
 
 @client.event
 async def on_member_join():
-    total_users = sum(1 for _ in client.get_all_members())
     channel = client.get_channel(615522151742701590)
-    await channel.edit(name = f'Total Users: {total_users}')
+    await channel.edit(name = 'Total Users: 599')
 
 @client.event
 async def on_member_remove():
-    total_users = sum(1 for _ in client.get_all_members())
     channel = client.get_channel(615522151742701590)
-    await channel.edit(name = f'Total Users: {total_users}')
+    await channel.edit(name = f'Total Users: 200')
 
 @client.command()
 @commands.has_role('botadmin')
