@@ -29,7 +29,7 @@ async def on_member_remove(member: discord.Member):
 
 @client.event
 async def on_member_update(member: discord.Member):
-    online_users = sum(member.status!=discord.Status.offline and not member.bot for member in client.get_all_members)
+    online_users = sum(member.status!=discord.Status.offline and not member.bot for member in client.get_all_members())
     online_channel = client.get_channel(615522198073114625)
     await online_channel.edit(name = f'Online Users: {online_users}')
 
