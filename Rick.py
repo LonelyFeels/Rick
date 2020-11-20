@@ -41,7 +41,13 @@ async def on_member_remove(member: discord.Member):
 async def update(ctx):
     online_users = sum(member.status!=discord.Status.offline and not member.bot for member in client.get_all_members())
     online_channel = client.get_channel(615522198073114625)
+    print(online_users)
+    print(online_channel)
     await online_channel.edit(name = f'Online Users: {online_users}')
+
+@update.error
+async def update_error(ctx, error):
+    raise error
 
 @client.command()
 @commands.has_role('botadmin')
