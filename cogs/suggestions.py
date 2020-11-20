@@ -16,7 +16,7 @@ class Suggestions(commands.Cog):
         author_icon = author.avatar_url
         embedsuggest = discord.Embed(
             title = '👍 Upvote | 👎 Downvote',
-            description = 'Suggest features to Hydro with `-suggest <suggestion>`',
+            description = 'Suggest features to Hydro with `!suggest <suggestion>`',
             colour = discord.Colour.from_rgb(12,235,241)
         )
 

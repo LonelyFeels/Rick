@@ -145,7 +145,7 @@ class Roles(commands.Cog):
         info = '<#584773749497266199>'
         await member.remove_roles(applicants)
         await member.add_roles(members)
-        await channel.send(f'Please welcome {member.mention} to **Hydro Vanilla SMP**! Our IP and Information can be found in {info}! :smiley:')
+        await channel.send(f'Please welcome {member.mention} to **Hydro Vanilla SMP**! Our IP and Information can be found in {info}! :smiley:\nAnd no, @W1ckeDMetaL is not an admin... he is just an asshole with too much income 💸')
 
     @accept.error
     async def accept_error(self, member, error):
