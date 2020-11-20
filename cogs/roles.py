@@ -42,6 +42,8 @@ class Roles(commands.Cog):
                 role = discord.utils.get(guild.roles, name='#PraiseNate')
             elif payload.emoji.name == '🛒':
                 role = discord.utils.get(guild.roles, name='Shopaholics')
+            elif payload.emoji.name == 'HydroSubway':
+                role = discord.utils.get(guild.roles, name='Weebs')
             elif payload.emoji.name == '🇳🇱':
                 role = discord.utils.get(guild.roles, name='Dutchie')
             elif payload.emoji.name == '🍰':
@@ -62,8 +64,6 @@ class Roles(commands.Cog):
                 role = discord.utils.get(guild.roles, name='Season 5 OG')
             elif payload.emoji.name == '6️⃣':
                 role = discord.utils.get(guild.roles, name='Season 6 OG')
-            elif payload.emoji.name == 'HydroSubway':
-                role = discord.utils.get(guild.roles, name='Weebs')
             else:
                 role = discord.utils.get(guild.roles, name=payload.emoji.name)
 
@@ -95,6 +95,8 @@ class Roles(commands.Cog):
                 role = discord.utils.get(guild.roles, name='#PraiseNate')
             elif payload.emoji.name == '🛒':
                 role = discord.utils.get(guild.roles, name='Shopaholics')
+            elif payload.emoji.name == 'HydroSubway':
+                role = discord.utils.get(guild.roles, name='Weebs')
             elif payload.emoji.name == '🇳🇱':
                 role = discord.utils.get(guild.roles, name='Dutchie')
             elif payload.emoji.name == '🍰':
@@ -115,8 +117,6 @@ class Roles(commands.Cog):
                 role = discord.utils.get(guild.roles, name='Season 5 OG')
             elif payload.emoji.name == '6️⃣':
                 role = discord.utils.get(guild.roles, name='Season 6 OG')
-            elif payload.emoji.name == 'HydroSubway':
-                role = discord.utils.get(guild.roles, name='Weebs')
             else:
                 role = discord.utils.get(guild.roles, name=payload.emoji.name)
 
