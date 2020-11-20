@@ -35,7 +35,7 @@ async def on_member_join(member: discord.Member):
 async def on_member_remove(member: discord.Member):
     total_users = sum(1 for _ in client.get_all_members())
     total_channel = client.get_channel(615522151742701590)
-    await total_channel.edit(name = f'Total Users: {total_users}')ž
+    await total_channel.edit(name = f'Total Users: {total_users}')
 
 @client.command()
 async def update(ctx):
