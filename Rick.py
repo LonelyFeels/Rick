@@ -17,13 +17,11 @@ async def online_users_task(ctx):
         await asyncio.sleep(60)
 
 @client.event
-async def on_ready(ctx):
+async def on_ready():
     member_count = sum(1 for _ in client.get_all_members())
     await client.change_presence(status=discord.Status.do_not_disturb,
     activity=discord.Activity(type=discord.ActivityType.watching, name=f'{member_count} Hydro Members'))
     print('Bot is ready.')
-
-    client.loop.create_task(online_users_task(ctx))
 
 @client.command()
 @commands.has_role('Staff')
