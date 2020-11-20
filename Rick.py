@@ -38,8 +38,8 @@ async def on_member_remove(member: discord.Member):
     await total_channel.edit(name = f'Total Users: {total_users}')
 
 @client.command()
-async def update(ctx):
-    online_users = sum(member.status!=discord.Status.offline and not member.bot for member in client.get_all_members())
+async def update(ctx, member: discord.Member):
+    online_users = len(list(filter(member.status!=discord.Status.offline, client.get_all_members())))
     online_channel = client.get_channel(615522198073114625)
     print(online_users)
     print(online_channel)
