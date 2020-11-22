@@ -10,20 +10,21 @@ intents.presences = True
 client = commands.Bot(command_prefix = '!', intents=intents, help_command=None)
 
 
-async def online_users_task():
-    while True:
-        guild = client.get_guild(494184372258471936)
-        nm = [m.status for m in guild.members]
-        online_channel = client.get_channel(615522198073114625)
-        await online_channel.edit(name = f'Online Users: {nm.count(discord.Status.online)+nm.count(discord.Status.idle)+nm.count(discord.Status.do_not_disturb)}')
-        await asyncio.sleep(10)
-
 @client.event
 async def on_ready():
     member_count = sum(1 for _ in client.get_all_members())
     await client.change_presence(status=discord.Status.do_not_disturb,
     activity=discord.Activity(type=discord.ActivityType.watching, name=f'{member_count} Hydro Members'))
     print('Bot is ready.')
+
+async def online_users_task():
+    await client.wait_until_ready()
+    guild = client.get_guild(494184372258471936)
+    while True:
+        members = [m.status for m in guild.members]
+        online_channel = client.get_channel(615522198073114625)
+        await online_channel.edit(name = f'Online Users: {members.count(discord.Status.online)+members.count(discord.Status.idle)+members.count(discord.Status.do_not_disturb)}')
+        await asyncio.sleep(10)
 
 client.loop.create_task(online_users_task())
 
