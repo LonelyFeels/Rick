@@ -24,7 +24,7 @@ async def on_ready():
     print('Bot is ready.')
 
 #client.loop.create_task(online_users_task())
-@client.command
+@client.command()
 async def count(ctx):
     online_members = sum(1 if member.status == discord.Status.online else 0 for member in guild.members)
     print(online_members)
