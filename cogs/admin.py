@@ -18,12 +18,12 @@ class Admin(commands.Cog):
          await ctx.send("You don't have the permissions to do that!")
 
     @commands.command()
-    @commands.has_role('Staff')
+    @commands.has_any_role('Staff', 'Donators')
     async def count(self, ctx):
         guild = self.client.get_guild(494184372258471936)
         members = [m.status for m in guild.members]
         bots = [b.status for b in guild.members if b.bot]
-        
+
         embedcount = discord.Embed(
             title = 'Hydro Member Counter',
             url = 'https://hydrovanillasmp.com',
