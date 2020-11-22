@@ -19,20 +19,14 @@ async def on_ready():
     async def count_users_task():
         while True:
             members = [m.status for m in guild.members]
-            bots = [m.status for m in guild.members if m.bot]
-            await online_channel.edit(name = f'Online Users: {members.count(discord.Status.online)+members.count(discord.Status.idle)+members.count(discord.Status.do_not_disturb)}')
-            await total_channel.edit(name = f'Total Users: {len(client.users)}')
+            bots = [b.status for b in guild.members if b.bot]
+            await online_channel.edit(name = f'Online Members: {members.count(discord.Status.online)+members.count(discord.Status.idle)+members.count(discord.Status.do_not_disturb)}')
+            await total_channel.edit(name = f'Total Members: {len(client.users)}')
             await bot_channel.edit(name = f'Bots: {bots.count(discord.Status.online)+bots.count(discord.Status.idle)+bots.count(discord.Status.do_not_disturb)}')
             await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Activity(type=discord.ActivityType.watching, name=f'{len(client.users)} Hydro Members'))
             await asyncio.sleep(1200)
     client.loop.create_task(count_users_task())
     print('Bot is ready.')
-
-@client.command()
-async def count(ctx):
-    guild = client.get_guild(494184372258471936)
-    members = [m.status for m in guild.members]
-    await ctx.send(f'Online Members: {members.count(discord.Status.online)}\nIdle Members: {members.count(discord.Status.idle)}\nDo not disturb Members: {members.count(discord.Status.do_not_disturb)}\nOffline Members: {members.count(discord.Status.offline)}')
 
 @client.command()
 @commands.has_role('botadmin')
