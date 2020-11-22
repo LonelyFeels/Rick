@@ -28,7 +28,7 @@ async def on_ready():
 @client.command()
 async def count(ctx):
     guild = client.get_guild(494184372258471936)
-    online_members = sum(1 for m in guild.members if m.status == discord.Status.online and if m.status == discord.Status.idle and if m.status == discord.Status.do_not_disturb)
+    online_members = sum(1 for m in guild.members if m.status == discord.Status.online)
     print(online_members)
     
 @client.event
