@@ -13,9 +13,9 @@ client = commands.Bot(command_prefix = '!', intents=intents, help_command=None)
 async def online_users_task():
     while True:
         guild = client.get_guild(494184372258471936)
-        members = [m.status for m in guild.members]
+        nm = [m.status for m in guild.members]
         online_channel = client.get_channel(615522198073114625)
-        await online_channel.edit(name = f'Online Users: {members.count(discord.Status.online)+members.count(discrod.Status.idle)+members.count(discord.Status.do_not_disturb)}')
+        await online_channel.edit(name = f'Online Users: {nm.count(discord.Status.online)+nm.count(discord.Status.idle)+nm.count(discord.Status.do_not_disturb)}')
         await asyncio.sleep(10)
 
 @client.event
