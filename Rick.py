@@ -26,8 +26,7 @@ async def on_ready():
 #client.loop.create_task(online_users_task())
 @client.command()
 async def count(ctx):
-    guild = discord.Guild
-    online_members = sum(1 if member.status == discord.Status.online else 0 for member in guild.members)
+    online_members = sum(1 if member.status == discord.Status.online else 0 for member in client.get_all_members())
     print(online_members)
     
 @client.event
