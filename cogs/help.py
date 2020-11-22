@@ -40,8 +40,9 @@ class Help(commands.Cog):
         embedhelp.add_field(name='!unban <IGN> -> <USER#DISCRIMINATOR>', value='Use this to unban the member both from Discord and Minecraft server.', inline=False)
         embedhelp.add_field(name='!kick <IGN>', value='Use this to kick the member from Discord server.', inline=False)
         embedhelp.add_field(name='!clear <amount=5>', value='Use this to clear messages.', inline=False)
+        embedhelp.add_field(name='!count', value='Returns amounts of members.', inline=False)
         embedhelp.add_field(name='_ _', value='_ _', inline=False)
-        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Status: Status; Roles: Accept, PermDeny, Reaction Roles; RCON: Whitelist, Unwhitelist, Ban, Unban, Kick, Close; Suggestions: Suggest; Clear: Clear; Fun:  Hug, 8ball, Waifu', inline=False)
+        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Status: Status; Roles: Accept, PermDeny, Reaction Roles; RCON: Whitelist, Unwhitelist, Ban, Unban, Kick, Close; Suggestions: Suggest; Admin: Clear, Count; Fun:  Hug, 8ball, Waifu', inline=False)
 
         await ctx.send(embed=embedhelp)
         
