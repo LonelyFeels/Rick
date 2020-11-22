@@ -24,6 +24,10 @@ async def on_ready():
     print('Bot is ready.')
 
 #client.loop.create_task(online_users_task())
+@client.command
+async def count(ctx):
+    online_members = sum(1 if member.status == discord.Status.online else 0 for member in guild.members)
+    print(online_members)
     
 @client.event
 async def on_member_join(member: discord.Member):
@@ -36,18 +40,6 @@ async def on_member_remove(member: discord.Member):
     total_users = sum(1 for _ in client.get_all_members())
     total_channel = client.get_channel(615522151742701590)
     await total_channel.edit(name = f'Total Users: {total_users}')
-
-@client.command()
-async def update(ctx, member: discord.Member):
-    online_users = len(list(filter(member.status!=discord.Status.offline, client.get_all_members())))
-    online_channel = client.get_channel(615522198073114625)
-    print(online_users)
-    print(online_channel)
-    await online_channel.edit(name = f'Online Users: {online_users}')
-
-@update.error
-async def update_error(ctx, error):
-    raise error
 
 @client.command()
 @commands.has_role('botadmin')
