@@ -12,39 +12,24 @@ client = commands.Bot(command_prefix = '!', intents=intents, help_command=None)
 
 @client.event
 async def on_ready():
-    member_count = sum(1 for _ in client.get_all_members())
-    await client.change_presence(status=discord.Status.do_not_disturb,
-    activity=discord.Activity(type=discord.ActivityType.watching, name=f'{member_count} Hydro Members'))
-    print('Bot is ready.')
-
-async def online_users_task():
-    await client.wait_until_ready()
     guild = client.get_guild(494184372258471936)
-    while True:
-        members = [m.status for m in guild.members]
-        online_channel = client.get_channel(615522198073114625)
-        await online_channel.edit(name = f'Online Users: {members.count(discord.Status.online)+members.count(discord.Status.idle)+members.count(discord.Status.do_not_disturb)}')
-        await asyncio.sleep(10)
-
-client.loop.create_task(online_users_task())
+    online_channel = client.get_channel(615522198073114625)
+    total_channel = client.get_channel(615522151742701590)
+    async def count_users_task():
+        while True:
+            members = [m.status for m in guild.members]
+            await online_channel.edit(name = f'Online Users: {members.count(discord.Status.online)+members.count(discord.Status.idle)+members.count(discord.Status.do_not_disturb)}')
+            await total_channel.edit(name = f'Total Users: {len(client.users)}')
+            await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Activity(type=discord.ActivityType.watching, name=f'{len(client.users)} Hydro Members'))
+            await asyncio.sleep(1200)
+    client.loop.create_task(count_users_task())
+    print('Bot is ready.')
 
 @client.command()
 async def count(ctx):
     guild = client.get_guild(494184372258471936)
     members = [m.status for m in guild.members]
     await ctx.send(f'Online Members: {members.count(discord.Status.online)}\nIdle Members: {members.count(discord.Status.idle)}\nDo not disturb Members: {members.count(discord.Status.do_not_disturb)}\nOffline Members: {members.count(discord.Status.offline)}')
-    
-@client.event
-async def on_member_join(member: discord.Member):
-    total_users = sum(1 for _ in client.get_all_members())
-    total_channel = client.get_channel(615522151742701590)
-    await total_channel.edit(name = f'Total Users: {total_users}')
-
-@client.event
-async def on_member_remove(member: discord.Member):
-    total_users = sum(1 for _ in client.get_all_members())
-    total_channel = client.get_channel(615522151742701590)
-    await total_channel.edit(name = f'Total Users: {total_users}')
 
 @client.command()
 @commands.has_role('botadmin')
