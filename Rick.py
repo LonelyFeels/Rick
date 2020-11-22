@@ -6,6 +6,7 @@ import asyncio
 
 intents = discord.Intents.default()
 intents.members = True
+intents.presences = True
 client = commands.Bot(command_prefix = '!', intents=intents, help_command=None)
 
 
