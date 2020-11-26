@@ -85,7 +85,35 @@ class Fun(commands.Cog):
     async def dogfact(self, ctx):
         response = urllib.request.urlopen("https://some-random-api.ml/facts/dog")
         data = json.load(response)
-        await ctx.send(data['fact'])
+        fact = data['fact']
+
+        embeddog = discord.Embed(
+            title = 'Dog Fact',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+        
+        embeddog.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embeddog.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embeddog.add_field(name='Woof woof 🐕', value=f'{fact}', inline=False)
+
+        await ctx.send(embed=embeddog)
+
+    @commands.command()
+    async def catfact(self, ctx):
+        response = urllib.request.urlopen("https://some-random-api.ml/facts/cat")
+        data = json.load(response)
+        fact = data['fact']
+        
+        embedcat = discord.Embed(
+            title = 'Dog Fact',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+        
+        embedcat.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedcat.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedcat.add_field(name='Meow 🐈‍⬛', value=f'{fact}', inline=False)
+
+        await ctx.send(embed=embedcat)
 
 def setup(client):
     client.add_cog(Fun(client))
