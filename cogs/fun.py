@@ -105,7 +105,7 @@ class Fun(commands.Cog):
         fact = data['fact']
         
         embedcat = discord.Embed(
-            title = 'Dog Fact',
+            title = 'Cat Fact',
             colour = discord.Colour.from_rgb(12,235,241)
         )
         
@@ -145,7 +145,7 @@ class Fun(commands.Cog):
         
         embedfox.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedfox.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedfox.add_field(name='What does a fox say? 🦊', value=f'{fact}', inline=False)
+        embedfox.add_field(name='What does the fox say? 🦊', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedfox)
 

@@ -27,7 +27,12 @@ class Help(commands.Cog):
         embedhelp.add_field(name='!suggest <suggestion>', value='Suggest something you think it would be a cool addition to the server.', inline=False)
         embedhelp.add_field(name='!hug <@USER>', value='Show someone how much you love them :heart:', inline=False)
         embedhelp.add_field(name='!8ball <question>', value='Undecided about something? Ask our 8ball (:', inline=False)
-        embedhelp.add_field(name='!waifu', value='So you\'re an anime fan? In that case this might be command just for you.', inline=False)
+        embedhelp.add_field(name='!dogfact', value='Woof Woof 🐕', inline=False)
+        embedhelp.add_field(name='!catfact', value='Meow 🐈‍⬛', inline=False)
+        embedhelp.add_field(name='!pandafact', value='Squeak? 🐼', inline=False)
+        embedhelp.add_field(name='!foxfact', value='What does the fox say? 🦊', inline=False)
+        embedhelp.add_field(name='!birdfact', value='Tweet 🐦', inline=False)
+        embedhelp.add_field(name='!koalafact', value='Tweet 🐨', inline=False)
         embedhelp.add_field(name='_ _', value='_ _', inline=False)
         embedhelp.add_field(name='!load <category>', value='Loads the category.', inline=False)
         embedhelp.add_field(name='!unload <category>', value='Unloads the category.', inline=False)
@@ -42,7 +47,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='!clear <amount=5>', value='Use this to clear messages.', inline=False)
         embedhelp.add_field(name='!count', value='Returns amounts of members.', inline=False)
         embedhelp.add_field(name='_ _', value='_ _', inline=False)
-        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Status: Status; Roles: Accept, PermDeny, Reaction Roles; RCON: Whitelist, Unwhitelist, Ban, Unban, Kick, Close; Suggestions: Suggest; Admin: Clear, Count; Fun:  Hug, 8ball, Waifu', inline=False)
+        embedhelp.add_field(name='Categories:', value='Help: Help, Donate, Invite, Dynmap; Status: Status; Roles: Accept, PermDeny, Reaction Roles; RCON: Whitelist, Unwhitelist, Ban, Unban, Kick, Close; Suggestions: Suggest; Admin: Clear, Count; Fun:  Hug, 8ball, Waifu, DogFact, CatFact, PandaFact, FoxFact, BirdFact, Koalafact', inline=False)
 
         await ctx.send(embed=embedhelp)
         
