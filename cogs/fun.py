@@ -3,6 +3,8 @@ from discord.ext import commands
 import random
 from bs4 import BeautifulSoup as bs
 import requests
+import urllib.request
+import json
 
 
 class Fun(commands.Cog):
@@ -79,6 +81,11 @@ class Fun(commands.Cog):
         else:
             await ctx.send(f'You can only use this command in {channel.mention}.')
 
+    @commands.command()
+    async def dogfact(self, ctx):
+        response = urllib.request.urlopen("https://some-random-api.ml/facts/dog")
+        data = json.load(response)
+        await ctx.send(data['fact'])
 
 def setup(client):
     client.add_cog(Fun(client))
