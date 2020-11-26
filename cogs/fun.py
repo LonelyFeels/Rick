@@ -115,5 +115,73 @@ class Fun(commands.Cog):
 
         await ctx.send(embed=embedcat)
 
+    @commands.command()
+    async def pandafact(self, ctx):
+        response = urllib.request.urlopen("https://some-random-api.ml/facts/panda")
+        data = json.load(response)
+        fact = data['fact']
+        
+        embedpanda = discord.Embed(
+            title = 'Panda Fact',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+        
+        embedpanda.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedpanda.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedpanda.add_field(name='squeak? 🐼', value=f'{fact}', inline=False)
+
+        await ctx.send(embed=embedpanda)
+
+    @commands.command()
+    async def foxfact(self, ctx):
+        response = urllib.request.urlopen("https://some-random-api.ml/facts/fox")
+        data = json.load(response)
+        fact = data['fact']
+        
+        embedfox = discord.Embed(
+            title = 'Fox Fact',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+        
+        embedfox.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedfox.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedfox.add_field(name='What does a fox say? 🦊', value=f'{fact}', inline=False)
+
+        await ctx.send(embed=embedfox)
+
+    @commands.command()
+    async def birdfact(self, ctx):
+        response = urllib.request.urlopen("https://some-random-api.ml/facts/bird")
+        data = json.load(response)
+        fact = data['fact']
+        
+        embedbird = discord.Embed(
+            title = 'Bird Fact',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+        
+        embedbird.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedbird.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedbird.add_field(name='Tweet 🐦', value=f'{fact}', inline=False)
+
+        await ctx.send(embed=embedbird)
+
+    @commands.command()
+    async def koalafact(self, ctx):
+        response = urllib.request.urlopen("https://some-random-api.ml/facts/koala")
+        data = json.load(response)
+        fact = data['fact']
+        
+        embedkoala = discord.Embed(
+            title = 'Koala Fact',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+        
+        embedkoala.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedkoala.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedkoala.add_field(name='Tweet 🐨', value=f'{fact}', inline=False)
+
+        await ctx.send(embed=embedkoala)
+
 def setup(client):
     client.add_cog(Fun(client))
