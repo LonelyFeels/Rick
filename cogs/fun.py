@@ -105,7 +105,7 @@ class Fun(commands.Cog):
     @commands.command()
     async def catfact(self, ctx):
         response = urllib.request.urlopen("https://some-random-api.ml/facts/cat")
-        imgresponse = urllib.request.urlopen("https://some-random-api.ml/img/panda")
+        imgresponse = urllib.request.urlopen("https://some-random-api.ml/img/cat")
         data = json.load(response)
         imgdata = json.load(imgresponse)
         fact = data['fact']
@@ -128,7 +128,7 @@ class Fun(commands.Cog):
         response = urllib.request.urlopen("https://some-random-api.ml/facts/panda")
         imgresponse = urllib.request.urlopen("https://some-random-api.ml/img/panda")
         data = json.load(response)
-        imgdata = join.load(imgresponse)
+        imgdata = json.load(imgresponse)
         fact = data['fact']
         img = imgdata['link']
         
@@ -170,7 +170,7 @@ class Fun(commands.Cog):
         response = urllib.request.urlopen("https://some-random-api.ml/facts/bird")
         imgresponse = urllib.request.urlopen("https://some-random-api.ml/img/birb")
         data = json.load(response)
-        imgdata = jston.load(imgresponse)
+        imgdata = json.load(imgresponse)
         fact = data['fact']
         img = imgdata['link']
         
