@@ -94,6 +94,7 @@ class Fun(commands.Cog):
         
         embeddog.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embeddog.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embeddog.set_image(url='https://some-random-api.ml/img/dog')
         embeddog.add_field(name='Woof woof 🐕', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embeddog)
@@ -111,6 +112,7 @@ class Fun(commands.Cog):
         
         embedcat.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedcat.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedcat.set_image(url='https://some-random-api.ml/img/cat')
         embedcat.add_field(name='Meow 🐈‍⬛', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedcat)
@@ -128,6 +130,7 @@ class Fun(commands.Cog):
         
         embedpanda.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedpanda.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedpanda.set_image(url='https://some-random-api.ml/img/panda')
         embedpanda.add_field(name='squeak? 🐼', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedpanda)
@@ -145,6 +148,7 @@ class Fun(commands.Cog):
         
         embedfox.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedfox.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedfox.set_image(url='https://some-random-api.ml/img/fox')
         embedfox.add_field(name='What does the fox say? 🦊', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedfox)
@@ -162,6 +166,7 @@ class Fun(commands.Cog):
         
         embedbird.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedbird.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedbird.set_image(url='https://some-random-api.ml/img/birb')
         embedbird.add_field(name='Tweet 🐦', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedbird)
@@ -179,6 +184,7 @@ class Fun(commands.Cog):
         
         embedkoala.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedkoala.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedkoala.set_image(url='https://some-random-api.ml/img/koala')
         embedkoala.add_field(name='Tweet 🐨', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedkoala)
