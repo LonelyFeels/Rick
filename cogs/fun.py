@@ -84,8 +84,11 @@ class Fun(commands.Cog):
     @commands.command()
     async def dogfact(self, ctx):
         response = urllib.request.urlopen("https://some-random-api.ml/facts/dog")
+        imgresponse = urllib.request.urlopen("https://some-random-api.ml/img/dog")
         data = json.load(response)
+        imgdata = json.load(imgresponse)
         fact = data['fact']
+        img = imgdata['link']
 
         embeddog = discord.Embed(
             title = 'Dog Fact',
@@ -94,7 +97,7 @@ class Fun(commands.Cog):
         
         embeddog.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embeddog.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embeddog.set_image(url='https://some-random-api.ml/img/dog')
+        embeddog.set_image(url=f'{img}')
         embeddog.add_field(name='Woof woof 🐕', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embeddog)
@@ -102,8 +105,11 @@ class Fun(commands.Cog):
     @commands.command()
     async def catfact(self, ctx):
         response = urllib.request.urlopen("https://some-random-api.ml/facts/cat")
+        imgresponse = urllib.request.urlopen("https://some-random-api.ml/img/panda")
         data = json.load(response)
+        imgdata = json.load(imgresponse)
         fact = data['fact']
+        img = imgdata['link']
         
         embedcat = discord.Embed(
             title = 'Cat Fact',
@@ -112,7 +118,7 @@ class Fun(commands.Cog):
         
         embedcat.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedcat.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedcat.set_image(url='https://some-random-api.ml/img/cat')
+        embedcat.set_image(url=f'{img}')
         embedcat.add_field(name='Meow 🐈‍⬛', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedcat)
@@ -120,8 +126,11 @@ class Fun(commands.Cog):
     @commands.command()
     async def pandafact(self, ctx):
         response = urllib.request.urlopen("https://some-random-api.ml/facts/panda")
+        imgresponse = urllib.request.urlopen("https://some-random-api.ml/img/panda")
         data = json.load(response)
+        imgdata = join.load(imgresponse)
         fact = data['fact']
+        img = imgdata['link']
         
         embedpanda = discord.Embed(
             title = 'Panda Fact',
@@ -130,7 +139,7 @@ class Fun(commands.Cog):
         
         embedpanda.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedpanda.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedpanda.set_image(url='https://some-random-api.ml/img/panda')
+        embedpanda.set_image(url=f'{img}')
         embedpanda.add_field(name='squeak? 🐼', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedpanda)
@@ -138,8 +147,11 @@ class Fun(commands.Cog):
     @commands.command()
     async def foxfact(self, ctx):
         response = urllib.request.urlopen("https://some-random-api.ml/facts/fox")
+        imgresponse = urllib.request.urlopen("https://some-random-api.ml/img/fox")
         data = json.load(response)
+        imgdata = json.load(imgresponse)
         fact = data['fact']
+        img = imgdata['link']
         
         embedfox = discord.Embed(
             title = 'Fox Fact',
@@ -148,7 +160,7 @@ class Fun(commands.Cog):
         
         embedfox.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedfox.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedfox.set_image(url='https://some-random-api.ml/img/fox')
+        embedfox.set_image(url=f'{img}')
         embedfox.add_field(name='What does the fox say? 🦊', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedfox)
@@ -156,8 +168,11 @@ class Fun(commands.Cog):
     @commands.command()
     async def birdfact(self, ctx):
         response = urllib.request.urlopen("https://some-random-api.ml/facts/bird")
+        imgresponse = urllib.request.urlopen("https://some-random-api.ml/img/birb")
         data = json.load(response)
+        imgdata = jston.load(imgresponse)
         fact = data['fact']
+        img = imgdata['link']
         
         embedbird = discord.Embed(
             title = 'Bird Fact',
@@ -166,7 +181,7 @@ class Fun(commands.Cog):
         
         embedbird.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedbird.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedbird.set_image(url='https://some-random-api.ml/img/birb')
+        embedbird.set_image(url=f'{img}')
         embedbird.add_field(name='Tweet 🐦', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedbird)
@@ -174,8 +189,11 @@ class Fun(commands.Cog):
     @commands.command()
     async def koalafact(self, ctx):
         response = urllib.request.urlopen("https://some-random-api.ml/facts/koala")
+        imgresponse = urllib.request.urlopen("https://some-random-api.ml/img/koala")
         data = json.load(response)
+        imgdata = json.load(imgresponse)
         fact = data['fact']
+        img = imgdata['link']
         
         embedkoala = discord.Embed(
             title = 'Koala Fact',
@@ -184,7 +202,7 @@ class Fun(commands.Cog):
         
         embedkoala.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedkoala.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedkoala.set_image(url='https://some-random-api.ml/img/koala')
+        embedkoala.set_image(url=f'{img}')
         embedkoala.add_field(name='Tweet 🐨', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedkoala)
