@@ -77,6 +77,9 @@ class RCON(commands.Cog):
 
         await ctx.send(embed=embedban)
 
+        channel = self.client.get_channel(508387474070962186)
+        await channel.send(f'Banned **@{member}**: {reason}')
+
     @ban.error
     async def ban_error(self, member, error):
         if isinstance(error, commands.MissingRole):
