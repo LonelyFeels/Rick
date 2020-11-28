@@ -41,7 +41,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='!permdeny <@USER>', value='Use this to permanently deny Applicants.', inline=False)
         embedhelp.add_field(name='!whitelist <IGN>', value='Use this to whitelist the member.', inline=False)
         embedhelp.add_field(name='!unwhitelist <IGN>', value='Use this to unwhitelist the member.', inline=False)
-        embedhelp.add_field(name='!ban <@USER> <IGN>', value='Use this to ban the member both from Discord and Minecraft server.', inline=False)
+        embedhelp.add_field(name='!ban <@USER> <IGN> <REASON>', value='Use this to ban the member both from Discord and Minecraft server.', inline=False)
         embedhelp.add_field(name='!unban <IGN> -> <USER#DISCRIMINATOR>', value='Use this to unban the member both from Discord and Minecraft server.', inline=False)
         embedhelp.add_field(name='!kick <IGN>', value='Use this to kick the member from Discord server.', inline=False)
         embedhelp.add_field(name='!clear <amount=5>', value='Use this to clear messages.', inline=False)

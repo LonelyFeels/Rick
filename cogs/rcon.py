@@ -53,14 +53,14 @@ class RCON(commands.Cog):
 
     @commands.command()
     @commands.has_role('Staff')
-    async def ban(self, ctx, member: discord.Member, ign):
+    async def ban(self, ctx, member: discord.Member, ign, *, reason=None):
         ip = rconcredentials.ip
         port = rconcredentials.port
         password = rconcredentials.password
 
         server = Server(ip, port, password, connect_on_send=True)
-        print(await server.send(f'ban {ign}'))
-        await member.ban(reason=None)
+        print(await server.send(f'ban {ign} {reason}'))
+        await member.ban(reason=reason)
 
         await server.close()
         
@@ -82,7 +82,7 @@ class RCON(commands.Cog):
         if isinstance(error, commands.MissingRole):
             await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
-            await member.send('You have to mention the Member you want to ban and put down their IGN!')
+            await member.send('You have to mention the Member you want to ban, put down their IGN and state the reason!')
 
     @commands.command()
     @commands.has_role('Staff')
