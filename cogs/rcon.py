@@ -74,6 +74,7 @@ class RCON(commands.Cog):
         embedban.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772449306560430110/tenor.gif')
         embedban.add_field(name=f'Successfully banned @{member}.', value='They\'ve been such a prick, innit?', inline=False)
+        embedban.add_field(name='Reason:', value=f'{reason}', inline=False)
 
         await ctx.send(embed=embedban)
 
