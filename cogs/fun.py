@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup as bs
 import requests
 import urllib.request
 import json
+from datetime import datetime
 
 
 class Fun(commands.Cog):
@@ -206,6 +207,22 @@ class Fun(commands.Cog):
         embedkoala.add_field(name='Tweet 🐨', value=f'{fact}', inline=False)
 
         await ctx.send(embed=embedkoala)
+
+    @commands.command()
+    async def christmas(self, ctx):
+        now = datetime.now()
+        christmas = datetime(2020, 12, 25)
+
+        embedchristmas = discord.Embed(
+            title = 'It\'s Beginning To Look A Lot Like Christmas',
+            url='https://www.youtube.com/watch?v=QJ5DOWPGxwg',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+
+        embedchristmas.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedchristmas.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedchristmas.add_field(name='Ho Ho Ho 🎅 Merry Christmas ☃️ And a Happy ❄️ New Year! 🌨️', value=f'Days left till Christmas: {(christmas.date()-now.date()).days}', inline=False)
+
 
 def setup(client):
     client.add_cog(Fun(client))
