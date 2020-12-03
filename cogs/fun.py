@@ -221,7 +221,9 @@ class Fun(commands.Cog):
 
         embedchristmas.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedchristmas.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedchristmas.add_field(name='Ho Ho Ho 🎅 Merry Christmas ☃️ And a Happy ❄️ New Year! 🌨️', value='Days left till Christmas:', inline=False)
+        embedchristmas.add_field(name='Ho Ho Ho 🎅 Merry Christmas ☃️ And a Happy ❄️ New Year! 🌨️', value=f'Days left till Christmas: {(christmas.date()-now.date()).days}', inline=False)
+
+        await ctx.send(embedchristmas)
 
 
 def setup(client):
