@@ -219,14 +219,14 @@ class Fun(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
-        embedchristmas.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedchristmas.set_footer(text=f'Wishes from @ Hydro Vanilla SMP Staff', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedchristmas.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         #embedchristmas.add_field(name='Ho Ho Ho 🎅 Merry Christmas ☃️ And a Happy ❄️ New Year! 🌨️', value=f'Days left till Christmas: {(christmas.date()-now.date()).days}', inline=False)
         embedchristmas.add_field(name='Ho Ho Ho 🎅 Merry Christmas ☃️ And a Happy ❄️ New Year! 🌨️', value=f'*Christmas...*', inline=False)
         embedchristmas.add_field(name='_ _', value=f'gives us an opportunity\nto pause and reflect\non what *really matters*...', inline=False)
-        embedchristmas.add_field(name='_ _', value=f'It\'s not\nwhat\'s under\nthe *Christmas tree*-\nbut who gathered\naround it.', inline=False)
+        embedchristmas.add_field(name='_ _', value=f'It\'s not\nwhat\'s under\nthe *Christmas tree* -\nbut who gathered\naround it.', inline=False)
         embedchristmas.add_field(name='_ _', value=f'May the *joys of today*\nwarm your heart,\nfill your home\n*and last a lifetime*.', inline=False)
-        embedchristmas.add_field(name='_ _', value=f'*Have a very Merry Christmas 🎅 🎁', inline=False)
+        embedchristmas.add_field(name='_ _', value=f'*Have a very Merry Christmas* 🎅 🎁', inline=False)
 
         await ctx.send(embed=embedchristmas)
 
