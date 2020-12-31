@@ -246,7 +246,7 @@ class Fun(commands.Cog):
         embednewyear.add_field(name='_ _', value=f'*Nobody said that it would be *easy*...\nThey just *promised*\nit would be *worth it*.', inline=False)
         embednewyear.add_field(name='_ _', value=f'We\'re wishing you *Peace*,\n*Love* and\n*Laughter*\nin the **New Year 2021** 🎉 🥂', inline=False)
 
-        await ctx.send(embed=embednewyears)
+        await ctx.send(embed=embednewyear)
 
 
 def setup(client):
