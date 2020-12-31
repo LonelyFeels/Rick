@@ -243,7 +243,7 @@ class Fun(commands.Cog):
         embednewyear.add_field(name='Happy New Year 2021! 🎉', value=f'*Life is too short* to wake up in the morning\nwith regrets.', inline=False)
         embednewyear.add_field(name='_ _', value=f'So, *love* the people who treat you right\nand *forget* about the ones who don\'t.', inline=False)
         embednewyear.add_field(name='_ _', value=f'And *believe*\nthat everything happens for a reason...\nif you have a chance - *take it*;\nif it changes your life - *let it*.', inline=False)
-        embednewyear.add_field(name='_ _', value=f'*Nobody said that it would be *easy*...\nThey just *promised*\nit would be *worth it*.', inline=False)
+        embednewyear.add_field(name='_ _', value=f'Nobody said that it would be *easy*...\nThey just *promised*\nit would be *worth it*.', inline=False)
         embednewyear.add_field(name='_ _', value=f'We\'re wishing you *Peace*,\n*Love* and\n*Laughter*\nin the **New Year 2021** 🎉 🥂', inline=False)
 
         await ctx.send(embed=embednewyear)
