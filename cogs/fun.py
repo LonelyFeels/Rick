@@ -230,6 +230,24 @@ class Fun(commands.Cog):
 
         await ctx.send(embed=embedchristmas)
 
+    @commands.command()
+    async def newyear(self, ctx):
+        embednewyear = discord.Embed(
+            title = 'New Year 2021',
+            url='https://www.youtube.com/watch?v=3Uo0JAUWijM',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+
+        embednewyear.set_footer(text=f'Wishes from @ Hydro Vanilla SMP Staff', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embednewyear.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embednewyear.add_field(name='Happy New Year 2021! 🎉', value=f'*Life is too short* to wake up in the morning\nwith regrets.', inline=False)
+        embednewyear.add_field(name='_ _', value=f'So, *love* the people who treat you right\nand *forget* about the ones who don't.', inline=False)
+        embednewyear.add_field(name='_ _', value=f'And *believe*\nthat everything happens for a reason...\nif you have a chance - *take it*;\nif it changes your life - *let it*.', inline=False)
+        embednewyear.add_field(name='_ _', value=f'*Nobody said that it would be *easy*...\nThey just *promised*\nit would be *worth it*.', inline=False)
+        embednewyear.add_field(name='_ _', value=f'We\'re wishing you *Peace*,\n*Love* and\n*Laughter*\nin the **New Year 2021** 🎉 🥂', inline=False)
+
+        await ctx.send(embed=embednewyears)
+
 
 def setup(client):
     client.add_cog(Fun(client))
