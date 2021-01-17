@@ -228,5 +228,23 @@ class RCON(commands.Cog):
         else:
             await ctx.send(f'You can only use this command in {channel.mention}.')
 
+    @commands.command()
+    @commands.has_role('Donators')
+    async def trail(self, ctx, colour):
+        ign = ctx.message.author.display_name
+        channel = self.client.get_channel(737029420493045800)
+
+        ip = rconcredentials.ip
+        port = rconcredentials.port
+        password = rconcredentials.password
+
+        if ctx.channel.id == channel.id:
+            server = Server(ip, port, password, connect_on_send=True)
+            print(await server.send(f'trail {colour} {ign}'))
+            await ctx.send(f'{ign} changed their trail colour to {colour}.')
+            await server.close()
+        else:
+            await ctx.send(f'You can only use this command in {channel.mention}.')
+
 def setup(client):
     client.add_cog(RCON(client))
