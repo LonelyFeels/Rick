@@ -25,8 +25,8 @@ class Help(commands.Cog):
         embedhelp.add_field(name='!invite', value='Get the invite link.', inline=False)
         embedhelp.add_field(name='!dynmap', value='Use this command to get the Official Hydro Vanilla SMP Dynmap!', inline=False)
         embedhelp.add_field(name='!suggest <suggestion>', value='Suggest something you think it would be a cool addition to the server.', inline=False)
-        embedhelp.add_field(name='!color', value='Use this command to change your donator IGN color. Make sure you\'re in-game. For colors check #rules-and-info, inline=False
-        embedhelp.add_field(name='!trail', value='Use this command to change your donator trail color. You can use any Minecraft color or any HEX color.', inline=False
+        embedhelp.add_field(name='!color', value='Use this command to change your donator IGN color. Make sure you\'re in-game. For colors check #rules-and-info', inline=False)
+        embedhelp.add_field(name='!trail', value='Use this command to change your donator trail color. You can use any Minecraft color or any HEX color.', inline=False)
         embedhelp.add_field(name='!hug <@USER>', value='Show someone how much you love them :heart:', inline=False)
         embedhelp.add_field(name='!8ball <question>', value='Undecided about something? Ask our 8ball (:', inline=False)
         embedhelp.add_field(name='!dogfact', value='Woof Woof 🐕', inline=False)
