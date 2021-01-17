@@ -179,7 +179,7 @@ class RCON(commands.Cog):
 
     @commands.command()
     @commands.has_role('Donators')
-    async def colour(self, ctx, colour):
+    async def color(self, ctx, colour):
         ign = ctx.message.author.display_name
         channel = self.client.get_channel(737029420493045800)
 
@@ -228,8 +228,8 @@ class RCON(commands.Cog):
         else:
             await ctx.send(f'You can only use this command in {channel.mention}.')
     
-    @colour.error
-    async def colour_error(self, ctx, error):
+    @color.error
+    async def color_error(self, ctx, error):
         if isinstance(error, commands.MissingRole):
             await ctx.send("You don't have the permissions to do that!")
         if isinstance(error, commands.MissingRequiredArgument):
