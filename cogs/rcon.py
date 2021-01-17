@@ -187,11 +187,15 @@ class RCON(commands.Cog):
         port = rconcredentials.port
         password = rconcredentials.password
 
-       if colour == 'GOLD':
+        if colour == 'GOLD':
             server = Server(ip, port, password, connect_on_send=True)
             print(await server.send(f'donator GOLD {ign}'))
             await ctx.send(f'{ign} changed their colour to GOLD.')
-
+            await server.close()
+        elif colour == 'DARK_GREEN':
+            server = Server(ip, port, password, connect_on_send=True)
+            print(await server.send(f'donator DARK_GREEN {ign}'))
+            await ctx.send(f'{ign} changed their colour to DARK GREEN.')
             await server.close()
         else:
             await ctx.send(f'You don\'t have permissions to use the color!')
