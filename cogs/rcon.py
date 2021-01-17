@@ -180,7 +180,7 @@ class RCON(commands.Cog):
     @commands.command()
     @commands.has_role('Donators')
     async def colour(self, ctx, colour):
-        ign = ctx.message.author
+        ign = ctx.message.author.display_name
         await ctx.send(ign)
 
 #        ip = rconcredentials.ip
