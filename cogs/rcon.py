@@ -227,6 +227,13 @@ class RCON(commands.Cog):
                 await ctx.send(f'You don\'t have permissions to use such color!')
         else:
             await ctx.send(f'You can only use this command in {channel.mention}.')
+    
+    @colour.error
+    async def colour_error(self, ctx, error):
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You don't have the permissions to do that!")
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('You have to put in the color you desire!')
 
     @commands.command()
     @commands.has_role('Donators')
@@ -245,6 +252,14 @@ class RCON(commands.Cog):
             await server.close()
         else:
             await ctx.send(f'You can only use this command in {channel.mention}.')
+
+    @trail.error
+    async def trail_error(self, ctx, error):
+        if isinstance(error, commands.MissingRole):
+            await ctx.send("You don't have the permissions to do that!")
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('You have to put in the color you desire!')
+
 
 def setup(client):
     client.add_cog(RCON(client))
