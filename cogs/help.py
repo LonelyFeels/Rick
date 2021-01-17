@@ -86,6 +86,46 @@ class Help(commands.Cog):
         await ctx.send(f'{member.mention}, You got mail! 📬')
         await member.send('Here you go, our Discord Invite!\nhttps://discordapp.com/invite/CAQ9p8y')
 
+    @commands.command()
+    async def colorlist(self, ctx):
+        embedcolorlist = discord.Embed(
+            title = 'All In-Game Available Colors',
+            url = 'https://hydrovanillasmp.com',
+            colour = discord.Colour.from_rgb(12,235,241)
+            )
+
+        embedcolorlist.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedcolorlist.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedcolorlist.add_field(name='IGN COLORS', value='_ _', inline=False)
+        embedcolorlist.add_field(name='_ _', value='GOLD', inline=False)
+        embedcolorlist.add_field(name='_ _', value='DARK_GREEN', inline=False)
+        embedcolorlist.add_field(name='_ _', value='DARK_PURPLE', inline=False)
+        embedcolorlist.add_field(name='_ _', value='DARK_AQUA', inline=False)
+        embedcolorlist.add_field(name='_ _', value='AQUA', inline=False)
+        embedcolorlist.add_field(name='_ _', value='YELLOW', inline=False)
+        embedcolorlist.add_field(name='_ _', value='GREEN', inline=False)
+        embedcolorlist.add_field(name='_ _', value='_ _', inline=False)
+        embedcolorlist.add_field(name='TRAIL COLORS', value='_ _', inline=False)
+        embedcolorlist.add_field(name='_ _', value='AQUA', inline=False)
+        embedcolorlist.add_field(name='_ _', value='BLACK', inline=False)
+        embedcolorlist.add_field(name='_ _', value='BLUE', inline=False)
+        embedcolorlist.add_field(name='_ _', value='DARK_AQUA', inline=False)
+        embedcolorlist.add_field(name='_ _', value='DARK_BLUE', inline=False)
+        embedcolorlist.add_field(name='_ _', value='DARK_GRAY', inline=False)
+        embedcolorlist.add_field(name='_ _', value='DARK_GREEN', inline=False)
+        embedcolorlist.add_field(name='_ _', value='DARK_PURPLE', inline=False)
+        embedcolorlist.add_field(name='_ _', value='DARK_RED', inline=False)
+        embedcolorlist.add_field(name='_ _', value='GOLD', inline=False)
+        embedcolorlist.add_field(name='_ _', value='GRAY', inline=False)
+        embedcolorlist.add_field(name='_ _', value='GREEN', inline=False)
+        embedcolorlist.add_field(name='_ _', value='LIGHT_PURPLE', inline=False)
+        embedcolorlist.add_field(name='_ _', value='RED', inline=False)
+        embedcolorlist.add_field(name='_ _', value='WHITE', inline=False)
+        embedcolorlist.add_field(name='_ _', value='YELLOW', inline=False)
+        embedcolorlist.add_field(name='_ _', value='remove', inline=False)
+
+        await ctx.send(embed=embedcolorlist)
+        
 
 def setup(client):
     client.add_cog(Help(client))
