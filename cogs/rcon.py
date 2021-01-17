@@ -180,20 +180,21 @@ class RCON(commands.Cog):
     @commands.command()
     @commands.has_role('Donators')
     async def colour(self, ctx, colour):
-        ign = ctx.message.author.display_name
+        ign = ctx.message.author
+        await ctx.send(ign)
 
-        ip = rconcredentials.ip
-        port = rconcredentials.port
-        password = rconcredentials.password
-
-        if colour == 'GOLD':
-            server = Server(ip, port, password, connect_on_send=True)
-            print(await server.send(f'donator GOLD {ign}'))
-            await ctx.send(f'{ign} changed their colour to GOLD.')
-
-            await server.close()
-        else:
-            await ctx.send(f'You don\'t have permissions to use the color!)
+#        ip = rconcredentials.ip
+#        port = rconcredentials.port
+#        password = rconcredentials.password
+#
+#       if colour == 'GOLD':
+#            server = Server(ip, port, password, connect_on_send=True)
+#            print(await server.send(f'donator GOLD {ign}'))
+#            await ctx.send(f'{ign} changed their colour to GOLD.')
+#
+#            await server.close()
+#        else:
+#            await ctx.send(f'You don\'t have permissions to use the color!)
 
 def setup(client):
     client.add_cog(RCON(client))
