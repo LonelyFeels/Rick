@@ -25,6 +25,7 @@ class Help(commands.Cog):
         embedhelp.add_field(name='!invite', value='Get the invite link.', inline=False)
         embedhelp.add_field(name='!dynmap', value='Use this command to get the Official Hydro Vanilla SMP Dynmap!', inline=False)
         embedhelp.add_field(name='!suggest <suggestion>', value='Suggest something you think it would be a cool addition to the server.', inline=False)
+        embedhelp.add_field(name='!colorlist', value='Shows you the list of available colors for Donators.', inline=False)
         embedhelp.add_field(name='!color', value='Use this command to change your donator IGN color. Make sure you\'re in-game. For colors check #rules-and-info.', inline=False)
         embedhelp.add_field(name='!trail', value='Use this command to change your donator trail color. You can use any Minecraft color or any HEX color.', inline=False)
         embedhelp.add_field(name='!hug <@USER>', value='Show someone how much you love them :heart:', inline=False)
@@ -96,6 +97,7 @@ class Help(commands.Cog):
 
         embedcolorlist.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
         embedcolorlist.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedcolorlist.add_field(name='How to use !color and !trail', value='It\'s simple. Your Discord nickname must match your IGN in order for the command to work. Check commands syntax in !help and follow them. Available colors are stated below.', inline=False)
         embedcolorlist.add_field(name='IGN COLORS', value='GOLD, DARK_GREEN, DARK_PURPLE, DARK_AQUA, AQUA, YELLOW, GREEN', inline=False)
         embedcolorlist.add_field(name='TRAIL COLORS', value='AQUA, BLACK, BLUE, DARK_AQUA, DARK_BLUE, DARK_GRAY, DARK_GREEN, DARK_PURPLE, DARK_RED, GOLD, GRAY, GREEN, LIGHT_PURPLE, RED, WHITE, YELLOW, remove, any HEX color', inline=False)
 
