@@ -191,37 +191,37 @@ class RCON(commands.Cog):
             if colour == 'GOLD':
                 server = Server(ip, port, password, connect_on_send=True)
                 print(await server.send(f'donator GOLD {ign}'))
-                await ctx.send(f'{ign} changed their colour to GOLD.')
+                await ctx.send(f'{ign} changed their color to GOLD.')
                 await server.close()
             elif colour == 'DARK_GREEN':
                 server = Server(ip, port, password, connect_on_send=True)
                 print(await server.send(f'donator DARK_GREEN {ign}'))
-                await ctx.send(f'{ign} changed their colour to DARK GREEN.')
+                await ctx.send(f'{ign} changed their color to DARK GREEN.')
                 await server.close()
             elif colour == 'DARK_PURPLE':
                 server = Server(ip, port, password, connect_on_send=True)
                 print(await server.send(f'donator DARK_PURPLE {ign}'))
-                await ctx.send(f'{ign} changed their colour to DARK PURPLE.')
+                await ctx.send(f'{ign} changed their color to DARK PURPLE.')
                 await server.close()
             elif colour == 'DARK_AQUA':
                 server = Server(ip, port, password, connect_on_send=True)
                 print(await server.send(f'donator DARK_AQUA {ign}'))
-                await ctx.send(f'{ign} changed their colour to DARK AQUA.')
+                await ctx.send(f'{ign} changed their color to DARK AQUA.')
                 await server.close()
             elif colour == 'AQUA':
                 server = Server(ip, port, password, connect_on_send=True)
                 print(await server.send(f'donator AQUA {ign}'))
-                await ctx.send(f'{ign} changed their colour to AQUA.')
+                await ctx.send(f'{ign} changed their color to AQUA.')
                 await server.close()
             elif colour == 'YELLOW':
                 server = Server(ip, port, password, connect_on_send=True)
                 print(await server.send(f'donator YELLOW {ign}'))
-                await ctx.send(f'{ign} changed their colour to YELLOW.')
+                await ctx.send(f'{ign} changed their color to YELLOW.')
                 await server.close()
             elif colour == 'GREEN':
                 server = Server(ip, port, password, connect_on_send=True)
                 print(await server.send(f'donator GREEN {ign}'))
-                await ctx.send(f'{ign} changed their colour to GREEN.')
+                await ctx.send(f'{ign} changed their color to GREEN.')
                 await server.close()
             else:
                 await ctx.send(f'You don\'t have permissions to use such color!')
@@ -248,7 +248,7 @@ class RCON(commands.Cog):
         if ctx.channel.id == channel.id:
             server = Server(ip, port, password, connect_on_send=True)
             print(await server.send(f'trail {colour} {ign}'))
-            await ctx.send(f'{ign} changed their trail colour to {colour}.')
+            await ctx.send(f'{ign} changed their trail color to {colour}.')
             await server.close()
         else:
             await ctx.send(f'You can only use this command in {channel.mention}.')
