@@ -200,27 +200,27 @@ class RCON(commands.Cog):
                 await server.close()
             elif colour == 'DARK_PURPLE':
                 server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator DARK_GREEN {ign}'))
+                print(await server.send(f'donator DARK_PURPLE {ign}'))
                 await ctx.send(f'{ign} changed their colour to DARK PURPLE.')
                 await server.close()
             elif colour == 'DARK_AQUA':
                 server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator DARK_GREEN {ign}'))
+                print(await server.send(f'donator DARK_AQUA {ign}'))
                 await ctx.send(f'{ign} changed their colour to DARK AQUA.')
                 await server.close()
             elif colour == 'AQUA':
                 server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator DARK_GREEN {ign}'))
+                print(await server.send(f'donator AQUA {ign}'))
                 await ctx.send(f'{ign} changed their colour to AQUA.')
                 await server.close()
             elif colour == 'YELLOW':
                 server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator DARK_GREEN {ign}'))
+                print(await server.send(f'donator YELLOW {ign}'))
                 await ctx.send(f'{ign} changed their colour to YELLOW.')
                 await server.close()
             elif colour == 'GREEN':
                 server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator DARK_GREEN {ign}'))
+                print(await server.send(f'donator GREEN {ign}'))
                 await ctx.send(f'{ign} changed their colour to GREEN.')
                 await server.close()
             else:
