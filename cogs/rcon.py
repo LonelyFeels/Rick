@@ -14,6 +14,9 @@ class RCON(commands.Cog):
     @commands.command()
     @commands.has_role('Staff')
     async def whitelist(self, ctx, ign):
+        print(rconcredentials.ip)
+        print(rconcredentials.port)
+        print(rconcredentials.password)
         ip = rconcredentials.ip
         port = rconcredentials.port
         password = rconcredentials.password
