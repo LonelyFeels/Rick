@@ -17,8 +17,12 @@ class RCON(commands.Cog):
         ip = rconcredentials.ip
         port = rconcredentials.port
         password = rconcredentials.password
+        print(ip)
+        print(port)
+        print(password)
 
         server = Server(ip, port, password, connect_on_send=True)
+        print(server)
         print(await server.send(f'whitelist add {ign}'))
         await ctx.send(f'Added {ign} to the whitelist.')
 
