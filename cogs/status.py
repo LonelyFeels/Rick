@@ -9,7 +9,7 @@ class Serverstatus:
                 async with session.get('https://api.mcsrvstat.us/1/148.251.236.239:25565') as resp:
                     data = await resp.json()
                     players_list = data['players'].get('list') if 'list' in data['players'] else None
-            return type(cls, (), {'online_players': data['players']['online'], 'max_players': data['players']['max'], 'motd': data['motd']['clean'][0].strip(), 'version': data['version'], 'players_list': players_list})
+            return type(cls.__name__, (), {'online_players': data['players']['online'], 'max_players': data['players']['max'], 'motd': data['motd']['clean'][0].strip(), 'version': data['version'], 'players_list': players_list})
 
 class Status(commands.Cog):
 
