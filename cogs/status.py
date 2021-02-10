@@ -41,3 +41,6 @@ class Status2(commands.Cog):
         embedstatus.add_field(name='Current Minecraft Version:', value=f'{server.version}', inline=False)
 
         await ctx.send(embed=embedstatus)
+
+def setup(client):
+    client.add_cog(Status(client))
