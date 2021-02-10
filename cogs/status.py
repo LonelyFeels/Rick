@@ -11,7 +11,7 @@ class Serverstatus:
                     players_list = data['players'].get('list') if 'list' in data['players'] else None
             return type(cls, (), {'online_players': data['players']['online'], 'max_players': data['players']['max'], 'motd': data['motd']['clean'][0].strip(), 'version': data['version'], 'players_list': players_list})
 
-class Status2(commands.Cog):
+class Status(commands.Cog):
 
     def __init__(self,client):
         self.client = client
