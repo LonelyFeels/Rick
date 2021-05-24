@@ -25,7 +25,7 @@ class Status(commands.Cog):
             colour = discord.Color.from_rgb(12,235,241)
         )
 
-        embedstatus.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedstatus.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedstatus.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedstatus.add_field(name='Hydro Vanilla SMP Season 6.9 is online!', value=f'Currently there are {server.online_players} / {server.max_players} playing.', inline=False)
         embedstatus.add_field(name='_ _', value='_ _', inline=False)
