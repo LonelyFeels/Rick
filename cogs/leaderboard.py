@@ -39,11 +39,10 @@ class Leaderboard(commands.Cog):
             users = json.load(file)
             if str(member.id) in users:
                 users[str(member.id)]['points'] = users[str(member.id)]['points'] + number
+                upoints = users[str(member.id)]['points'] + number
                 with open('leaderboard.json', 'w+') as file:
                     json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                    users = json.load
-                    upoints = users[str(member.id)]['points']
-                    await ctx.send(f'Successfully updated @{member}\'s points to {upoints}')
+                await ctx.send(f'Successfully updated @{member}\'s points to {upoints}')
             else:
                 await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
                 with open('leaderboard.json', 'w', encoding='utf8') as file:
