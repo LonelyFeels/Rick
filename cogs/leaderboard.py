@@ -23,7 +23,7 @@ class Leaderboard(commands.Cog):
         )
         mycursor = db.cursor()
 
-        mycursor.execute(f"SELECT * FROM User WHERE User={str(member.id)}")
+        mycursor.execute(f"SELECT EXISTS(SELECT * FROM User WHERE User={str(member.id)})")
         if mycursor is 1:
             ctx.send('Member is already registered in GuildWars database!')
         else:
