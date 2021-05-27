@@ -13,15 +13,16 @@ class Leaderboard(commands.Cog):
     @commands.command()
     @commands.has_any_role('Staff', 'GameMaster')
     async def lbm(self, ctx, member: discord.Member):
-        file = json.loads('leaderboard.json')
-        if f'{member.id}' in file:
-            member.send('User already registered in database.')
-        else:
-            with open('leaderboard.json', 'w', encoding='utf8') as file:
-                user = {}
-                user[str(member.id)] = {}
-                user[str(member.id)]['points'] = 0
-                json.dump(user, file, sort_keys=True, indent=4, ensure_ascii=False)
+        with open('leaderboard.json', 'r', encoding='utf8') as file:
+            users = json.load(file)
+            if member.id in users:
+                ctx.send('Member is already registered in database.')
+            else:
+                with open('leaderboard.json', 'w', encoding='utf8') as file:
+                    users = {}
+                    users[str(member.id)] = {}
+                    users[str(member.id)]['points'] = 0
+                    json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
 
     @lbm.error
     async def lbm_error(self, member, error):
