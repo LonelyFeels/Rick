@@ -42,7 +42,7 @@ class Leaderboard(commands.Cog):
                 upoints = users[str(member.id)]['points'] + number
                 with open('leaderboard.json', 'w+') as file:
                     json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                await ctx.send(f'Successfully updated @{member}\'s points to {upoints}')
+                await ctx.send(f'Successfully updated @{member}\'s points by {number} to {upoints}')
             else:
                 await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
                 with open('leaderboard.json', 'w', encoding='utf8') as file:
@@ -50,7 +50,7 @@ class Leaderboard(commands.Cog):
                     users[str(member.id)] = {}
                     users[str(member.id)]['points'] = number
                     json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                    await ctx.send(f'@{member} successfully registered into GuildWars.')
+                    await ctx.send(f'@{member} successfully registered into GuildWars with starting points of {number}.')
     
     @lbadd.error
     async def lbadd_error(self, member, error):
