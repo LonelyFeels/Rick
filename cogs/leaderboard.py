@@ -16,14 +16,14 @@ class Leaderboard(commands.Cog):
         with open('leaderboard.json', 'r', encoding='utf8') as file:
             users = json.load(file)
             if member.id in users:
-                ctx.send('Member is already registered in GuildWars database.')
+                await ctx.send('Member is already registered in GuildWars database.')
             else:
                 with open('leaderboard.json', 'w', encoding='utf8') as file:
                     users = {}
                     users[str(member.id)] = {}
                     users[str(member.id)]['points'] = 0
                     json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                    ctx.send(f'@{member} sucessfully registered into GuildWars.')
+                    await ctx.send(f'@{member} sucessfully registered into GuildWars.')
 
     @lbm.error
     async def lbm_error(self, member, error):
