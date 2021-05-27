@@ -43,7 +43,7 @@ class Leaderboard(commands.Cog):
                 json.dump(user, file, sort_keys=True, indent=4, ensure_ascii=False)
     
     @lba.error
-    async def lba_error(self, ctx, member, error):
+    async def lba_error(self, member, error):
         if isinstance(error, commands.MissingRole):
             await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
@@ -66,7 +66,7 @@ class Leaderboard(commands.Cog):
                 json.dump(user, file, sort_keys=True, indent=4, ensure_ascii=False)
 
     @lbs.error
-    async def lbs_error(self, ctx, member, error):
+    async def lbs_error(self, member, error):
         if isinstance(error, commands.MissingRole):
             await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
