@@ -61,7 +61,7 @@ class Leaderboard(commands.Cog):
                 with open('leaderboard.json', 'w', encoding='utf8') as file:
                     users = {}
                     users[str(member.id)] = {}
-                    users[str(member.id)]['points'] = number
+                    users[str(member.id)]['points'] = 0 - number
                     json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
                     await ctx.send(f'@{member} successfully registered into GuildWars with starting points of {number}.')
     
