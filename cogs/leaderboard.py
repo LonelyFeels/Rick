@@ -28,14 +28,14 @@ class Leaderboard(commands.Cog):
 
     @commands.command()
     @commands.has_any_role('Staff', 'GameMaster')
-    async def lba(self, ctx, member: discord.Member):
+    async def lba(self, number, member: discord.Member):
         try:
             with open('leaderboard.json', 'r', encoding='utf8') as file:
                 user = json.load(file)
             with open('leaderboard.json', 'w', encoding='utf8') as file:
-                user[str(member.id)]['points'] = user[str(member.id)]['points'] + ctx
+                user[str(member.id)]['points'] = user[str(member.id)]['points'] + number
         except:
-            await ctx.send(f'{member} is not in the database. Let me add them for you.')
+            await member.send(f'{member} is not in the database. Let me add them for you.')
             with open('leaderboard.json', 'w', encoding='utf8') as file:
                 user = {}
                 user[str(member.id)] = {}
@@ -51,14 +51,14 @@ class Leaderboard(commands.Cog):
 
     @commands.command()
     @commands.has_any_role('Staff', 'GameMaster')
-    async def lbs(self, ctx, member: discord.Member):
+    async def lbs(self, number, member: discord.Member):
         try:
             with open('leaderboard.json', 'r', encoding='utf8') as file:
                 user = json.load(file)
             with open('leaderboard.json', 'w', encoding='utf8') as file:
-                user[str(member.id)]['points'] = user[str(member.id)]['points'] - ctx
+                user[str(member.id)]['points'] = user[str(member.id)]['points'] - number
         except:
-            await ctx.send(f'{member} is not in the database. Let me add them for you.')
+            await member.send(f'{member} is not in the database. Let me add them for you.')
             with open('leaderboard.json', 'w', encoding='utf8') as file:
                 user = {}
                 user[str(member.id)] = {}
