@@ -28,7 +28,7 @@ class Leaderboard(commands.Cog):
 
     @commands.command()
     @commands.has_any_role('Staff', 'GameMaster')
-    async def lba(self, number, member: discord.Member):
+    async def lba(self, member: discord.Member, number):
         try:
             with open('leaderboard.json', 'r', encoding='utf8') as file:
                 user = json.load(file)
