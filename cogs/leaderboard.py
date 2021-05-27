@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
-import json
+import mysql.connector
+import mysqlcredentials as msc
 
 
 class Leaderboard(commands.Cog):
@@ -13,142 +14,12 @@ class Leaderboard(commands.Cog):
     @commands.command()
     @commands.has_any_role('Staff', 'GameMaster')
     async def lbregister(self, ctx, member: discord.Member):
-        with open('leaderboard.json', 'r', encoding='utf8') as file:
-            users = json.load(file)
-            if str(member.id) in users:
-                await ctx.send('Member is already registered in GuildWars database!')
-            else:
-                with open('leaderboard.json', 'w', encoding='utf8') as file:
-                    users = {}
-                    users[str(member.id)] = {}
-                    users[str(member.id)]['points'] = 0
-                    json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                    await ctx.send(f'@{member} successfully registered into GuildWars.')
-
-    @lbregister.error
-    async def lbregister_error(self, member, error):
-        if isinstance(error, commands.MissingRole):
-            await member.send('You don\'t have the permissions to do that!')
-        if isinstance(error, commands.MissingRequiredArgument):
-            await member.send('You have to mention the Member you want to add to the database!')
-
-    @commands.command()
-    @commands.has_any_role('Staff', 'GameMaster')
-    async def lbunregister(self, ctx, member: discord.Member):
-        with open('leaderboard.json', 'r', encoding='utf8') as file:
-            users = json.load(file)
-            if not str(member.id) in users:
-                await ctx.send('Member hasn\'t been registered to Guild Wars database yet!')
-            else:
-                users.pop(str(member.id))
-                with open('leaderboard.json', 'w', encoding='utf8') as file:
-                    json.dump(users, file, indent=4)
-                    await ctx.send(f'@{member} successfully unregistered from GuildWars.')
-
-    @commands.command()
-    @commands.has_any_role('Staff', 'GameMaster')
-    async def lbadd(self, ctx, member: discord.Member, number:int):
-        with open('leaderboard.json', 'r') as file:
-            users = json.load(file)
-            if str(member.id) in users:
-                users[str(member.id)]['points'] = users[str(member.id)]['points'] + number
-                upoints = users[str(member.id)]['points']
-                with open('leaderboard.json', 'w') as file:
-                    json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                await ctx.send(f'Successfully updated @{member}\'s points to {upoints}.')
-            else:
-                await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
-                with open('leaderboard.json', 'w', encoding='utf8') as file:
-                    users = {}
-                    users[str(member.id)] = {}
-                    users[str(member.id)]['points'] = number
-                    json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                    await ctx.send(f'@{member} successfully registered into GuildWars with starting points of {number}.')
-    
-    @lbadd.error
-    async def lbadd_error(self, member, error):
-        if isinstance(error, commands.MissingRole):
-            await member.send('You don\'t have the permissions to do that!')
-        if isinstance(error, commands.MissingRequiredArgument):
-            await member.send('You have to mention the Member you want to add points to and put down the number of points!')
-
-    @commands.command()
-    @commands.has_any_role('Staff', 'GameMaster')
-    async def lbsubtract(self, ctx, member: discord.Member, number:int):
-        with open('leaderboard.json', 'r') as file:
-            users = json.load(file)
-            if str(member.id) in users:
-                users[str(member.id)]['points'] = users[str(member.id)]['points'] - number
-                upoints = users[str(member.id)]['points']
-                with open('leaderboard.json', 'w') as file:
-                    json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                await ctx.send(f'Successfully updated @{member}\'s points to {upoints}.')
-            else:
-                await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
-                with open('leaderboard.json', 'w', encoding='utf8') as file:
-                    users = {}
-                    users[str(member.id)] = {}
-                    users[str(member.id)]['points'] = 0 - number
-                    json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                    await ctx.send(f'@{member} successfully registered into GuildWars with starting points of -{number}.')
-
-    @lbsubtract.error
-    async def lbsubtract_error(self, member, error):
-        if isinstance(error, commands.MissingRole):
-            await member.send('You don\'t have the permissions to do that!')
-        if isinstance(error, commands.MissingRequiredArgument):
-            await member.send('You have to mention the Member you want to subtract points from and put down the number of points!')
-
-    @commands.command()
-    @commands.has_any_role('Staff', 'GameMaster')
-    async def lbreset(self, ctx, member: discord.Member):
-        with open('leaderboard.json', 'r') as file:
-            users = json.load(file)
-            if str(member.id) in users:
-                users[str(member.id)]['points'] = 0
-                with open('leaderboard.json', 'w') as file:
-                    json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                await ctx.send(f'Successfully updated @{member}\'s points to 0.')
-            else:
-                await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
-                with open('leaderboard.json', 'w', encoding='utf8') as file:
-                    users = {}
-                    users[str(member.id)] = {}
-                    users[str(member.id)]['points'] = 0
-                    json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
-                    await ctx.send(f'@{member} successfully registered into GuildWars with starting points of 0.')
-
-    @lbreset.error
-    async def lbreset_error(self, member, error):
-        if isinstance(error, commands.MissingRole):
-            await member.send('You don\'t have the permissions to do that!')
-        if isinstance(error, commands.MissingRequiredArgument):
-            await member.send('You have to mention the Member you want to reset points to!')
-
-    @commands.command()
-    async def lbdisplay(self, ctx, member:discord.Member):
-        with open('leaderboard.json', 'r') as file:
-            users = json.load(file)
-            if str(member.id) in users:
-                points = users[str(member.id)]['points']
-
-                member_icon = member.avatar_url
-                embeddisplay = discord.Embed(
-                    title = 'Guild Wars Points',
-                    description = f'Check {member}\'s points from Guild Wars RP.',
-                    colour = discord.Colour.from_rgb(12,235,241)
-                )
-
-                embeddisplay.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
-                embeddisplay.set_thumbnail(url=f'{member_icon}')
-                embeddisplay.set_author(name=f'{member}', icon_url=f'{member_icon}')
-                embeddisplay.add_field(name=f'_ _', value='_ _', inline=False)
-                embeddisplay.add_field(name=f'Points', value=f'{points}', inline=False)
-
-                await ctx.send(embed=embeddisplay)
-            else:
-                await ctx.send(f'@{member} is not participating in Guild Wars!')
-
+        msc.connectdb()
+        mycursor = msc.connectdb().db
+        mycursor.execute("INSERT INTO User (id, points) VALUES (%s, %s)", (f"{member.id}", 0))
+        mycursor.execute("SELECT * FROM User")
+        for x in mycursor:
+            print(x)
 
 
 def setup(client):
