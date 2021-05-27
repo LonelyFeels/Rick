@@ -17,7 +17,7 @@ class Help(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
             )
 
-        embedhelp.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedhelp.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedhelp.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedhelp.add_field(name='!help', value='Shows this message.', inline=False)
         embedhelp.add_field(name='!status', value='Shows Minecraft Server Status', inline=False)
@@ -61,7 +61,7 @@ class Help(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
-        embeddynmap.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embeddynmap.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embeddynmap.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embeddynmap.add_field(name='Dynmap Link', value='Here you go! The link to our Dynmap,\nhttps://map.hydrovanillasmp.com', inline=False)
 
@@ -74,7 +74,7 @@ class Help(commands.Cog):
             colour = discord.Color.from_rgb(12,235,241)
         )
 
-        embeddonate.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embeddonate.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embeddonate.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embeddonate.add_field(name='Here you go! The link to donate to Hydro Vanilla SMP!', value='Thanks in advance if you are donating! We really appreciate it :heart:', inline=False)
         embeddonate.add_field(name='https://www.paypal.me/HydroVanillaSMP', value='If you do not use PayPal, but are European and use iDeal you can message @Tehlo on Discord, I am Dutch too :smiley:', inline=False)
@@ -95,7 +95,7 @@ class Help(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
             )
 
-        embedcolorlist.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedcolorlist.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedcolorlist.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedcolorlist.add_field(name='How to use !color and !trail', value='It\'s simple. Your Discord nickname must match your IGN in order for the command to work. Check commands syntax in !help and follow them. Available colors are stated below.', inline=False)
         embedcolorlist.add_field(name='IGN COLORS', value='GOLD, DARK_GREEN, DARK_PURPLE, DARK_AQUA, AQUA, YELLOW, GREEN', inline=False)

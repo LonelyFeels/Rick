@@ -74,7 +74,7 @@ class RCON(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
             )
 
-        embedban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedban.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772449306560430110/tenor.gif')
         embedban.add_field(name=f'Successfully banned @{member}.', value='They\'ve been such a prick, innit?', inline=False)
@@ -126,7 +126,7 @@ class RCON(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
             )
 
-        embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedunban.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedunban.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedunban.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772480429034569739/tenor.gif')
         embedunban.add_field(name=f'Successfully unbanned @{member.content}.', value='Maybe they haven\'t been such a prick?', inline=False)
@@ -151,7 +151,7 @@ class RCON(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
             )
 
-        embedkick.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedkick.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedkick.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedkick.set_image(url='https://cdn.discordapp.com/attachments/586259382522609664/772572339916242944/gif.gif')
         embedkick.add_field(name=f'Successfully kicked @{member}.', value='They\'ve been such a prick, innit?', inline=False)
@@ -178,7 +178,7 @@ class RCON(commands.Cog):
 
     @close.error
     async def close_error(self, ctx, error):
-        if isinstance(error, commands.MissingRole):
+        if isinstance(error, commands.MissingAnyRole):
             await ctx.send("You don't have the permissions to do that!")
 
     @commands.command()

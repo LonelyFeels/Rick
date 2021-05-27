@@ -125,6 +125,30 @@ class Leaderboard(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await member.send('You have to mention the Member you want to reset points to!')
 
+    @commands.command()
+    async def lbdisplay(self, ctx, member:discord.Member):
+        with open('leaderboard.json', 'r') as file:
+            users = json.load(file)
+            if str(member.id) in users:
+                points = users[str(member.id)]['points']
+
+                member_icon = member.avatar_url
+                embeddisplay = discord.Embed(
+                    title = 'Guild Wars Points',
+                    description = f'Check {member}\'s points from Guild Wars RP.',
+                    colour = discord.Colour.from_rgb(12,235,241)
+                )
+
+                embeddisplay.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+                embeddisplay.set_thumbnail(url=f'{member_icon}')
+                embeddisplay.set_author(name=f'{member}', icon_url=f'{member_icon}')
+                embeddisplay.add_field(name=f'_ _', value='_ _', inline=False)
+                embeddisplay.add_field(name=f'Points', value=f'{points}', inline=False)
+
+                await ctx.send(embed=embeddisplay)
+            else:
+                await ctx.send(f'@{member} is not participating in Guild Wars!')
+
 
 
 def setup(client):

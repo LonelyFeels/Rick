@@ -30,7 +30,7 @@ class Admin(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
-        embedcount.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedcount.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedcount.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedcount.add_field(name='Online Members:', value=f'{members.count(discord.Status.online)}', inline=False)
         embedcount.add_field(name='Idle Members:', value=f'{members.count(discord.Status.idle)}', inline=False)

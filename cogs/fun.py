@@ -47,7 +47,7 @@ class Fun(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
             )
 
-        embedhug.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedhug.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedhug.set_author(name=f'{author}', icon_url=f'{author_icon}')
         embedhug.set_image(url='https://i.imgur.com/kSWpxnG.gif')
         embedhug.add_field(name=f'@{member} I just hugged you in my thoughts :heart:', value='Hope you felt the squeeze! :teddy_bear:', inline=False)
@@ -74,7 +74,7 @@ class Fun(commands.Cog):
                 colour = discord.Colour.from_rgb(12,235,241)
             )
 
-            embedwaifu.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+            embedwaifu.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
             embedwaifu.set_image(url=f'http://randomwaifu.altervista.org/{url}')
             embedwaifu.add_field(name='_ _', value='If the picutre doesn\'t load, that means it\'s too big.\nClick the name and it will open on your browser.', inline=False)
 
@@ -96,7 +96,7 @@ class Fun(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
         
-        embeddog.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embeddog.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embeddog.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embeddog.set_image(url=f'{img}')
         embeddog.add_field(name='Woof woof 🐕', value=f'{fact}', inline=False)
@@ -117,7 +117,7 @@ class Fun(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
         
-        embedcat.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedcat.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedcat.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedcat.set_image(url=f'{img}')
         embedcat.add_field(name='Meow 🐈‍⬛', value=f'{fact}', inline=False)
@@ -138,7 +138,7 @@ class Fun(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
         
-        embedpanda.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedpanda.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedpanda.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedpanda.set_image(url=f'{img}')
         embedpanda.add_field(name='squeak? 🐼', value=f'{fact}', inline=False)
@@ -159,7 +159,7 @@ class Fun(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
         
-        embedfox.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedfox.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedfox.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedfox.set_image(url=f'{img}')
         embedfox.add_field(name='What does the fox say? 🦊', value=f'{fact}', inline=False)
@@ -180,7 +180,7 @@ class Fun(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
         
-        embedbird.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedbird.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedbird.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedbird.set_image(url=f'{img}')
         embedbird.add_field(name='Tweet 🐦', value=f'{fact}', inline=False)
@@ -201,7 +201,7 @@ class Fun(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
         
-        embedkoala.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedkoala.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedkoala.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedkoala.set_image(url=f'{img}')
         embedkoala.add_field(name='Tweet 🐨', value=f'{fact}', inline=False)
@@ -219,7 +219,7 @@ class Fun(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
-        embedchristmas.set_footer(text=f'Wishes from @ Hydro Vanilla SMP Staff', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embedchristmas.set_footer(text=f'Wishes from @ Hydro Vanilla SMP Staff', icon_url='https://i.imgur.com/VkgebnW.png')
         embedchristmas.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         #embedchristmas.add_field(name='Ho Ho Ho 🎅 Merry Christmas ☃️ And a Happy ❄️ New Year! 🌨️', value=f'Days left till Christmas: {(christmas.date()-now.date()).days}', inline=False)
         embedchristmas.add_field(name='Ho Ho Ho 🎅 Merry Christmas ☃️ And a Happy ❄️ New Year! 🌨️', value=f'*Christmas...*', inline=False)
@@ -238,7 +238,7 @@ class Fun(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
-        embednewyear.set_footer(text=f'Wishes from @ Hydro Vanilla SMP Staff', icon_url='https://hydrovanillasmp.com/wp-content/uploads/2019/06/HydroSMP_BaseLogo.png')
+        embednewyear.set_footer(text=f'Wishes from @ Hydro Vanilla SMP Staff', icon_url='https://i.imgur.com/VkgebnW.png')
         embednewyear.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embednewyear.add_field(name='Happy New Year 2021! 🎉', value=f'*Life is too short* to wake up in the morning\nwith regrets.', inline=False)
         embednewyear.add_field(name='_ _', value=f'So, *love* the people who treat you right\nand *forget* about the ones who don\'t.', inline=False)
