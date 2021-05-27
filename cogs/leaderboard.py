@@ -34,12 +34,18 @@ class Leaderboard(commands.Cog):
                 user = json.load(file)
             with open('leaderboard.json', 'w', encoding='utf8') as file:
                 user[str(member.id)]['points'] = user[str(member.id)]['points'] + number
+                json.dump(user, file, sort_keys=True, indent=4, ensure_ascii=False)
         except:
             await member.send(f'{member} is not in the database. Let me add them for you.')
+            with open('leaderboard.json', 'r', encoding='utf8') as file:
+                user = json.load(file)
             with open('leaderboard.json', 'w', encoding='utf8') as file:
                 user = {}
                 user[str(member.id)] = {}
                 user[str(member.id)]['points'] = 0
+                json.dump(user, file, sort_keys=True, indent=4, ensure_ascii=False)
+            with open('leaderboard.json', 'w', encoding='utf8') as file:    
+                user[str(member.id)]['points'] = user[str(member.id)]['points'] + number
                 json.dump(user, file, sort_keys=True, indent=4, ensure_ascii=False)
     
     @lba.error
