@@ -45,14 +45,14 @@ class Leaderboard(commands.Cog):
 
                 with open('leaderboard.json', 'r') as file:
                     users = json.load
-                upoints = users[str(member.id)]['points']
-                await ctx.send(f'Successfully updated @{member}\'s points to {upoints}')
+                    upoints = users[str(member.id)]['points']
+                    await ctx.send(f'Successfully updated @{member}\'s points to {upoints}')
             else:
                 await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
                 with open('leaderboard.json', 'w', encoding='utf8') as file:
                     users = {}
                     users[str(member.id)] = {}
-                    users[str(member.id)]['points'] = 0
+                    users[str(member.id)]['points'] = number
                     json.dump(users, file, sort_keys=True, indent=4, ensure_ascii=False)
                     await ctx.send(f'@{member} successfully registered into GuildWars.')
     
@@ -61,7 +61,7 @@ class Leaderboard(commands.Cog):
         if isinstance(error, commands.MissingRole):
             await member.send('You don\'t have the permissions to do that!')
         if isinstance(error, commands.MissingRequiredArgument):
-            await member.send('You have to mention the Member you want to add points to!')
+            await member.send('You have to mention the Member you want to add points to and put down the number of points!')
 
 
 def setup(client):
