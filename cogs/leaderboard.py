@@ -135,6 +135,37 @@ class Leaderboard(commands.Cog):
 
     @commands.command()
     @commands.has_any_role('Staff', 'GameMaster')
+    async def lbset(self, ctx, member: discord.Member, number:int):
+        db = mysql.connector.connect(
+            host = mysqlcredentials.host,
+            port = mysqlcredentials.port,
+            user = mysqlcredentials.user,
+            password = mysqlcredentials.password,
+            database = mysqlcredentials.database
+        )
+        mycursor = db.cursor()
+
+        mycursor.execute(f"SELECT * FROM User WHERE id={str(member.id)}")
+        data = mycursor.fetchall()
+        if len(data)==0:
+            await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
+            mycursor.execute("INSERT INTO User (id, points) VALUES (%s, %s)", (f"{member.id}", number))
+            db.commit()
+            await ctx.send(f'@{member} successfully registered into GuildWars with starting points of {number}.')
+        else:
+            mycursor.execute(f"UPDATE User SET points={number} WHERE id={str(member.id)}")
+            db.commit()
+            await ctx.send(f'Successfully updated @{member}\'s points to {number}.')
+    
+    @lbset.error
+    async def lbset_error(self, member, error):
+        if isinstance(error, commands.MissingRole):
+            await member.send('You don\'t have the permissions to do that!')
+        if isinstance(error, commands.MissingRequiredArgument):
+            await member.send('You have to mention the Member you want to set points to and put down the number!')
+
+    @commands.command()
+    @commands.has_any_role('Staff', 'GameMaster')
     async def lbreset(self, ctx, member: discord.Member):
         db = mysql.connector.connect(
             host = mysqlcredentials.host,
@@ -184,19 +215,24 @@ class Leaderboard(commands.Cog):
             points = mycursor.fetchall()[0][0]
 
             member_icon = member.avatar_url
-            embeddisplay = discord.Embed(
+            embedlbdisplay = discord.Embed(
                 title = 'Guild Wars Points',
                 description = f'Check {member}\'s points from Guild Wars RP.',
                 colour = discord.Colour.from_rgb(12,235,241)
             )
 
-            embeddisplay.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
-            embeddisplay.set_thumbnail(url=f'{member_icon}')
-            embeddisplay.set_author(name=f'{member}', icon_url=f'{member_icon}')
-            embeddisplay.add_field(name=f'_ _', value='_ _', inline=False)
-            embeddisplay.add_field(name=f'Points', value=f'{int(points)}', inline=False)
+            embedlbdisplay.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+            embedlbdisplay.set_thumbnail(url=f'{member_icon}')
+            embedlbdisplay.set_author(name=f'{member}', icon_url=f'{member_icon}')
+            embedlbdisplay.add_field(name=f'_ _', value='_ _', inline=False)
+            embedlbdisplay.add_field(name=f'Points', value=f'{int(points)}', inline=False)
 
-            await ctx.send(embed=embeddisplay)
+            await ctx.send(embed=embedlbdisplay)
+
+    @lbdisplay.error
+    async def lbdisplay_error(self, member, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await member.send('You have to mention the Member if you want to see their stats!')
 
 
 def setup(client):
