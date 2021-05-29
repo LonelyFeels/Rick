@@ -57,6 +57,7 @@ class Leaderboard(commands.Cog):
             await ctx.send('Member hasn\'t been registered to Guild Wars database yet!')
         else:
             mycursor.execute(f"DELETE FROM User WHERE id={str(member.id)}")
+            db.commit()
             await ctx.send(f'@{member} successfully unregistered from GuildWars.')
 
 
