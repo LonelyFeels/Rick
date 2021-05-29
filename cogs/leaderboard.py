@@ -89,9 +89,9 @@ class Leaderboard(commands.Cog):
         else:
             mycursor.execute(f"SELECT points FROM User WHERE id={str(member.id)}")
             points = mycursor.fetchall()
-            mycursor.execute(f"UPDATE User SET points={points+number} WHERE id={str(member.id)}")
+            mycursor.execute(f"UPDATE User SET points={points[0][0]+number} WHERE id={str(member.id)}")
             db.commit()
-            await ctx.send(f'Successfully updated @{member}\'s points to {points+number}.')
+            await ctx.send(f'Successfully updated @{member}\'s points to {points[0][0]+number}.')
 
     @lbadd.error
     async def lbadd_error(self, member, error):
