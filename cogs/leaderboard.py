@@ -69,7 +69,7 @@ class Leaderboard(commands.Cog):
 
     @commands.command()
     @commands.has_any_role('Staff', 'GameMaster')
-    async def lbadd(self, ctx, member: discord.Member, number):
+    async def lbadd(self, ctx, member: discord.Member, number:int):
         db = mysql.connector.connect(
             host = mysqlcredentials.host,
             port = mysqlcredentials.port,
@@ -88,10 +88,10 @@ class Leaderboard(commands.Cog):
             await ctx.send(f'@{member} successfully registered into GuildWars with starting points of {number}.')
         else:
             mycursor.execute(f"SELECT points FROM User WHERE id={str(member.id)}")
-            points = mycursor.fetchall()
-            mycursor.execute(f"UPDATE User SET points={points[0][0]+number} WHERE id={str(member.id)}")
+            points = mycursor.fetchall()[0][0]
+            mycursor.execute(f"UPDATE User SET points={int(points)+number} WHERE id={str(member.id)}")
             db.commit()
-            await ctx.send(f'Successfully updated @{member}\'s points to {points[0][0]+number}.')
+            await ctx.send(f'Successfully updated @{member}\'s points to {int(points)+number}.')
 
     @lbadd.error
     async def lbadd_error(self, member, error):
