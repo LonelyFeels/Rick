@@ -27,9 +27,7 @@ class Leaderboard(commands.Cog):
         data = mycursor.fetchall()
         if len(data)==0:
             mycursor.execute("INSERT INTO User (id, points) VALUES (%s, %s)", (f"{member.id}", 0))
-            mycursor.execute("SELECT * FROM User")
-            for x in mycursor:
-                print(x)
+            db.commit()
         else:
             ctx.send('Member is already registered in GuildWars database!')
 
