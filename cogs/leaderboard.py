@@ -29,7 +29,7 @@ class Leaderboard(commands.Cog):
             mycursor.execute("INSERT INTO User (id, points) VALUES (%s, %s)", (f"{member.id}", 0))
             db.commit()
         else:
-            ctx.send('Member is already registered in GuildWars database!')
+            await ctx.send('Member is already registered in GuildWars database!')
 
 
 def setup(client):
