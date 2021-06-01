@@ -2,6 +2,40 @@ import discord
 from discord.ext import commands
 import mysql.connector
 import mysqlcredentials
+from discord.ext.menus import MenuPages, ListPageSource
+
+
+class LeaderboardMenu(ListPageSource):
+    def __init__(self, ctx, data):
+        self.ctx = ctx
+
+        super().__init__(data, per_page=10)
+
+        async def write_page(self, menu, offset, fields=[]):
+            len_data = len(self.entries)
+
+            embedleaderboard = discord.Embed(
+                title = "Guild Wars Leaderboard",
+                colour = discord.Colour.from_rgb(12,235,241)
+            )
+            embedleaderboard.set_footer(text=f"{offset:,} - {min(len_data, offset+self.per_page-1):,} of {len_data:,} members.")
+            embedleaderboard.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+
+            for name, value in fields:
+                embedleaderboard.add_field(name=name, value=value, inline=False)
+
+            return embedleaderboard
+
+        async def format_page(self, menu, entries):
+            offset = (menu.current_page*self.per_page) + 1
+
+            fields = []
+            table = ("\n".join(f"{idx+offset}. {self.ctx.client.guild.get_member(entry[0]).display_name} (Points: {entry[1]})"
+				for idx, entry in enumerate(entries)))
+
+            fields.append(("Points", table))
+
+            return await self.write_page(menu, offset, fields)
 
 
 class Leaderboard(commands.Cog):
@@ -233,6 +267,23 @@ class Leaderboard(commands.Cog):
     async def lbdisplay_error(self, member, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await member.send('You have to mention the Member if you want to see their stats!')
+
+    @commands.command()
+    async def leaderboard(self, ctx):
+        db = mysql.connector.connect(
+            host = mysqlcredentials.host,
+            port = mysqlcredentials.port,
+            user = mysqlcredentials.user,
+            password = mysqlcredentials.password,
+            database = mysqlcredentials.database
+        )
+        mycursor = db.cursor()
+
+        mycursor.execute(f"SELECT id, points FROM User ORDER BY points DESC")
+        records = mycursor.fetchall()
+
+        menu = MenuPages(source=LeaderboardMenu(ctx, records), clear_reactions_after=True, timeout=60.0)
+        await menu.start(ctx)
 
 
 def setup(client):
