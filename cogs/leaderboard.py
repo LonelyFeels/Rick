@@ -248,7 +248,7 @@ class Leaderboard(commands.Cog):
 
         mycursor.execute("SELECT * FROM User ORDER BY points DESC")
         data = mycursor.fetchall()
-
+        
         embedleaderboard = discord.Embed(
             title = 'Guild Wars Leaderboard',
             description = 'Check who\'s the best in Guild Wars RP.',
@@ -257,8 +257,8 @@ class Leaderboard(commands.Cog):
 
         embedleaderboard.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedleaderboard.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedleaderboard.add_field(name=f'1. {client.get_user(id=str(int(data[0][0])))}', value=f'{int(data[0][1])}', inline=False)
-        embedleaderboard.add_field(name=f'2. {client.get_user(id=str(int(data[1][0])))}', value=f'{int(data[1][1])}', inline=False)
+        embedleaderboard.add_field(name=f'1. {self.ctx.client.get_user(int(data[0][0]))}', value=f'{int(data[0][1])}', inline=False)
+        embedleaderboard.add_field(name=f'2. {self.ctx.client.get_user(int(data[0][1]))}', value=f'{int(data[1][1])}', inline=False)
 
         await ctx.send(embed=embedleaderboard)
 
