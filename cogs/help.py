@@ -97,7 +97,7 @@ class Help(commands.Cog):
         embedcolorlist.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedcolorlist.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedcolorlist.add_field(name='How to use !color and !trail', value='It\'s simple. Your Discord nickname must match your IGN in order for the command to work. Check commands syntax in !help and follow them. Available colors are stated below.', inline=False)
-        embedcolorlist.add_field(name='IGN COLORS', value='GOLD, DARK_GREEN, DARK_PURPLE, DARK_AQUA, AQUA, YELLOW, GREEN', inline=False)
+        embedcolorlist.add_field(name='IGN COLORS', value='GOLD, DARK_GREEN, GREEN, DARK_PURPLE, LIGHT_PURPLE, DARK_AQUA, AQUA, DARK_BLUE', inline=False)
         embedcolorlist.add_field(name='TRAIL COLORS', value='AQUA, BLACK, BLUE, DARK_AQUA, DARK_BLUE, DARK_GRAY, DARK_GREEN, DARK_PURPLE, DARK_RED, GOLD, GRAY, GREEN, LIGHT_PURPLE, RED, WHITE, YELLOW, remove, any HEX color', inline=False)
 
         await ctx.send(embed=embedcolorlist)
