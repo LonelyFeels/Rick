@@ -258,7 +258,15 @@ class Leaderboard(commands.Cog):
         embedleaderboard.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedleaderboard.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedleaderboard.add_field(name=f'1. {self.client.get_user(int(data[0][0]))}', value=f'{int(data[0][1])}', inline=False)
-        embedleaderboard.add_field(name=f'2. {self.client.get_user(int(data[0][1]))}', value=f'{int(data[1][1])}', inline=False)
+        embedleaderboard.add_field(name=f'2. {self.client.get_user(int(data[1][0]))}', value=f'{int(data[1][1])}', inline=False)
+        embedleaderboard.add_field(name=f'3. {self.client.get_user(int(data[2][0]))}', value=f'{int(data[2][1])}', inline=False)
+        embedleaderboard.add_field(name=f'4. {self.client.get_user(int(data[3][0]))}', value=f'{int(data[3][1])}', inline=False)
+        embedleaderboard.add_field(name=f'5. {self.client.get_user(int(data[4][0]))}', value=f'{int(data[4][1])}', inline=False)
+        embedleaderboard.add_field(name=f'6. {self.client.get_user(int(data[5][0]))}', value=f'{int(data[5][1])}', inline=False)
+        embedleaderboard.add_field(name=f'7. {self.client.get_user(int(data[6][0]))}', value=f'{int(data[6][1])}', inline=False)
+        embedleaderboard.add_field(name=f'8. {self.client.get_user(int(data[7][0]))}', value=f'{int(data[7][1])}', inline=False)
+        embedleaderboard.add_field(name=f'9. {self.client.get_user(int(data[8][0]))}', value=f'{int(data[8][1])}', inline=False)
+        embedleaderboard.add_field(name=f'10. {self.client.get_user(int(data[9][0]))}', value=f'{int(data[9][1])}', inline=False)
 
         await ctx.send(embed=embedleaderboard)
 
