@@ -70,14 +70,13 @@ class Help(commands.Cog):
     @commands.command()
     async def donate(self, ctx):
         embeddonate = discord.Embed(
-            url = 'https://www.paypal.me/HydroVanillaSMP',
             colour = discord.Color.from_rgb(12,235,241)
         )
 
         embeddonate.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embeddonate.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embeddonate.add_field(name='Here you go! The link to donate to Hydro Vanilla SMP!', value='Thanks in advance if you are donating! We really appreciate it :heart:', inline=False)
-        embeddonate.add_field(name='https://www.paypal.me/HydroVanillaSMP', value='If you do not use PayPal, but are European and use iDeal you can message @Tehlo on Discord, I am Dutch too :smiley:', inline=False)
+        embeddonate.add_field(name='We are being sponsored from **DedicatedMC** 🙏', value='We are thankful from the bottom of the heart ❤️', inline=False)
 
         await ctx.send(embed=embeddonate)
 
