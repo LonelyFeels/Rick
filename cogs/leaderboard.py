@@ -29,6 +29,8 @@ class Leaderboard(commands.Cog):
         if len(data)==0:
             mycursor.execute("INSERT INTO User (id, points) VALUES (%s, %s)", (f"{member.id}", 0))
             db.commit()
+            role = discord.utils.get(ctx.guild.roles, name='GuildWars')
+            await member.add_roles(role)
             await ctx.send(f'@{member} successfully registered into GuildWars.')
         else:
             await ctx.send('Member is already registered in GuildWars database!')
@@ -59,6 +61,8 @@ class Leaderboard(commands.Cog):
         else:
             mycursor.execute(f"DELETE FROM User WHERE id={str(member.id)}")
             db.commit()
+            role = discord.utils.get(ctx.guild.roles, name='GuildWars')
+            await member.remove_roles(role)
             await ctx.send(f'@{member} successfully unregistered from GuildWars.')
 
     @lbunregister.error
@@ -86,6 +90,8 @@ class Leaderboard(commands.Cog):
             await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
             mycursor.execute("INSERT INTO User (id, points) VALUES (%s, %s)", (f"{member.id}", number))
             db.commit()
+            role = discord.utils.get(ctx.guild.roles, name='GuildWars')
+            await member.add_roles(role)
             await ctx.send(f'@{member} successfully registered into GuildWars with starting points of {number}.')
         else:
             mycursor.execute(f"SELECT points FROM User WHERE id={str(member.id)}")
@@ -119,6 +125,8 @@ class Leaderboard(commands.Cog):
             await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
             mycursor.execute("INSERT INTO User (id, points) VALUES (%s, %s)", (f"{member.id}", 0-number))
             db.commit()
+            role = discord.utils.get(ctx.guild.roles, name='GuildWars')
+            await member.add_roles(role)
             await ctx.send(f'@{member} successfully registered into GuildWars with starting points of -{number}.')
         else:
             mycursor.execute(f"SELECT points FROM User WHERE id={str(member.id)}")
@@ -152,6 +160,8 @@ class Leaderboard(commands.Cog):
             await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
             mycursor.execute("INSERT INTO User (id, points) VALUES (%s, %s)", (f"{member.id}", number))
             db.commit()
+            role = discord.utils.get(ctx.guild.roles, name='GuildWars')
+            await member.add_roles(role)
             await ctx.send(f'@{member} successfully registered into GuildWars with starting points of {number}.')
         else:
             mycursor.execute(f"UPDATE User SET points={number} WHERE id={str(member.id)}")
@@ -183,6 +193,8 @@ class Leaderboard(commands.Cog):
             await ctx.send(f'@{member} is not in the GuildWars database. Let me add them for you.')
             mycursor.execute("INSERT INTO User (id, points) VALUES (%s, %s)", (f"{member.id}", 0))
             db.commit()
+            role = discord.utils.get(ctx.guild.roles, name='GuildWars')
+            await member.add_roles(role)
             await ctx.send(f'@{member} successfully registered into GuildWars with starting points of 0.')
         else:
             mycursor.execute(f"UPDATE User SET points=0 WHERE id={str(member.id)}")
