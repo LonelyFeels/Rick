@@ -91,6 +91,8 @@ class Help(commands.Cog):
         embeddocs.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embeddocs.add_field(name='Docs Website', value='Here you go! The link to our Docs,\nhttps://lonelyfeels1.gitbook.io/hydro-guide/', inline=False)
 
+        await ctx.send(embed=embeddocs)
+
     @commands.command()
     async def donate(self, ctx):
         embeddonate = discord.Embed(
