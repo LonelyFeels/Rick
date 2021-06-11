@@ -57,15 +57,39 @@ class Help(commands.Cog):
     @commands.command()
     async def dynmap(self, ctx):
         embeddynmap = discord.Embed(
-            url = 'https://map.hydrovanillasmp.com',
+            url = 'http://148.251.211.70:25599',
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
         embeddynmap.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embeddynmap.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embeddynmap.add_field(name='Dynmap Link', value='Here you go! The link to our Dynmap,\nhttps://map.hydrovanillasmp.com', inline=False)
+        embeddynmap.add_field(name='Dynmap Link', value='Here you go! The link to our Dynmap,\nhttp://148.251.211.70:25599', inline=False)
 
         await ctx.send(embed=embeddynmap)
+
+    @commands.command()
+    async def plan(self, ctx):
+        embedplan = discord.Embed(
+            url = 'http://148.251.211.70:25553',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+
+        embedplan.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+        embedplan.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedplan.add_field(name='PLAN Link', value='Here you go! The link to our PLAN,\nhttp://148.251.211.70:25553', inline=False)
+
+        await ctx.send(embed=embedplan)
+
+    @commands.command()
+    async def docs(self, ctx):
+        embeddocs = discord.Embed(
+            url = 'https://lonelyfeels1.gitbook.io/hydro-guide/',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+
+        embeddocs.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+        embeddocs.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embeddocs.add_field(name='Docs Website', value='Here you go! The link to our Docs,\nhttps://lonelyfeels1.gitbook.io/hydro-guide/', inline=False)
 
     @commands.command()
     async def donate(self, ctx):
