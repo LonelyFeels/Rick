@@ -56,7 +56,7 @@ class Shops(commands.Cog):
         data = mycursor.fetchall()
         store = data[0][2]
 
-        mycursor.execute(f"SELECT * FROM Item_Listings WHERE Item={str(item)}")
+        mycursor.execute(f"SELECT * FROM Item_Listings WHERE Item={str(item)} AND StoreName={str(store)}")
         if len(data)==0:
             mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Price, Description) VALUES (%s, %s, %s, %s)", (f"{item}", f"{store}", f"{price}", f"{description}"))
             db.commit()
