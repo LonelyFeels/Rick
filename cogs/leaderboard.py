@@ -2,7 +2,7 @@ import discord
 from discord import client
 from discord.ext import commands
 import mysql.connector
-import mysqlcredentials
+import mysqlleaderboardcredentials as credentials
 
 
 class Leaderboard(commands.Cog):
@@ -16,11 +16,11 @@ class Leaderboard(commands.Cog):
     @commands.has_any_role('Staff', 'GameMaster')
     async def lbregister(self, ctx, member: discord.Member):
         db = mysql.connector.connect(
-            host = mysqlcredentials.host,
-            port = mysqlcredentials.port,
-            user = mysqlcredentials.user,
-            password = mysqlcredentials.password,
-            database = mysqlcredentials.database
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
         )
         mycursor = db.cursor()
 
@@ -46,11 +46,11 @@ class Leaderboard(commands.Cog):
     @commands.has_any_role('Staff', 'GameMaster')
     async def lbunregister(self, ctx, member: discord.Member):
         db = mysql.connector.connect(
-            host = mysqlcredentials.host,
-            port = mysqlcredentials.port,
-            user = mysqlcredentials.user,
-            password = mysqlcredentials.password,
-            database = mysqlcredentials.database
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
         )
         mycursor = db.cursor()
 
@@ -76,11 +76,11 @@ class Leaderboard(commands.Cog):
     @commands.has_any_role('Staff', 'GameMaster')
     async def lbadd(self, ctx, member: discord.Member, number:int):
         db = mysql.connector.connect(
-            host = mysqlcredentials.host,
-            port = mysqlcredentials.port,
-            user = mysqlcredentials.user,
-            password = mysqlcredentials.password,
-            database = mysqlcredentials.database
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
         )
         mycursor = db.cursor()
 
@@ -111,11 +111,11 @@ class Leaderboard(commands.Cog):
     @commands.has_any_role('Staff', 'GameMaster')
     async def lbsubtract(self, ctx, member: discord.Member, number:int):
         db = mysql.connector.connect(
-            host = mysqlcredentials.host,
-            port = mysqlcredentials.port,
-            user = mysqlcredentials.user,
-            password = mysqlcredentials.password,
-            database = mysqlcredentials.database
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
         )
         mycursor = db.cursor()
 
@@ -146,11 +146,11 @@ class Leaderboard(commands.Cog):
     @commands.has_any_role('Staff', 'GameMaster')
     async def lbset(self, ctx, member: discord.Member, number:int):
         db = mysql.connector.connect(
-            host = mysqlcredentials.host,
-            port = mysqlcredentials.port,
-            user = mysqlcredentials.user,
-            password = mysqlcredentials.password,
-            database = mysqlcredentials.database
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
         )
         mycursor = db.cursor()
 
@@ -179,11 +179,11 @@ class Leaderboard(commands.Cog):
     @commands.has_any_role('Staff', 'GameMaster')
     async def lbreset(self, ctx, member: discord.Member):
         db = mysql.connector.connect(
-            host = mysqlcredentials.host,
-            port = mysqlcredentials.port,
-            user = mysqlcredentials.user,
-            password = mysqlcredentials.password,
-            database = mysqlcredentials.database
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
         )
         mycursor = db.cursor()
 
@@ -211,11 +211,11 @@ class Leaderboard(commands.Cog):
     @commands.command()
     async def lbdisplay(self, ctx, member: discord.Member):
         db = mysql.connector.connect(
-            host = mysqlcredentials.host,
-            port = mysqlcredentials.port,
-            user = mysqlcredentials.user,
-            password = mysqlcredentials.password,
-            database = mysqlcredentials.database
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
         )
         mycursor = db.cursor()
 
@@ -250,11 +250,11 @@ class Leaderboard(commands.Cog):
     @commands.command()
     async def leaderboard(self, ctx):
         db = mysql.connector.connect(
-            host = mysqlcredentials.host,
-            port = mysqlcredentials.port,
-            user = mysqlcredentials.user,
-            password = mysqlcredentials.password,
-            database = mysqlcredentials.database
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
         )
         mycursor = db.cursor()
 
