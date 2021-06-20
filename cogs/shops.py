@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import discord
 from discord import client
 from discord.ext import commands
@@ -14,7 +13,7 @@ class Shops(commands.Cog):
 
     #Commands
     @commands.command()
-    async def storeregister(self, ctx, username, storename, location=NULL):
+    async def storeregister(self, ctx, username, storename, location=None):
         db = mysql.connector.connect(
             host = credentials.host,
             port = credentials.port,
@@ -41,7 +40,7 @@ class Shops(commands.Cog):
             await member.send('You have state your Username, Storename (and Location)!')
 
     @commands.command()
-    async def storeedit(self, ctx, item, price:int, description=NULL):
+    async def storeedit(self, ctx, item, price:int, description=None):
         db = mysql.connector.connect(
             host = credentials.host,
             port = credentials.port,
