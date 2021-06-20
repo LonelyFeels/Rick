@@ -23,7 +23,7 @@ class Shops(commands.Cog):
         )
         mycursor = db.cursor()
 
-        owner = ctx.message.author()
+        owner = ctx.message.author
 
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
         data = mycursor.fetchall()
