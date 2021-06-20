@@ -30,7 +30,7 @@ class Shops(commands.Cog):
         if len(data)==0:
             mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location) VALUES (%s, %s, %s, %s)", (f"{owner.id}", username, storename, location))
             db.commit()
-            await ctx.send(f'@{storename} successfully registered into Stores database.')
+            await ctx.send(f'{storename} successfully registered into Stores database.')
         else:
             await ctx.send('Store is already registered in Stores database!')
 
@@ -50,7 +50,7 @@ class Shops(commands.Cog):
         )
         mycursor = db.cursor()
 
-        owner = ctx.message.author()
+        owner = ctx.message.author
 
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
         data = mycursor.fetchall()
