@@ -6,7 +6,7 @@ import mysql.connector
 import mysqlshopcredentials as credentials
 
 
-class Leaderboard(commands.Cog):
+class Shops(commands.Cog):
 
     def __init__(self,client):
         self.client = client
@@ -69,4 +69,4 @@ class Leaderboard(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Leaderboard(client))
+    client.add_cog(Shops(client))
