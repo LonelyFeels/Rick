@@ -54,18 +54,21 @@ class Shops(commands.Cog):
 
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
         data = mycursor.fetchall()
-        store = data[0][2]
-
-        mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(store)}')")
-        itemexists = mycursor.fetchall()
-        if itemexists[0][0]:
-            mycursor.execute(f"UPDATE Item_Listings SET price={int(price)} WHERE Item='{str(item)}' AND StoreName='{str(store)}'")
-            db.commit()
-            await ctx.send(f'{item}\'s price succesfually updated to {price} Diamonds in {store} Store.')
+        if len(data)==0:
+            await ctx.send('Your store does not exist in Stores database!')
         else:
-            mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Price, Description) VALUES (%s, %s, %s, %s)", (item, store, price, description))
-            db.commit()
-            await ctx.send(f'{item}\'s successfully added with price at {price} Diamonds in {store} Store.')
+            store = data[0][2]
+
+            mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(store)}')")
+            itemexists = mycursor.fetchall()
+            if itemexists[0][0]:
+                mycursor.execute(f"UPDATE Item_Listings SET price={int(price)} WHERE Item='{str(item)}' AND StoreName='{str(store)}'")
+                db.commit()
+                await ctx.send(f'{item}\'s price succesfually updated to {price} Diamonds in {store} Store.')
+            else:
+                mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Price, Description) VALUES (%s, %s, %s, %s)", (item, store, price, description))
+                db.commit()
+                await ctx.send(f'{item}\'s successfully added with price at {price} Diamonds in {store} Store.')
 
 
 def setup(client):
