@@ -56,10 +56,10 @@ class Shops(commands.Cog):
         data = mycursor.fetchall()
         store = data[0][2]
 
-        mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item={str(item)} AND StoreName={str(store)})")
+        mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(store)}')")
         itemexists = mycursor.fetchall()
         if itemexists[0][0]:
-            mycursor.execute(f"UPDATE Item_Listings SET price={int(price)} WHERE Item={str(item)} AND StoreName={str(store)}")
+            mycursor.execute(f"UPDATE Item_Listings SET price={int(price)} WHERE Item='{str(item)}' AND StoreName='{str(store)}'")
             db.commit()
             await ctx.send(f'{item}\'s price succesfually updated to {price} Diamonds in {store} Store.')
         else:
