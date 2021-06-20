@@ -35,9 +35,9 @@ class Shops(commands.Cog):
             await ctx.send('Store is already registered in Stores database!')
 
     @storeregister.error
-    async def storeregister_error(self, member, error):
+    async def storeregister_error(self, username, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await member.send('You have state your Username, Storename (and Location)!')
+            await username.send('You have state your Username, Storename (and Location)!')
 
     @commands.command()
     async def storeedit(self, ctx, item, price:int, description=None):
@@ -56,15 +56,16 @@ class Shops(commands.Cog):
         data = mycursor.fetchall()
         store = data[0][2]
 
-        mycursor.execute(f"SELECT * FROM Item_Listings WHERE Item={str(item)} AND StoreName={str(store)}")
-        if len(data)==0:
-            mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Price, Description) VALUES (%s, %s, %s, %s)", (f"{item}", f"{store}", f"{price}", f"{description}"))
+        mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item={str(item)} AND StoreName={str(store)})")
+        itemexists = mycursor.fetchall()
+        if itemexists[0][0]:
+            mycursor.execute(f"UPDATE Item_Listings SET price={int(price)} WHERE Item={str(item)} AND StoreName={str(store)}")
             db.commit()
-            await ctx.send(f'{item} successfully added to {price} Diamonds in {store} store.')
+            await ctx.send(f'{item}\'s price succesfually updated to {price} Diamonds in {store} Store.')
         else:
-            mycursor.execute(f"UPDATE Item_Listings SET Price={int(price)} WHERE Item={str(item)} AND StoreName={str(store)}")
+            mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Price, Description) VALUES (%s, %s, %s, %s)", (item, store, price, description))
             db.commit()
-            await ctx.send(f'{item} successfully updated to {price} Diamonds in {store} store.')
+            await ctx.send(f'{item}\'s successfully added with price at {price} Diamonds in {store} Store.')
 
 
 def setup(client):
