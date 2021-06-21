@@ -187,14 +187,15 @@ class Shops(commands.Cog):
 
         mycursor.execute(f"SELECT DISTINCT Category FROM Item_List")
         data = mycursor.fetchall()
-        embeditemlookup = discord.Embed(
+        embedcategories = discord.Embed(
             title = 'Item Categories',
             description = 'Showing all item categories for the Store Listings',
             colour = discord.Colour.from_rgb(12,235,241)
         )
-        for row in data:
-            embeditemlookup.add_field(name=row[0], value="", inline=False)
-        await ctx.send(embed=embeditemlookup)
+        print(data)
+        #for row in data:
+        #    embedcategories.add_field(name=row[0], value="", inline=False)
+        #await ctx.send(embed=embedcategories)
 
 def setup(client):
     client.add_cog(Shops(client))
