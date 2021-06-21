@@ -86,20 +86,24 @@ class Shops(commands.Cog):
         )
         mycursor = db.cursor()
 
-        mycursor.execute(f"SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item='{str(item)}'")
+        mycursor.execute(f"SELECT EXISTS (SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item='{str(item)}')")
         data = mycursor.fetchall()
 
-        embeditemlookup = discord.Embed(
-            title = 'Store Item Lookup',
-            description = f'Showing all store listings for {item}.',
-            colour = discord.Colour.from_rgb(12,235,241)
-        )
-
-        print(data)
-        for row in data:
-            embeditemlookup.add_field(name=row[0], value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} \n Description: {str(row[3])}", inline=False)
-
-        await ctx.send(embed=embeditemlookup)
+        if data[0][0]:
+            mycursor.execute(f"SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item='{str(item)}'")
+            embeditemlookup = discord.Embed(
+                title = 'Store Item Lookup',
+                description = f'Showing all store listings for {item}.',
+                colour = discord.Colour.from_rgb(12,235,241)
+            )
+            print(data)
+            for row in data:
+                embeditemlookup.add_field(name=row[0], value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} \n Description: {str(row[3])}", inline=False)
+            await ctx.send(embed=embeditemlookup)
+        else: 
+            mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
+            data = mycursor.fetchall()
+            await ctx.send(f"Did you mean to look up \"{str(data[0][0])}\"? Try running this command: `!storeitemlookup \"{str(data[0][0])}\"`")
 
 def setup(client):
     client.add_cog(Shops(client))
