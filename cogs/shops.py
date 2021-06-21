@@ -199,7 +199,6 @@ class Shops(commands.Cog):
             database = credentials.database
         )
         mycursor = db.cursor()
-        owner = ctx.message.author
 
         mycursor.execute(f"SELECT DISTINCT Category FROM Item_List")
         data = mycursor.fetchall()
@@ -217,6 +216,39 @@ class Shops(commands.Cog):
         embedcategories.add_field(name="Showing all item categories for the Store Listings", value=categorylist, inline=False)
         
         await ctx.send(embed=embedcategories)
+
+    @commands.command()
+    async def storeunregister(self, ctx):
+        db = mysql.connector.connect(
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
+        )
+        mycursor = db.cursor()
+        owner = ctx.message.author
+
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
+        data = mycursor.fetchall()
+        if len(data)==0:
+            await ctx.send('Your store does not exist in Stores database!')
+        else:
+            storename = data[0][2]
+            mycursor.execute(f"DELETE FROM Item_Listings WHERE StoreName='{str(storename)}'")
+            db.commit()
+            deleteresult = mycursor.rowcount
+            if deleteresult > 0: 
+                await ctx.send(f"Successfully removed all items from your store.")
+                mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)}")
+                db.commit()
+                deleteshop = mycursor.rowcount
+                if deleteshop >0:
+                    await ctx.send(f'Successfully unregistered store {storename}.')
+                else:
+                    await ctx.send('Something happened when trying to unregister your shop. Contact an Admin for help.')
+            else:
+                await ctx.send("Something happened when trying to remove items from your store. Contact an Admin for help.")
 
 
 def setup(client):
