@@ -173,5 +173,28 @@ class Shops(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await username.send('Make sure to either have either a one word search term, or enclose your search term in quotations, like this:\n`!storeremove "search term"`')
 
+    @commands.command(aliases=['categories'])
+    async def storecategories(self, ctx):
+        db = mysql.connector.connect(
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
+        )
+        mycursor = db.cursor()
+        owner = ctx.message.author
+
+        mycursor.execute(f"SELECT DISTINCT Category FROM Item_List")
+        data = mycursor.fetchall()
+        embeditemlookup = discord.Embed(
+            title = 'Item Categories',
+            description = 'Showing all item categories for the Store Listings',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+        for row in data:
+            embeditemlookup.add_field(name=row[0], value="", inline=False)
+        await ctx.send(embed=embeditemlookup)
+
 def setup(client):
     client.add_cog(Shops(client))
