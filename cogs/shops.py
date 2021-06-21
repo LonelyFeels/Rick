@@ -57,18 +57,35 @@ class Shops(commands.Cog):
         if len(data)==0:
             await ctx.send('Your store does not exist in Stores database!')
         else:
-            store = data[0][2]
+            storename = data[0][2]
+            # Checks if Item is in Library of Minecraft Items
+            mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
+            data = mycursor.fetchall()
 
-            mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(store)}')")
-            itemexists = mycursor.fetchall()
-            if itemexists[0][0]:
-                mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)} WHERE Item='{str(item)}' AND StoreName='{str(store)}'")
-                db.commit()
-                await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {store} Store.')
+            if not data[0][0]:
+                # Assume the user did a misspell, and suggests an item from the list
+                mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
+                data = mycursor.fetchall()
+                if len(data) != 0:
+                    await ctx.send(f"Did you mean to remove \"{str(data[0][0])}\" from your store? Try running this command: `!storeremove \"{str(data[0][0])}\"`")
+                else:
+                    await ctx.send("I\'m not sure what you're trying to remove. Try another search term.")
             else:
-                mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Description) VALUES (%s, %s, %s, %s, %s)", (item, store, quantity, price, description))
-                db.commit()
-                await ctx.send(f'A listing for {quantity}x {item} was successfully added at a price of {price} Diamonds for the {store} Store.')
+                #try to update or add item to store
+                mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}')")
+                itemexists = mycursor.fetchall()
+                if itemexists[0][0]:
+                    mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)} WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
+                    db.commit()
+                    await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {storename} Store.')
+                else:
+                    mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Description) VALUES (%s, %s, %s, %s, %s)", (item, storename, quantity, price, description))
+                    db.commit()
+                    addresult = mycursor.rowcount
+                    if addresult > 0:
+                        await ctx.send(f'A listing for {quantity}x {item} was successfully added at a price of {price} Diamonds for the {storename} Store.')
+                    else:
+                        await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
 
     @storeedit.error
     async def storeedit_error(self, username, error):
@@ -162,7 +179,6 @@ class Shops(commands.Cog):
                     mycursor.execute(f"DELETE FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
                     db.commit()
                     deleteresult = mycursor.rowcount
-                    print(deleteresult)
                     if deleteresult > 0: 
                         await ctx.send(f"Successfully removed {str(item)} from your store.")
                     else:
