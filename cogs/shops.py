@@ -131,7 +131,7 @@ class Shops(commands.Cog):
                 for row in data:
                     mycursor.execute(f"SELECT Username FROM Store_Directory WHERE StoreName='{str(row[0])}")
                     username = mycursor.fetchall()[0][0]
-                    embeditemlookup.add_field(name=f"{row[0]} ({username})", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} \n Description: {str(row[3])}", inline=False)
+                    embeditemlookup.add_field(name=f"{str(row[0])} ({username})", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} \n Description: {str(row[3])}", inline=False)
                 await ctx.send(embed=embeditemlookup)
             else:
                 await ctx.send(f"No one is currently selling any {str(item)}s.")
