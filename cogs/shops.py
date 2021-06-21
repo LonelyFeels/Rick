@@ -22,8 +22,9 @@ class Shops(commands.Cog):
             database = credentials.database
         )
         mycursor = db.cursor()
-
         owner = ctx.message.author
+
+        # Rejection reasons: Store already exists under another owner OR the user is making another new store and they're already the owner of one
 
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
         data = mycursor.fetchall()
@@ -310,6 +311,19 @@ class Shops(commands.Cog):
                         await ctx.send('Something happened when trying to unregister your shop. Contact an Admin for help.')
                 else:
                     await ctx.send("Something happened when trying to remove items from your store. Contact an Admin for help.")
+
+    # !store
+    @commands.command()
+    async def store(self, ctx, storereference):
+        db = mysql.connector.connect(
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
+        )
+        mycursor = db.cursor()
+        await ctx.send(f"Received Store Request for {storereference}")
 
 
 def setup(client):
