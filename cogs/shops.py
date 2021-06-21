@@ -189,13 +189,15 @@ class Shops(commands.Cog):
         data = mycursor.fetchall()
         embedcategories = discord.Embed(
             title = 'Item Categories',
-            description = 'Showing all item categories for the Store Listings',
+            description = '-----',
             colour = discord.Colour.from_rgb(12,235,241)
         )
         print(data)
-        #for row in data:
-        #    embedcategories.add_field(name=row[0], value="", inline=False)
-        #await ctx.send(embed=embedcategories)
+        categorylist = ""
+        for row in data:
+            categorylist = categorylist + str(row[0]) + "\n"
+        embedcategories.add_field(name="Showing all item categories for the Store Listings", value=categorylist, inline=False)
+        await ctx.send(embed=embedcategories)
 
 def setup(client):
     client.add_cog(Shops(client))
