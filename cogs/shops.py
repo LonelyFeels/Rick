@@ -162,6 +162,7 @@ class Shops(commands.Cog):
                 else:
                     print(f"Item: {str(item)} Name: {str(storename)}")
                     mycursor.execute(f"DELETE FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
+                    db.commit()
                     deleteresult = mycursor.fetchall()
                     if deleteresult: 
                         await ctx.send(f"Successfully removed {str(item)} from your store.")
