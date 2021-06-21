@@ -158,7 +158,7 @@ class Shops(commands.Cog):
                 mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}')")
                 data = mycursor.fetchall()
                 if not data[0][0]:
-                    await ctx.send(f"You do not have any {stf(item)}s in your store.")
+                    await ctx.send(f"You do not have any {str(item)}s in your store.")
                 else:
                     print(f"Item: {str(item)} Name: {str(storename)}")
                     mycursor.execute(f"DELETE FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
