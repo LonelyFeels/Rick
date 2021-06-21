@@ -123,5 +123,54 @@ class Shops(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await username.send('Make sure to either have either a one word search term, or enclose your search term in quotations, like this:\n`!itemlookup "search term"`')
 
+    @commands.command(aliases=['storeremoveitem'])
+    async def storeremove(self, ctx, item):
+        db = mysql.connector.connect(
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
+        )
+        mycursor = db.cursor()
+        owner = ctx.message.author
+
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
+        data = mycursor.fetchall()
+        if len(data)==0:
+            await ctx.send('Your store does not exist in Stores database!')
+        else:
+            storename = data[0][2]
+            # Checks if Item is in Library of Minecraft Items
+            mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
+            data = mycursor.fetchall()
+
+            if not data[0][0]:
+                # Assume the user did a misspell, and suggests an item from the list
+                mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
+                data = mycursor.fetchall()
+                if len(data) != 0:
+                    await ctx.send(f"Did you mean to remove \"{str(data[0][0])}\" from your store? Try running this command: `!storeremove \"{str(data[0][0])}\"`")
+                else:
+                    await ctx.send("I\'m not sure what you're trying to remove. Try another search term.")
+            else:
+                # Try to remove item from store
+                mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}')")
+                data = mycursor.fetchall()
+                if not data[0][0]:
+                    await ctx.send(f"You do not have any {stf(item)}s in your store.")
+                else:
+                    mycursor.execute(f"DELETE FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
+                    deleteresult = mycursor.fetchall()
+                    if deleteresult: 
+                        await ctx.send(f"Successfully removed {str(item)} from your store.")
+                    else:
+                        await ctx.send("Something happened when trying to remove an item from your store. Contact an Admin for help.")
+
+    @storeedit.error
+    async def storeremove_error(self, username, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await username.send('Make sure to either have either a one word search term, or enclose your search term in quotations, like this:\n`!storeremove "search term"`')
+
 def setup(client):
     client.add_cog(Shops(client))
