@@ -86,7 +86,7 @@ class Shops(commands.Cog):
         )
         mycursor = db.cursor()
 
-        mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")\\
+        mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
         data = mycursor.fetchall()
 
 
