@@ -86,11 +86,12 @@ class Shops(commands.Cog):
         )
         mycursor = db.cursor()
 
+        # Checks if Item is in Library of Minecraft Items
         mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
         data = mycursor.fetchall()
 
-
         if not data[0][0]:
+            # Assume the user did a misspell, and suggests an item from the list
             mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
             data = mycursor.fetchall()
             if len(data) != 0:
@@ -98,11 +99,13 @@ class Shops(commands.Cog):
             else:
                 await ctx.send("I\'m not sure what you're trying to lookup. Try another search term.")
         else:
+            # Item exists in Library, display all listings for said item lookup
             mycursor.execute(f"SELECT EXISTS (SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item='{str(item)}')")
             data = mycursor.fetchall()
 
             if data[0][0]:
                 mycursor.execute(f"SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item='{str(item)}'")
+                data = mycursor.fetchall()
                 embeditemlookup = discord.Embed(
                     title = 'Store Item Lookup',
                     description = f'Showing all store listings for {item}.',
