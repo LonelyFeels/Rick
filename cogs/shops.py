@@ -87,7 +87,7 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
 
         mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
-        if !data[0][0]:
+        if not data[0][0]:
             mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
             data = mycursor.fetchall()
             if len(data) != 0:
@@ -111,6 +111,6 @@ class Shops(commands.Cog):
                 await ctx.send(embed=embeditemlookup)
             else:
                 await ctx.send(f"No one is currently selling any {str(item)}s")
-                
+
 def setup(client):
     client.add_cog(Shops(client))
