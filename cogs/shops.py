@@ -192,7 +192,6 @@ class Shops(commands.Cog):
             colour = discord.Colour.from_rgb(12,235,241)
         )
 
-        print(data)
         categorylist = ""
         for row in data:
             categorylist = categorylist + str(row[0]) + "\n"
@@ -200,7 +199,7 @@ class Shops(commands.Cog):
         embedcategories.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedcategories.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedcategories.add_field(name="Showing all item categories for the Store Listings", value=categorylist, inline=False)
-        
+
         await ctx.send(embed=embedcategories)
 
 
