@@ -70,6 +70,10 @@ class Shops(commands.Cog):
                 db.commit()
                 await ctx.send(f'{quantity}x{item}\'s successfully added with price at {price} Diamonds in {store} Store.')
 
+    @storeedit.error
+    async def storeedit_error(self, username, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await username.send('You have to provide the Item Name, Quantity, and Price (in Diamonds)!')
 
     @commands.command()
     async def storeitemlookup(self, ctx, item):
@@ -92,6 +96,8 @@ class Shops(commands.Cog):
         )
 
         print(data)
+        for row in data:
+            embeditemlookup.add_field(name=row[0], value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} \n Description: {str(row[3])}", inline=False)
 
         await ctx.send(embed=embeditemlookup)
 
