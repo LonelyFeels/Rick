@@ -76,7 +76,7 @@ class Shops(commands.Cog):
             await username.send('You have to provide the Item Name, Quantity, and Price (in Diamonds)!')
 
     @commands.command()
-    async def itemlookup(self, ctx, item):
+    async def storeitemlookup(self, ctx, item):
         db = mysql.connector.connect(
             host = credentials.host,
             port = credentials.port,
@@ -118,8 +118,8 @@ class Shops(commands.Cog):
             else:
                 await ctx.send(f"No one is currently selling any {str(item)}s")
 
-    @itemlookup.error
-    async def itemlookup_error(self, username, error):
+    @storeitemlookup.error
+    async def storeitemlookup_error(self, username, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await username.send('Make sure to either have either a one word search term, or enclose your search term in quotations, like this:\n`!itemlookup "search term"`')
 
