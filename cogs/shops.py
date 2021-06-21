@@ -64,11 +64,11 @@ class Shops(commands.Cog):
             if itemexists[0][0]:
                 mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)} WHERE Item='{str(item)}' AND StoreName='{str(store)}'")
                 db.commit()
-                await ctx.send(f'A listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {store} Store.')
+                await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {store} Store.')
             else:
                 mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Description) VALUES (%s, %s, %s, %s, %s)", (item, store, quantity, price, description))
                 db.commit()
-                await ctx.send(f'A listing for {quantity}x {item}\'s was successfully added at a price of {price} Diamonds for the {store} Store.')
+                await ctx.send(f'A listing for {quantity}x {item} was successfully added at a price of {price} Diamonds for the {store} Store.')
 
     @storeedit.error
     async def storeedit_error(self, username, error):
@@ -163,7 +163,7 @@ class Shops(commands.Cog):
                     db.commit()
                     deleteresult = mycursor.rowcount
                     print(deleteresult)
-                    if len(deleteresult): 
+                    if deleteresult > 0: 
                         await ctx.send(f"Successfully removed {str(item)} from your store.")
                     else:
                         await ctx.send("Something happened when trying to remove an item from your store. Contact an Admin for help.")
