@@ -161,9 +161,9 @@ class Shops(commands.Cog):
                 else:
                     mycursor.execute(f"DELETE FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
                     db.commit()
-                    deleteresult = mycursor.fetchall()
+                    deleteresult = mycursor.rowcount()
                     print(deleteresult)
-                    if deleteresult: 
+                    if len(deleteresult): 
                         await ctx.send(f"Successfully removed {str(item)} from your store.")
                     else:
                         await ctx.send("Something happened when trying to remove an item from your store. Contact an Admin for help.")
