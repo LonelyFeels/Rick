@@ -116,7 +116,7 @@ class Shops(commands.Cog):
                     embeditemlookup.add_field(name=row[0], value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} \n Description: {str(row[3])}", inline=False)
                 await ctx.send(embed=embeditemlookup)
             else:
-                await ctx.send(f"No one is currently selling any {str(item)}s")
+                await ctx.send(f"No one is currently selling any {str(item)}s.")
 
     @storeitemlookup.error
     async def storeitemlookup_error(self, username, error):
