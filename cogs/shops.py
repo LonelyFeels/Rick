@@ -71,5 +71,29 @@ class Shops(commands.Cog):
                 await ctx.send(f'{quantity}x{item}\'s successfully added with price at {price} Diamonds in {store} Store.')
 
 
+    @commands.command()
+    async def storeitemlookup(self, ctx, item):
+        db = mysql.connector.connect(
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
+        )
+        mycursor = db.cursor()
+
+        mycursor.execute(f"SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item='{str(item)}'")
+        data = mycursor.fetchall()
+
+        embedlbdisplay = discord.Embed(
+            title = 'Store Item Lookup',
+            description = f'Showing all store listings for {item}.',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+
+        print(data)
+
+        await ctx.send(embed=embeditemlookup)
+
 def setup(client):
     client.add_cog(Shops(client))
