@@ -189,15 +189,20 @@ class Shops(commands.Cog):
         data = mycursor.fetchall()
         embedcategories = discord.Embed(
             title = 'Item Categories',
-            description = '-----',
             colour = discord.Colour.from_rgb(12,235,241)
         )
+
         print(data)
         categorylist = ""
         for row in data:
             categorylist = categorylist + str(row[0]) + "\n"
+
+        embedcategories.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+        embedcategories.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedcategories.add_field(name="Showing all item categories for the Store Listings", value=categorylist, inline=False)
+        
         await ctx.send(embed=embedcategories)
+
 
 def setup(client):
     client.add_cog(Shops(client))
