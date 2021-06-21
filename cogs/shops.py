@@ -235,11 +235,9 @@ class Shops(commands.Cog):
             await ctx.send('Your store does not exist in Stores database!')
         else:
             storename = data[0][2]
-            mycursor.execute(f"DELETE FROM Item_Listings WHERE StoreName='{str(storename)}'")
-            db.commit()
-            deleteresult = mycursor.rowcount
-            if deleteresult > 0: 
-                await ctx.send(f"Successfully removed all items from your store.")
+            mycursor.execute(f"SELECT * FROM Item_Listings WHERE StoreName='{str(storename)}'")
+            itemcount = mycursor.fetchall()
+            if len(itemcount)==0:
                 mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)}")
                 db.commit()
                 deleteshop = mycursor.rowcount
@@ -248,7 +246,20 @@ class Shops(commands.Cog):
                 else:
                     await ctx.send('Something happened when trying to unregister your shop. Contact an Admin for help.')
             else:
-                await ctx.send("Something happened when trying to remove items from your store. Contact an Admin for help.")
+                mycursor.execute(f"DELETE FROM Item_Listings WHERE StoreName='{str(storename)}'")
+                db.commit()
+                deleteresult = mycursor.rowcount
+                if deleteresult > 0: 
+                    await ctx.send(f"Successfully removed all items from your store.")
+                    mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)}")
+                    db.commit()
+                    deleteshop = mycursor.rowcount
+                    if deleteshop >0:
+                        await ctx.send(f'Successfully unregistered store {storename}.')
+                    else:
+                        await ctx.send('Something happened when trying to unregister your shop. Contact an Admin for help.')
+                else:
+                    await ctx.send("Something happened when trying to remove items from your store. Contact an Admin for help.")
 
 
 def setup(client):
