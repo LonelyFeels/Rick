@@ -248,26 +248,23 @@ class Shops(commands.Cog):
             else:
                 await ctx.send("I\'m not sure what you're trying to lookup. Try another search term.")
         else:
-            mycursor.execute(f"SELECT Item FROM Item_List WHERE Category='{str(category)}")
+            mycursor.execute(f"SELECT Item FROM Item_List WHERE Category='{str(category)}'")
             data = mycursor.fetchall()
 
-        mycursor.execute(f"SELECT DISTINCT Category FROM Item_List")
-        data = mycursor.fetchall()
+            embedcitems = discord.Embed(
+                title = f'Items in the {str(category)} Category',
+                colour = discord.Colour.from_rgb(12,235,241)
+            )
 
-        embedcitems = discord.Embed(
-            title = f'Items in {str(category)} Category',
-            colour = discord.Colour.from_rgb(12,235,241)
-        )
+            categoryitems = ""
+            for row in data:
+                categoryitems = categoryitems + str(row[0]) + "\n"
 
-        categoryitems = ""
-        for row in data:
-            categoryitems = categoryitems + str(row[0]) + "\n"
-
-        embedcitems.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
-        embedcitems.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedcitems.add_field(name=f"{str(category)}", value=categoryitems, inline=False)
-        
-        await ctx.send(embed=embedcitems)
+            embedcitems.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+            embedcitems.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+            embedcitems.add_field(name=f"{str(category)}", value=categoryitems, inline=False)
+            
+            await ctx.send(embed=embedcitems)
 
     # !storeunregister or !sunreg
     @commands.command(aliases=['sunreg'])
