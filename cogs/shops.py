@@ -323,6 +323,7 @@ class Shops(commands.Cog):
             database = credentials.database
         )
         mycursor = db.cursor()
+        print(storereference)
         await ctx.send(f"Received Store Request for {storereference}")
 
 
