@@ -39,8 +39,9 @@ class Shops(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await username.send('You have state your Username, Storename (and Location)!')
 
-    @commands.command()
-    async def storeedit(self, ctx, item, quantity:int, price:int, description=None):
+    # !storeedit [storename] [item] [quantity] [price] [description] or !sedit [storename] [item] [quantity] [price] [description]
+    @commands.command(aliases=['sedit'])
+    async def storeedit(self, ctx, storename, item, quantity:int, price:int, description=None):
         db = mysql.connector.connect(
             host = credentials.host,
             port = credentials.port,
@@ -90,9 +91,10 @@ class Shops(commands.Cog):
     @storeedit.error
     async def storeedit_error(self, username, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await username.send('You have to provide the Item Name, Quantity, and Price (in Diamonds)!')
+            await username.send('You have to provide the Store Name, Item Name, Quantity, and Price (in Diamonds)!')
 
-    @commands.command(aliases=['itemlookup'])
+    # !storeitemlookup [item] or !itemlookup [item] or !slookup [item]
+    @commands.command(aliases=['itemlookup','slookup'])
     async def storeitemlookup(self, ctx, item):
         db = mysql.connector.connect(
             host = credentials.host,
@@ -141,7 +143,8 @@ class Shops(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await username.send('Make sure to either have either a one word search term, or enclose your search term in quotations, like this:\n`!itemlookup "search term"`')
 
-    @commands.command(aliases=['storeremoveitem'])
+    # !storeremove [item] or !sr [item]
+    @commands.command(aliases=['sr'])
     async def storeremove(self, ctx, item):
         db = mysql.connector.connect(
             host = credentials.host,
@@ -191,7 +194,8 @@ class Shops(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await username.send('Make sure to either have either a one word search term, or enclose your search term in quotations, like this:\n`!storeremove "search term"`')
 
-    @commands.command(aliases=['categories'])
+    # !storecategories or !categories or !cat
+    @commands.command(aliases=['categories', 'cat'])
     async def storecategories(self, ctx):
         db = mysql.connector.connect(
             host = credentials.host,
@@ -219,7 +223,54 @@ class Shops(commands.Cog):
         
         await ctx.send(embed=embedcategories)
 
-    @commands.command()
+    # !categoriesitems [category] or !cati [category]
+    @commands.command(aliases=['cati'])
+    async def categoriesitems(self, ctx, category):
+        db = mysql.connector.connect(
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
+        )
+        mycursor = db.cursor()
+
+        # Checks if Item is in Library of Minecraft Items
+        mycursor.execute(f"SELECT EXISTS (SELECT Category FROM Item_List WHERE Category='{str(category)}')")
+        data = mycursor.fetchall()
+
+        if not data[0][0]:
+            # Assume the user did a misspell, and suggests an Category from the list
+            mycursor.execute(f"SELECT Category FROM Item_List WHERE Category SOUNDS LIKE '{str(category)}' LIMIT 1")
+            data = mycursor.fetchall()
+            if len(data) != 0:
+                await ctx.send(f"Did you mean to look up \"{str(data[0][0])}\"? Try running this command: `!cati \"{str(data[0][0])}\"`")
+            else:
+                await ctx.send("I\'m not sure what you're trying to lookup. Try another search term.")
+        else:
+            mycursor.execute(f"SELECT Item FROM Item_List WHERE Category='{str(category)}")
+            data = mycursor.fetchall()
+
+        mycursor.execute(f"SELECT DISTINCT Category FROM Item_List")
+        data = mycursor.fetchall()
+
+        embedcitems = discord.Embed(
+            title = f'Items in {str(category)} Category',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+
+        categoryitems = ""
+        for row in data:
+            categoryitems = categoryitems + str(row[0]) + "\n"
+
+        embedcitems.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+        embedcitems.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedcitems.add_field(name=f"{str(category)}", value=categoryitems, inline=False)
+        
+        await ctx.send(embed=embedcitems)
+
+    # !storeunregister or !sunreg
+    @commands.command(aliases=['sunreg'])
     async def storeunregister(self, ctx):
         db = mysql.connector.connect(
             host = credentials.host,
