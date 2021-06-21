@@ -160,6 +160,7 @@ class Shops(commands.Cog):
                 if not data[0][0]:
                     await ctx.send(f"You do not have any {stf(item)}s in your store.")
                 else:
+                    print(f"Item: {str(item)} Name: {str(storename)}")
                     mycursor.execute(f"DELETE FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
                     deleteresult = mycursor.fetchall()
                     if deleteresult: 
