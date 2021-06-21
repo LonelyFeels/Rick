@@ -111,7 +111,6 @@ class Shops(commands.Cog):
                     description = f'Showing all store listings for {item}.',
                     colour = discord.Colour.from_rgb(12,235,241)
                 )
-                print(data)
                 for row in data:
                     embeditemlookup.add_field(name=row[0], value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} \n Description: {str(row[3])}", inline=False)
                 await ctx.send(embed=embeditemlookup)
@@ -160,10 +159,10 @@ class Shops(commands.Cog):
                 if not data[0][0]:
                     await ctx.send(f"You do not have any {str(item)}s in your store.")
                 else:
-                    print(f"Item: {str(item)} Name: {str(storename)}")
                     mycursor.execute(f"DELETE FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
                     db.commit()
                     deleteresult = mycursor.fetchall()
+                    print(deleteresult)
                     if deleteresult: 
                         await ctx.send(f"Successfully removed {str(item)} from your store.")
                     else:
