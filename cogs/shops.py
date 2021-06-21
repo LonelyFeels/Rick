@@ -86,7 +86,10 @@ class Shops(commands.Cog):
         )
         mycursor = db.cursor()
 
-        mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
+        mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")\\
+        data = mycursor.fetchall()
+
+
         if not data[0][0]:
             mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
             data = mycursor.fetchall()
