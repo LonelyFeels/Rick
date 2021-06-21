@@ -75,7 +75,7 @@ class Shops(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await username.send('You have to provide the Item Name, Quantity, and Price (in Diamonds)!')
 
-    @commands.command()
+    @commands.command(aliases=['itemlookup','storeitemlookup'])
     async def storeitemlookup(self, ctx, item):
         db = mysql.connector.connect(
             host = credentials.host,
