@@ -129,6 +129,8 @@ class Shops(commands.Cog):
                     colour = discord.Colour.from_rgb(12,235,241)
                 )
                 for row in data:
+                    embeditemlookup.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+                    embeditemlookup.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
                     embeditemlookup.add_field(name=row[0], value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} \n Description: {str(row[3])}", inline=False)
                 await ctx.send(embed=embeditemlookup)
             else:
