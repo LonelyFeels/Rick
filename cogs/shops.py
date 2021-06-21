@@ -85,7 +85,7 @@ class Shops(commands.Cog):
         mycursor.execute(f"SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item='{str(item)}'")
         data = mycursor.fetchall()
 
-        embedlbdisplay = discord.Embed(
+        embeditemlookup = discord.Embed(
             title = 'Store Item Lookup',
             description = f'Showing all store listings for {item}.',
             colour = discord.Colour.from_rgb(12,235,241)
