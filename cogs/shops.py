@@ -56,8 +56,7 @@ class Shops(commands.Cog):
 
         print(f"Start command: storeedit({str(storename)}, {str(item)}, {str(quantity)}, {str(price)}, {str(description)})")
 
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
-        # AND StoreName='{str(storename)}'")
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND StoreName='{str(storename)}'")
         data = mycursor.fetchall()
         dataempty = [] == data
         print("test")
@@ -87,7 +86,7 @@ class Shops(commands.Cog):
                 mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}')")
                 itemexists = mycursor.fetchall()
                 if itemexists[0][0]:
-                    mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)}, Description={str(description)} WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
+                    mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)}, Description=`{str(description)}` WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
                     db.commit()
                     await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {storename} Store.')
                 else:
