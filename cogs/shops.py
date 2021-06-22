@@ -323,16 +323,67 @@ class Shops(commands.Cog):
             database = credentials.database
         )
         mycursor = db.cursor()
-        print(storereference)
-        await ctx.send(f"Received Store Request for {storereference}")
 
         # To check if the user entered a user's tag, or a store name, we check size of string and beginning characters
         # 22 is the standard length of a member reference
         if len(storereference) == 22 and storereference[0:3] == "<@!":
-            print(storereference.id)
-        else:
-            print("It's a Store Name")
+            ownerid = storereference[4:22]
+            mycursor.execute(f"SELECT EXISTS (SELECT * FROM Store_Directory WHERE UserID='{str(ownerid)}' AND IsOwner=1)")
+            data = mycursor.fetchall()
+            if not data[0][0]:
+                await ctx.send("I could not find a store that is owned by that player.")
+            else:
+                mycursor.execute(f"SELECT StoreName FROM Store_Directory WHERE UserID='{str(ownerid)}' AND IsOwner=1 LIMIT 1")
+                data = mycursor.fetchall()
+                storename = data[0][0]
 
+                # Store exists, display all listings for said item lookup
+                mycursor.execute(f"SELECT EXISTS (SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName='{str(storename)}')")
+                data = mycursor.fetchall()
+
+                if data[0][0]:
+                    mycursor.execute(f"SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName='{str(storename)}'")
+                    data = mycursor.fetchall()
+                    embedstoreup = discord.Embed(
+                        title = 'Store Lookup'
+                        description = f'Showing all listings for the {storename} store.',
+                        colour = discord.Colour.from_rgb(12,235,241)
+                    )
+                    for row in data:
+                        embedstoreup.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+                        embedstoreup.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+                        embedstoreup.add_field(name=f"{str(row[0])}", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} \n Description: {str(row[3])}", inline=False)
+                    await ctx.send(embed=embedstoreup)
+                else:
+                    await ctx.send(f"The {storename} store currently does not have any items for sale.")
+        else:
+            storename = storereference
+            mycursor.execute(f"SELECT StoreName FROM Store_Directory WHERE StoreName='{str(storename)}' LIMIT 1")
+            data = mycursor.fetchall()
+            storename = data[0][0]
+
+            if data[0][0]:
+                # Store exists, display all listings for said item lookup
+                mycursor.execute(f"SELECT EXISTS (SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName='{str(storename)}')")
+                data = mycursor.fetchall()
+
+                if data[0][0]:
+                    mycursor.execute(f"SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName='{str(storename)}'")
+                    data = mycursor.fetchall()
+                    embedstoreup = discord.Embed(
+                        title = 'Store Lookup'
+                        description = f'Showing all listings for the {storename} store.',
+                        colour = discord.Colour.from_rgb(12,235,241)
+                    )
+                    for row in data:
+                        embedstoreup.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+                        embedstoreup.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+                        embedstoreup.add_field(name=f"{str(row[0])}", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} \n Description: {str(row[3])}", inline=False)
+                    await ctx.send(embed=embedstoreup)
+                else:
+                    await ctx.send(f"The {storename} store currently does not have any items for sale.")
+            else:
+                await ctx.send("There is no store under that name. Try again.")
 
 def setup(client):
     client.add_cog(Shops(client))
