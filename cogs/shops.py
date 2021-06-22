@@ -51,14 +51,12 @@ class Shops(commands.Cog):
             database = credentials.database
         )
         mycursor = db.cursor()
-        owner = ctx.message.author
+        member = ctx.message.author
 
-
-
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(member.id)} AND StoreName={str(storename)}")
         data = mycursor.fetchall()
         if len(data)==0:
-            await ctx.send('Your store does not exist in Stores database!')
+            await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
         else:
             storename = data[0][2]
             # Checks if Item is in Library of Minecraft Items
