@@ -51,11 +51,12 @@ class Shops(commands.Cog):
             database = credentials.database
         )
         mycursor = db.cursor()
-        member = ctx.message.author
+        member = ctx.message.author.id
+        print(member)
 
         print(f"Start command: storeedit({str(storename)}, {str(item)}, {str(quantity)}, {str(price)}, {str(description)})")
 
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(member.id)} AND StoreName={str(storename)}")
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(member)} AND StoreName={str(storename)}")
         data = mycursor.fetchall()
         if len(data)==0:
             print("ID Failed.")
