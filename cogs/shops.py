@@ -86,7 +86,7 @@ class Shops(commands.Cog):
                 mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}')")
                 itemexists = mycursor.fetchall()
                 if itemexists[0][0]:
-                    mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)}, Description=`{str(description)}` WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
+                    mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)}, Description='{str(description)}' WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
                     db.commit()
                     updateresult = mycursor.rowcount
                     if updateresult > 0:
