@@ -59,9 +59,9 @@ class Shops(commands.Cog):
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
         # AND StoreName='{str(storename)}'")
         data = mycursor.fetchall()
-        data = []
+        dataempty = [] == data
         print("test")
-        print("Getting Data: " + data)
+        print("Getting Data: " + dataempty)
         if len(data) == 0:
             print("ID Failed.")
             await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
