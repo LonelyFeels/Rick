@@ -58,6 +58,7 @@ class Shops(commands.Cog):
 
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(member)} AND StoreName={str(storename)}")
         data = mycursor.fetchall()
+        print("test")
         print("Getting Data: " + data)
         if len(data)==0:
             print("ID Failed.")
