@@ -88,7 +88,11 @@ class Shops(commands.Cog):
                 if itemexists[0][0]:
                     mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)}, Description=`{str(description)}` WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
                     db.commit()
-                    await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {storename} Store.')
+                    updateresult = mycursor.rowcount
+                    if updateresult > 0:
+                        await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {storename} Store.')
+                    else:
+                        await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
                 else:
                     mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Description) VALUES (%s, %s, %s, %s, %s)", (item, storename, quantity, price, description))
                     db.commit()
