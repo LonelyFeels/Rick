@@ -345,7 +345,7 @@ class Shops(commands.Cog):
                     mycursor.execute(f"SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName='{str(storename)}'")
                     data = mycursor.fetchall()
                     embedstoreup = discord.Embed(
-                        title = 'Store Lookup'
+                        title = 'Store Lookup',
                         description = f'Showing all listings for the {storename} store.',
                         colour = discord.Colour.from_rgb(12,235,241)
                     )
@@ -371,7 +371,7 @@ class Shops(commands.Cog):
                     mycursor.execute(f"SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName='{str(storename)}'")
                     data = mycursor.fetchall()
                     embedstoreup = discord.Embed(
-                        title = 'Store Lookup'
+                        title = 'Store Lookup',
                         description = f'Showing all listings for the {storename} store.',
                         colour = discord.Colour.from_rgb(12,235,241)
                     )
