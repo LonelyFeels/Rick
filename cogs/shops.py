@@ -328,7 +328,7 @@ class Shops(commands.Cog):
 
         # To check if the user entered a user's tag, or a store name, we check size of string and beginning characters
         # 22 is the standard length of a member reference
-        if len(storereference) == 22 AND storereference[0:3] == "<@!":
+        if len(storereference) == 22 and storereference[0:3] == "<@!":
             print(storereference.id)
         else:
             print("It's a Store Name")
