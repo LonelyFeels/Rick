@@ -326,6 +326,13 @@ class Shops(commands.Cog):
         print(storereference)
         await ctx.send(f"Received Store Request for {storereference}")
 
+        # To check if the user entered a user's tag, or a store name, we check size of string and beginning characters
+        # 22 is the standard length of a member reference
+        if len(storereference) == 22 AND storereference[0:3] == "<@!":
+            print(storereference.id)
+        else:
+            print("It's a Store Name")
+
 
 def setup(client):
     client.add_cog(Shops(client))
