@@ -53,17 +53,22 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
         member = ctx.message.author
 
+        print(f"Start command: storeedit({str(storename)}, {str(item)}, {str(quantity)}, {str(price)}, {str(description)})")
+
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(member.id)} AND StoreName={str(storename)}")
         data = mycursor.fetchall()
         if len(data)==0:
+            print("ID Failed.")
             await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
         else:
+            print("ID Succeeded.")
             storename = data[0][2]
             # Checks if Item is in Library of Minecraft Items
             mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
             data = mycursor.fetchall()
 
             if not data[0][0]:
+                print("Misspell.")
                 # Assume the user did a misspell, and suggests an item from the list
                 mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
                 data = mycursor.fetchall()
@@ -72,6 +77,7 @@ class Shops(commands.Cog):
                 else:
                     await ctx.send("I\'m not sure what you're trying to update or add. Try another search term.")
             else:
+                print("update or add")
                 #try to update or add item to store
                 mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}')")
                 itemexists = mycursor.fetchall()
