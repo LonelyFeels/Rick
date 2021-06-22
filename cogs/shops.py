@@ -51,8 +51,9 @@ class Shops(commands.Cog):
             database = credentials.database
         )
         mycursor = db.cursor()
-
         owner = ctx.message.author
+
+
 
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
         data = mycursor.fetchall()
@@ -77,7 +78,7 @@ class Shops(commands.Cog):
                 mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}')")
                 itemexists = mycursor.fetchall()
                 if itemexists[0][0]:
-                    mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)} WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
+                    mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)}, Description={str(description)} WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
                     db.commit()
                     await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {storename} Store.')
                 else:
@@ -190,7 +191,7 @@ class Shops(commands.Cog):
                     else:
                         await ctx.send("Something happened when trying to remove an item from your store. Contact an Admin for help.")
 
-    @storeedit.error
+    @storeremove.error
     async def storeremove_error(self, username, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await username.send('Make sure to either have either a one word search term, or enclose your search term in quotations, like this:\n`!storeremove "search term"`')
