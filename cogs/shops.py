@@ -61,7 +61,7 @@ class Shops(commands.Cog):
         data = mycursor.fetchall()
         dataempty = [] == data
         print("test")
-        print("Getting Data: ")
+        print(data)
         if len(data) == 0:
             print("ID Failed.")
             await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
