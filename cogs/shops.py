@@ -329,7 +329,6 @@ class Shops(commands.Cog):
         # 22 is the standard length of a member reference
         if len(storereference) == 22 and storereference[0:3] == "<@!":
             ownerid = storereference[3:21]
-            print(ownerid)
             mycursor.execute(f"SELECT EXISTS (SELECT * FROM Store_Directory WHERE UserID='{str(ownerid)}' AND IsOwner=1)")
             data = mycursor.fetchall()
             if not data[0][0]:
