@@ -327,7 +327,7 @@ class Shops(commands.Cog):
         # To check if the user entered a user's tag, or a store name, we check size of string and beginning characters
         # 22 is the standard length of a member reference
         if len(storereference) == 22 and storereference[0:3] == "<@!":
-            ownerid = storereference[4:22]
+            ownerid = storereference[3:21]
             print(ownerid)
             mycursor.execute(f"SELECT EXISTS (SELECT * FROM Store_Directory WHERE UserID='{str(ownerid)}' AND IsOwner=1)")
             data = mycursor.fetchall()
