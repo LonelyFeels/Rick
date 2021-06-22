@@ -56,7 +56,7 @@ class Shops(commands.Cog):
 
         print(f"Start command: storeedit({str(storename)}, {str(item)}, {str(quantity)}, {str(price)}, {str(description)})")
 
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(member)} AND StoreName={str(storename)}")
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID='{str(member)}' AND StoreName='{str(storename)}'")
         data = mycursor.fetchall()
         print("test")
         print("Getting Data: " + data)
