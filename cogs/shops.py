@@ -29,7 +29,7 @@ class Shops(commands.Cog):
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
         data = mycursor.fetchall()
         if len(data)==0:
-            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location) VALUES (%s, %s, %s, %s)", (f"{owner.id}", username, storename, location))
+            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", username, storename, location))
             db.commit()
             await ctx.send(f'{storename} successfully registered into Stores database.')
         else:
@@ -220,7 +220,7 @@ class Shops(commands.Cog):
         )
         mycursor = db.cursor()
 
-        mycursor.execute(f"SELECT DISTINCT Category FROM Item_List")
+        mycursor.execute("SELECT DISTINCT Category FROM Item_List")
         data = mycursor.fetchall()
         embedcategories = discord.Embed(
             title = 'Item Categories',
@@ -408,6 +408,34 @@ class Shops(commands.Cog):
                     await ctx.send(f"The {storename} store currently does not have any items for sale.")
             else:
                 await ctx.send("There is no store under that name. Try again.")
+
+    @commands.command(aliases=['storeaddm'])
+    async def storeaddmember(self, ctx, member: discord.Member, username):
+        db = mysql.connector.connect(
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
+        )
+        mycursor = db.cursor()
+        owner = ctx.message.author
+
+        # Rejection reasons: Store already exists under another owner OR the user is making another new store and they're already the owner of one
+
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1")
+        data = mycursor.fetchall()
+        if len(data) != 0:
+            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (f"{member.id}", username, str(data[0][2]), str(data[0][3])))
+            db.commit()
+            await ctx.send(f'{str(member)} successfully added to the {str(data[0][2])} store.')
+        else:
+            await ctx.send('You currently don\'t own a store! Try registering one with `!storeregister [Minecraft Username] [Store Name] [Location]')
+
+    @storeaddmember.error
+    async def storeaddmember_error(self, username, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await username.send('You have state your Username, Storename (and Location)!')
 
 def setup(client):
     client.add_cog(Shops(client))
