@@ -269,8 +269,8 @@ class Shops(commands.Cog):
                 title = f'Items in the {str(category)} Category',
                 colour = discord.Colour.from_rgb(12,235,241)
             )
-            embedcitems.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
-            embedcitems.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+            # embedcitems.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+            # embedcitems.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
 
             i = 1
             section = 1
@@ -283,7 +283,7 @@ class Shops(commands.Cog):
                     if i < len(data):
                         nextstring = str(data[i][0]) + "\n"
                     i += 1
-                    print(len(currentstring))
+                    # print(len(currentstring))
                     embedcitems.add_field(name=f"{str(category)} {str(section)}", value=currentstring, inline=False)
                     section += 1
             
