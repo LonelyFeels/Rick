@@ -286,10 +286,8 @@ class Shops(commands.Cog):
                         nextstring = str(data[i][0]) + "\n"
                     i += 1
                     # print(len(currentstring))
-                    embedcitems.add_field(name=f"{str(category)} {str(section)}", value=currentstring, inline=False)
-                    section += 1
-            
-            print(embedcitems)
+                section += 1
+                embedcitems.add_field(name=f"{str(category)} {str(section)}", value=currentstring, inline=False)
 
             await ctx.send(embed=embedcitems)
 
