@@ -235,6 +235,8 @@ class Shops(commands.Cog):
         embedcategories.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedcategories.add_field(name="Showing all item categories for the Store Listings", value=categorylist, inline=False)
         
+        print(len(embedcategories))
+
         await ctx.send(embed=embedcategories)
 
     # !categoriesitems [category] or !cati [category]
