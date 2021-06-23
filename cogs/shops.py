@@ -68,7 +68,7 @@ class Shops(commands.Cog):
                 mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
                 data = mycursor.fetchall()
                 if len(data) != 0:
-                    await ctx.send(f"Did you mean to update or add \"{str(data[0][0])}\" to your store? Try running this command: `!storeedit \"{str(data[0][0])}\" <quantity> <price>`")
+                    await ctx.send(f"Did you mean to update or add \"{str(data[0][0])}\" to your store? Try running this command: `!storeedit <store name> \"{str(data[0][0])}\" <quantity> <price>`")
                 else:
                     await ctx.send("I\'m not sure what you're trying to update or add. Try another search term.")
             else:
