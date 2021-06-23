@@ -287,7 +287,7 @@ class Shops(commands.Cog):
                     embedcitems.add_field(name=f"{str(category)} {str(section)}", value=currentstring, inline=False)
                     section += 1
             
-            print(len(embedcitems))
+            print(embedcitems)
 
             await ctx.send(embed=embedcitems)
 
