@@ -269,14 +269,22 @@ class Shops(commands.Cog):
                 title = f'Items in the {str(category)} Category',
                 colour = discord.Colour.from_rgb(12,235,241)
             )
-
-            categoryitems = ""
-            for row in data:
-                categoryitems = categoryitems + str(row[0]) + "\n"
-
             embedcitems.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
             embedcitems.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-            embedcitems.add_field(name=f"{str(category)}", value=categoryitems, inline=False)
+
+            i = 1
+            section = 1
+            nextstring = data[0][0] + "\n"
+
+            while i <= len(data):
+                currentstring = ""
+                while len(currentstring) + len(nextstring) < 1024 and i<= len(data):
+                    currentstring = currentstring + nextstring
+                    if len(currentstring) + len(nextstring) < 1024:
+                        nextstring = str(data[i][0]) + "\n"
+                    i += 1
+                    embedcitems.add_field(name=f"{str(category)} {str(section)}", value=currentstring, inline=False)
+                    section += 1
             
             await ctx.send(embed=embedcitems)
 
