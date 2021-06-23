@@ -283,6 +283,7 @@ class Shops(commands.Cog):
                     if i < len(data):
                         nextstring = str(data[i][0]) + "\n"
                     i += 1
+                    print(len(currentstring))
                     embedcitems.add_field(name=f"{str(category)} {str(section)}", value=currentstring, inline=False)
                     section += 1
             
