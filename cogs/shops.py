@@ -414,7 +414,7 @@ class Shops(commands.Cog):
             print(member.id)
             print(owner.id)
             print(data)
-            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (f"{member.id}", username, str(data[0][2]), str(data[0][3])))
+            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (f"{member.id}", username, f"{str(data[0][2])}", f"{str(data[0][3])}"))
             db.commit()
             await ctx.send(f'{str(member)} successfully added to the {str(data[0][2])} store.')
         else:
