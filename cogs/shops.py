@@ -411,13 +411,11 @@ class Shops(commands.Cog):
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1")
         data = mycursor.fetchall()
         if len(data) != 0:
-            print(member.id)
-            print(owner.id)
             storename = data[0][2]
             location = data[0][3]
             mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (f"{member.id}", username, storename, location))
             db.commit()
-            await ctx.send(f'{str(member)} successfully added to the {str(storename)} store.')
+            await ctx.send(f'{member} successfully added to the {str(storename)} store.')
         else:
             await ctx.send('You currently don\'t own a store! Try registering one with `!storeregister [Minecraft Username] [Store Name] [Location]')
 
