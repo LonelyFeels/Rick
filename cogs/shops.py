@@ -303,7 +303,7 @@ class Shops(commands.Cog):
                 mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)}")
                 db.commit()
                 deleteshop = mycursor.rowcount
-                if deleteshop >0:
+                if deleteshop > 0:
                     await ctx.send(f'Successfully unregistered store {storename}.')
                 else:
                     await ctx.send('Something happened when trying to unregister your shop. Contact an Admin for help.')
@@ -316,7 +316,7 @@ class Shops(commands.Cog):
                     mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)}")
                     db.commit()
                     deleteshop = mycursor.rowcount
-                    if deleteshop >0:
+                    if deleteshop > 0:
                         await ctx.send(f'Successfully unregistered store {storename}.')
                     else:
                         await ctx.send('Something happened when trying to unregister your shop. Contact an Admin for help.')
@@ -423,6 +423,38 @@ class Shops(commands.Cog):
     async def storeaddmember_error(self, username, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await username.send('You have state the member\'s Discord ID and Username!')
+
+    @commands.command(aliases=['storeremm','storeremmember'])
+    async def storeremovemember(self, ctx, member: discord.Member):
+        db = mysql.connector.connect(
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
+        )
+        mycursor = db.cursor()
+        owner = ctx.message.author
+
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1")
+        data = mycursor.fetchall()
+        if len(data) != 0:
+            storename = data[0][2]
+            mycursor.execute(f"DELETE FROM Store_Directory WHERE StoreName='{str(storename)}' AND UserID='{str(member.id)}' AND IsOwner=0")
+            db.commit()
+            removeresult = mycursor.rowcount
+                if removeresult > 0:
+                    await ctx.send(f'{member} successfully removed from the {str(storename)} store.')
+                else:
+                    await ctx.send(f'{member} is not a member of your shop.')
+        else:
+            await ctx.send('You currently don\'t own a store! Try registering one with `!storeregister [Minecraft Username] [Store Name] [Location]')
+
+    @storeremovemember.error
+    async def storeremovemember_error(self, username, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await username.send('You have state the member\'s Discord ID!')
+
 
 def setup(client):
     client.add_cog(Shops(client))
