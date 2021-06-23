@@ -280,7 +280,7 @@ class Shops(commands.Cog):
                 currentstring = ""
                 while len(currentstring) + len(nextstring) < 1024 and i<= len(data):
                     currentstring = currentstring + nextstring
-                    if len(currentstring) + len(nextstring) < 1024:
+                    if i < len(data):
                         nextstring = str(data[i][0]) + "\n"
                     i += 1
                     embedcitems.add_field(name=f"{str(category)} {str(section)}", value=currentstring, inline=False)
