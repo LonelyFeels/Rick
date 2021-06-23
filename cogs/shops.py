@@ -52,27 +52,18 @@ class Shops(commands.Cog):
         )
         mycursor = db.cursor()
         owner = ctx.message.author
-        print(owner)
-
-        print(f"Start command: storeedit({str(storename)}, {str(item)}, {str(quantity)}, {str(price)}, {str(description)})")
-
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND StoreName='{str(storename)}'")
         data = mycursor.fetchall()
         dataempty = [] == data
-        print("test")
-        print(data)
         if len(data) == 0:
-            print("ID Failed.")
             await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
         else:
-            print("ID Succeeded.")
             storename = data[0][2]
             # Checks if Item is in Library of Minecraft Items
             mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
             data = mycursor.fetchall()
 
             if not data[0][0]:
-                print("Misspell.")
                 # Assume the user did a misspell, and suggests an item from the list
                 mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
                 data = mycursor.fetchall()
@@ -81,7 +72,6 @@ class Shops(commands.Cog):
                 else:
                     await ctx.send("I\'m not sure what you're trying to update or add. Try another search term.")
             else:
-                print("update or add")
                 #try to update or add item to store
                 mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}')")
                 itemexists = mycursor.fetchall()
@@ -234,8 +224,6 @@ class Shops(commands.Cog):
         embedcategories.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedcategories.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedcategories.add_field(name="Showing all item categories for the Store Listings", value=categorylist, inline=False)
-        
-        print(len(embedcategories))
 
         await ctx.send(embed=embedcategories)
 
@@ -285,7 +273,6 @@ class Shops(commands.Cog):
                     if i < len(data):
                         nextstring = str(data[i][0]) + "\n"
                     i += 1
-                    # print(len(currentstring))
                 section += 1
                 embedcitems.add_field(name=f"{str(category)} {str(section)}", value=currentstring, inline=False)
 
@@ -424,7 +411,10 @@ class Shops(commands.Cog):
         mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1")
         data = mycursor.fetchall()
         if len(data) != 0:
-            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (str(member.id), username, str(data[0][2]), str(data[0][3])))
+            print(member.id)
+            print(owner.id)
+            print(data)
+            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (f"{member.id}", username, str(data[0][2]), str(data[0][3])))
             db.commit()
             await ctx.send(f'{str(member)} successfully added to the {str(data[0][2])} store.')
         else:
