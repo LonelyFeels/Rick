@@ -275,7 +275,7 @@ class Shops(commands.Cog):
             embedcitems.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
 
             i = 1
-            section = 1
+            section = 0
             nextstring = data[0][0] + "\n"
 
             while i <= len(data):
