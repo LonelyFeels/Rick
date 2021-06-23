@@ -443,10 +443,10 @@ class Shops(commands.Cog):
             mycursor.execute(f"DELETE FROM Store_Directory WHERE StoreName='{str(storename)}' AND UserID='{str(member.id)}' AND IsOwner=0")
             db.commit()
             removeresult = mycursor.rowcount
-                if removeresult > 0:
-                    await ctx.send(f'{member} successfully removed from the {str(storename)} store.')
-                else:
-                    await ctx.send(f'{member} is not a member of your shop.')
+            if removeresult > 0:
+                await ctx.send(f'{member} successfully removed from the {str(storename)} store.')
+            else:
+                await ctx.send(f'{member} is not a member of your shop.')
         else:
             await ctx.send('You currently don\'t own a store! Try registering one with `!storeregister [Minecraft Username] [Store Name] [Location]')
 
