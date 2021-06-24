@@ -72,7 +72,6 @@ class Shops(commands.Cog):
         if len(data) == 0:
             await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
         else:
-            storename = data[0][2]
             # Checks if Item is in Library of Minecraft Items
             mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
             data = mycursor.fetchall()
@@ -163,7 +162,7 @@ class Shops(commands.Cog):
 
     # !storeremove [item] or !sr [item]
     @commands.command(aliases=['sr'])
-    async def storeremove(self, ctx, item):
+    async def storeremove(self, ctx, storename, item):
         db = mysql.connector.connect(
             host = credentials.host,
             port = credentials.port,
@@ -174,12 +173,11 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
         owner = ctx.message.author
 
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND StoreName='{str(storename)}")
         data = mycursor.fetchall()
         if len(data)==0:
-            await ctx.send('Your store does not exist in Stores database!')
+            await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
         else:
-            storename = data[0][2]
             # Checks if Item is in Library of Minecraft Items
             mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
             data = mycursor.fetchall()
@@ -203,7 +201,7 @@ class Shops(commands.Cog):
                     db.commit()
                     deleteresult = mycursor.rowcount
                     if deleteresult > 0: 
-                        await ctx.send(f"Successfully removed {str(item)} from your store.")
+                        await ctx.send(f"Successfully removed {str(item)} from {str(storename)} store.")
                     else:
                         await ctx.send("Something happened when trying to remove an item from your store. Contact an Admin for help.")
 
