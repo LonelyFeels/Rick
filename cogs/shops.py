@@ -305,7 +305,7 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
         owner = ctx.message.author
 
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=0")
         data = mycursor.fetchall()
         if len(data)==0:
             await ctx.send('Your store does not exist in Stores database!')
