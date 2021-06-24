@@ -472,6 +472,35 @@ class Shops(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await username.send('You have mention the member you want to remove from your store!')
 
+    # !stores
+    @commands.command()
+    async def stores(self, ctx):
+        db = mysql.connector.connect(
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
+        )
+        mycursor = db.cursor()
+
+        mycursor.execute("SELECT DISTINCT StoreName FROM Store_Directory")
+        data = mycursor.fetchall()
+        embedstores = discord.Embed(
+            title = 'List of Stores',
+            colour = discord.Colour.from_rgb(12,235,241)
+        )
+
+        storeslist = ""
+        for row in data:
+            storeslist = storeslist + str(row[0]) + "\n"
+
+        embedstores.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
+        embedstores.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
+        embedstores.add_field(name="Showing all item categories for the Store Listings", value=storeslist, inline=False)
+
+        await ctx.send(embed=embedstores)
+
 
 def setup(client):
     client.add_cog(Shops(client))
