@@ -123,12 +123,12 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
 
         # Checks if Item is in Library of Minecraft Items
-        mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
+        mycursor.execute("SELECT EXISTS (SELECT Item FROM Item_List WHERE Item=%s)", (item,))
         data = mycursor.fetchall()
 
         if not data[0][0]:
             # Assume the user did a misspell, and suggests an item from the list
-            mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
+            mycursor.execute("SELECT Item FROM Item_List WHERE Item SOUNDS LIKE %s LIMIT 1", (item,))
             data = mycursor.fetchall()
             if len(data) != 0:
                 await ctx.send(f"Did you mean to look up \"{str(data[0][0])}\"? Try running this command: `!storeitemlookup \"{str(data[0][0])}\"`")
@@ -136,11 +136,11 @@ class Shops(commands.Cog):
                 await ctx.send("I\'m not sure what you're trying to lookup. Try another search term.")
         else:
             # Item exists in Library, display all listings for said item lookup
-            mycursor.execute(f"SELECT EXISTS (SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item='{str(item)}')")
+            mycursor.execute("SELECT EXISTS (SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item=%s)", (item,))
             data = mycursor.fetchall()
 
             if data[0][0]:
-                mycursor.execute(f"SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item='{str(item)}'")
+                mycursor.execute("SELECT StoreName, Quantity, Price, Description FROM Item_Listings WHERE Item=%s", (item,))
                 data = mycursor.fetchall()
                 embeditemlookup = discord.Embed(
                     title = 'Store Item Lookup',
@@ -173,18 +173,18 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
         owner = ctx.message.author
 
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND StoreName='{str(storename)}'")
+        mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s", (owner.id, storename))
         data = mycursor.fetchall()
         if len(data)==0:
             await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
         else:
             # Checks if Item is in Library of Minecraft Items
-            mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
+            mycursor.execute("SELECT EXISTS (SELECT Item FROM Item_List WHERE Item=%s)", (item,))
             data = mycursor.fetchall()
 
             if not data[0][0]:
                 # Assume the user did a misspell, and suggests an item from the list
-                mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
+                mycursor.execute("SELECT Item FROM Item_List WHERE Item SOUNDS LIKE %s LIMIT 1", (item,))
                 data = mycursor.fetchall()
                 if len(data) != 0:
                     await ctx.send(f"Did you mean to remove \"{str(data[0][0])}\" from your store? Try running this command: `!storeremove \"{str(data[0][0])}\"`")
@@ -192,12 +192,12 @@ class Shops(commands.Cog):
                     await ctx.send("I\'m not sure what you're trying to remove. Try another search term.")
             else:
                 # Try to remove item from store
-                mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}')")
+                mycursor.execute("SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item=%s AND StoreName=%s)", (item, storename))
                 data = mycursor.fetchall()
                 if not data[0][0]:
                     await ctx.send(f"You do not have any {str(item)}s in your store.")
                 else:
-                    mycursor.execute(f"DELETE FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
+                    mycursor.execute("DELETE FROM Item_Listings WHERE Item=%s AND StoreName=%s", (item, storename))
                     db.commit()
                     deleteresult = mycursor.rowcount
                     if deleteresult > 0: 
@@ -252,19 +252,19 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
 
         # Checks if Item is in Library of Minecraft Items
-        mycursor.execute(f"SELECT EXISTS (SELECT Category FROM Item_List WHERE Category='{str(category)}')")
+        mycursor.execute("SELECT EXISTS (SELECT Category FROM Item_List WHERE Category=%s)", (category,))
         data = mycursor.fetchall()
 
         if not data[0][0]:
             # Assume the user did a misspell, and suggests an Category from the list
-            mycursor.execute(f"SELECT Category FROM Item_List WHERE Category SOUNDS LIKE '{str(category)}' LIMIT 1")
+            mycursor.execute("SELECT Category FROM Item_List WHERE Category SOUNDS LIKE %s LIMIT 1", (category,))
             data = mycursor.fetchall()
             if len(data) != 0:
                 await ctx.send(f"Did you mean to look up \"{str(data[0][0])}\"? Try running this command: `!cati \"{str(data[0][0])}\"`")
             else:
                 await ctx.send("I\'m not sure what you're trying to lookup. Try another search term.")
         else:
-            mycursor.execute(f"SELECT Item FROM Item_List WHERE Category='{str(category)}'")
+            mycursor.execute("SELECT Item FROM Item_List WHERE Category=%s", (category,))
             data = mycursor.fetchall()
 
             embedcitems = discord.Embed(
@@ -303,16 +303,16 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
         owner = ctx.message.author
 
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1 ")
+        mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND IsOwner=1", (owner.id,))
         data = mycursor.fetchall()
         if len(data)==0:
             await ctx.send('Your store does not exist in Stores database!')
         else:
             storename = data[0][2]
-            mycursor.execute(f"SELECT * FROM Item_Listings WHERE StoreName='{str(storename)}'")
+            mycursor.execute("SELECT * FROM Item_Listings WHERE StoreName=%s", (storename,))
             itemcount = mycursor.fetchall()
             if len(itemcount)==0:
-                mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1")
+                mycursor.execute("DELETE FROM Store_Directory WHERE StoreName=%s", (storename,))
                 db.commit()
                 deleteshop = mycursor.rowcount
                 if deleteshop > 0:
@@ -320,12 +320,12 @@ class Shops(commands.Cog):
                 else:
                     await ctx.send('Something happened when trying to unregister your shop. Contact an Admin for help.')
             else:
-                mycursor.execute(f"DELETE FROM Item_Listings WHERE StoreName='{str(storename)}'")
+                mycursor.execute("DELETE FROM Item_Listings WHERE StoreName=%s", (storename,))
                 db.commit()
                 deleteresult = mycursor.rowcount
                 if deleteresult > 0: 
                     await ctx.send(f"Successfully removed all items from your store.")
-                    mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1")
+                    mycursor.execute("DELETE FROM Store_Directory WHERE StoreName=%s", (storename,))
                     db.commit()
                     deleteshop = mycursor.rowcount
                     if deleteshop > 0:
@@ -351,21 +351,21 @@ class Shops(commands.Cog):
         # 22 is the standard length of a member reference
         if len(storereference) == 22 and storereference[0:3] == "<@!":
             ownerid = storereference[3:21]
-            mycursor.execute(f"SELECT EXISTS (SELECT * FROM Store_Directory WHERE UserID='{str(ownerid)}' AND IsOwner=1)")
+            mycursor.execute("SELECT EXISTS (SELECT * FROM Store_Directory WHERE UserID=%s AND IsOwner=1)", (ownerid,))
             data = mycursor.fetchall()
             if not data[0][0]:
                 await ctx.send("I could not find a store that is owned by that player.")
             else:
-                mycursor.execute(f"SELECT StoreName FROM Store_Directory WHERE UserID='{str(ownerid)}' AND IsOwner=1 LIMIT 1")
+                mycursor.execute("SELECT StoreName FROM Store_Directory WHERE UserID=%s AND IsOwner=1 LIMIT 1", (ownerid,))
                 data = mycursor.fetchall()
                 storename = data[0][0]
 
                 # Store exists, display all listings for said item lookup
-                mycursor.execute(f"SELECT EXISTS (SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName='{str(storename)}')")
+                mycursor.execute("SELECT EXISTS (SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName=%s)", (storename,))
                 data = mycursor.fetchall()
 
                 if data[0][0]:
-                    mycursor.execute(f"SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName='{str(storename)}'")
+                    mycursor.execute("SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName=%s", (storename))
                     data = mycursor.fetchall()
                     embedstoreup = discord.Embed(
                         title = 'Store Lookup',
@@ -381,17 +381,17 @@ class Shops(commands.Cog):
                     await ctx.send(f"The {storename} store currently does not have any items for sale.")
         else:
             storename = storereference
-            mycursor.execute(f"SELECT StoreName FROM Store_Directory WHERE StoreName='{str(storename)}' LIMIT 1")
+            mycursor.execute("SELECT StoreName FROM Store_Directory WHERE StoreName=%s LIMIT 1", (storename,))
             data = mycursor.fetchall()
             storename = data[0][0]
 
             if data[0][0]:
                 # Store exists, display all listings for said item lookup
-                mycursor.execute(f"SELECT EXISTS (SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName='{str(storename)}')")
+                mycursor.execute("SELECT EXISTS (SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName=%s)", (storename,))
                 data = mycursor.fetchall()
 
                 if data[0][0]:
-                    mycursor.execute(f"SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName='{str(storename)}'")
+                    mycursor.execute("SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName=%s", (ownerid,))
                     data = mycursor.fetchall()
                     embedstoreup = discord.Embed(
                         title = 'Store Lookup',
@@ -420,15 +420,15 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
         owner = ctx.message.author
 
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1")
+        mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND IsOwner=1", (owner.id,))
         data = mycursor.fetchall()
         if len(data) != 0:
             storename = data[0][2]
             location = data[0][3]
-            mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(member.id)} AND StoreName='{str(storename)}' AND IsOwner=0")
+            mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s AND IsOwner=0", (member.id, storename))
             ismember = mycursor.fetchall()
             if len(ismember) == 0:
-                mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (f"{member.id}", f"{member.display_name}", storename, location))
+                mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (member.id, member.display_name, storename, location))
                 db.commit()
                 await ctx.send(f'{member} successfully added to the {str(storename)} store.')
             else:
@@ -453,11 +453,11 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
         owner = ctx.message.author
 
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1")
+        mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND IsOwner=1", (owner.id,))
         data = mycursor.fetchall()
         if len(data) != 0:
             storename = data[0][2]
-            mycursor.execute(f"DELETE FROM Store_Directory WHERE StoreName='{str(storename)}' AND UserID='{str(member.id)}' AND IsOwner=0")
+            mycursor.execute("DELETE FROM Store_Directory WHERE StoreName=%s AND UserID=%s AND IsOwner=0", (storename, member.id))
             db.commit()
             removeresult = mycursor.rowcount
             if removeresult > 0:
