@@ -314,7 +314,7 @@ class Shops(commands.Cog):
             mycursor.execute(f"SELECT * FROM Item_Listings WHERE StoreName='{str(storename)}'")
             itemcount = mycursor.fetchall()
             if len(itemcount)==0:
-                mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)}")
+                mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1")
                 db.commit()
                 deleteshop = mycursor.rowcount
                 if deleteshop > 0:
