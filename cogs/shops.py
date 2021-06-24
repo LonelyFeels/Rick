@@ -33,7 +33,7 @@ class Shops(commands.Cog):
             mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
             data = mycursor.fetchall()
             if len(data)==0:
-                mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", f"{owner.displayname}", storename, location))
+                mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", f"{owner.display_name}", storename, location))
                 db.commit()
                 await ctx.send(f'{storename} successfully registered into Stores database.')
             else:
@@ -45,7 +45,7 @@ class Shops(commands.Cog):
                     if isowner[0][0] == 1:
                         await ctx.send('Your store is already registered in Stores database!')
                     else:
-                        mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", f"{owner.displayname}", storename, location))
+                        mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", f"{owner.display_name}", storename, location))
                         db.commit()
                         await ctx.send(f'{storename} successfully registered into Stores database.')
 
