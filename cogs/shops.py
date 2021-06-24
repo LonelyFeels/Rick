@@ -173,7 +173,7 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
         owner = ctx.message.author
 
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND StoreName='{str(storename)}")
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND StoreName='{str(storename)}'")
         data = mycursor.fetchall()
         if len(data)==0:
             await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
@@ -206,9 +206,9 @@ class Shops(commands.Cog):
                         await ctx.send("Something happened when trying to remove an item from your store. Contact an Admin for help.")
 
     @storeremove.error
-    async def storeremove_error(self, username, error):
+    async def storeremove_error(self, storename, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await username.send('Make sure to either have either a one word search term, or enclose your search term in quotations, like this:\n`!storeremove "search term"`')
+            await storename.send('Make sure to either have either a one word search term, or enclose your search term in quotations, like this:\n`!storeremove "shopname" "search term"`')
 
     # !storecategories or !categories or !cat
     @commands.command(aliases=['categories', 'cat'])
