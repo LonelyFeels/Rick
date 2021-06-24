@@ -427,11 +427,16 @@ class Shops(commands.Cog):
         if len(data) != 0:
             storename = data[0][2]
             location = data[0][3]
-            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (f"{member.id}", f"{member.display_name}", storename, location))
-            db.commit()
-            await ctx.send(f'{member} successfully added to the {str(storename)} store.')
+            mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(member.id)} AND StoreName='{str(storename)}' AND IsOwner=0")
+            ismember = mycursor.fetchall()
+            if len(ismember) == 0:
+                mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (f"{member.id}", f"{member.display_name}", storename, location))
+                db.commit()
+                await ctx.send(f'{member} successfully added to the {str(storename)} store.')
+            else:
+                await ctx.send(f'{member} is already member of {str(storename)} store!')
         else:
-            await ctx.send('You currently don\'t own a store! Try registering one with `!storeregister [Minecraft Username] [Store Name] [Location]')
+            await ctx.send('You currently don\'t own a store! Try registering one with `!storeregister [Store Name] [Location]`')
 
     @storeaddmember.error
     async def storeaddmember_error(self, username, error):
@@ -462,7 +467,7 @@ class Shops(commands.Cog):
             else:
                 await ctx.send(f'{member} is not a member of your shop.')
         else:
-            await ctx.send('You currently don\'t own a store! Try registering one with `!storeregister [Minecraft Username] [Store Name] [Location]')
+            await ctx.send('You currently don\'t own a store! Try registering one with `!storeregister [Store Name] [Location]`')
 
     @storeremovemember.error
     async def storeremovemember_error(self, username, error):
