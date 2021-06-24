@@ -66,19 +66,19 @@ class Shops(commands.Cog):
         )
         mycursor = db.cursor()
         owner = ctx.message.author
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)} AND StoreName='{str(storename)}'")
+        mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s", (owner.id, storename))
         data = mycursor.fetchall()
         dataempty = [] == data
         if len(data) == 0:
             await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
         else:
             # Checks if Item is in Library of Minecraft Items
-            mycursor.execute(f"SELECT EXISTS (SELECT Item FROM Item_List WHERE Item='{str(item)}')")
+            mycursor.execute("SELECT EXISTS (SELECT Item FROM Item_List WHERE Item=%s", (item,))
             data = mycursor.fetchall()
 
             if not data[0][0]:
                 # Assume the user did a misspell, and suggests an item from the list
-                mycursor.execute(f"SELECT Item FROM Item_List WHERE Item SOUNDS LIKE '{str(item)}' LIMIT 1")
+                mycursor.execute("SELECT Item FROM Item_List WHERE Item SOUNDS LIKE %s LIMIT 1", (item,))
                 data = mycursor.fetchall()
                 if len(data) != 0:
                     await ctx.send(f"Did you mean to update or add \"{str(data[0][0])}\" to your store? Try running this command: `!storeedit <store name> \"{str(data[0][0])}\" <quantity> <price>`")
@@ -86,10 +86,10 @@ class Shops(commands.Cog):
                     await ctx.send("I\'m not sure what you're trying to update or add. Try another search term.")
             else:
                 #try to update or add item to store
-                mycursor.execute(f"SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item='{str(item)}' AND StoreName='{str(storename)}')")
+                mycursor.execute("SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item=%s AND StoreName=%s)", (item, storename))
                 itemexists = mycursor.fetchall()
                 if itemexists[0][0]:
-                    mycursor.execute(f"UPDATE Item_Listings SET Quantity={int(quantity)}, Price={int(price)}, Description='{str(description)}' WHERE Item='{str(item)}' AND StoreName='{str(storename)}'")
+                    mycursor.execute("UPDATE Item_Listings SET Quantity=%s, Price=%s, Description=%s WHERE Item=%s AND StoreName=%s", (quantity, price, description, item, storename))
                     db.commit()
                     updateresult = mycursor.rowcount
                     if updateresult > 0:
