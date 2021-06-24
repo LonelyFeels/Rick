@@ -327,7 +327,7 @@ class Shops(commands.Cog):
                 deleteresult = mycursor.rowcount
                 if deleteresult > 0: 
                     await ctx.send(f"Successfully removed all items from your store.")
-                    mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)}")
+                    mycursor.execute(f"DELETE FROM Store_Directory WHERE UserID={str(owner.id)} AND IsOwner=1")
                     db.commit()
                     deleteshop = mycursor.rowcount
                     if deleteshop > 0:
