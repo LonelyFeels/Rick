@@ -35,12 +35,15 @@ class Shops(commands.Cog):
         else:
             mycursor.execute(f"SELECT IsOwner FROM Store_Directory WHERE UserID={str(owner.id)}")
             isowner = mycursor.fetchall()
-            if isowner[0][0] == 0:
-                mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", username, storename, location))
-                db.commit()
-                await ctx.send(f'{storename} successfully registered into Stores database.')
-            else:
+            if len(isowner) > 1:
                 await ctx.send('Your store is already registered in Stores database!')
+            else:
+                if isowner[0][0] == 1:
+                    await ctx.send('Your store is already registered in Stores database!')
+                else:
+                    mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", username, storename, location))
+                    db.commit()
+                    await ctx.send(f'{storename} successfully registered into Stores database.')
 
     @storeregister.error
     async def storeregister_error(self, username, error):
