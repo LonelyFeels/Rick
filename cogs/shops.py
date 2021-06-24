@@ -501,6 +501,36 @@ class Shops(commands.Cog):
 
         await ctx.send(embed=embedstores)
 
+    @commands.command(aliases=['sleave'])
+    async def storeleave(self, ctx, storename):
+        db = mysql.connector.connect(
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
+        )
+        mycursor = db.cursor()
+        member = ctx.message.author
+
+        mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s AND IsOwner=1", (member.id, storename))
+        data = mycursor.fetchall()
+        if len(data) == 0:
+            mycursor.execute("DELETE FROM Store_Directory WHERE StoreName=%s AND UserID=%s AND IsOwner=0", (storename, member.id))
+            db.commit()
+            removeresult = mycursor.rowcount
+            if removeresult > 0:
+                await ctx.send(f'Successfully left the {str(storename)} store.')
+            else:
+                await ctx.send('You are not a member of that store!')
+        else:
+            await ctx.send('You own that store! Try using `!sunreg` instead, if you want to delete the store.')
+
+    @storeleave.error
+    async def storeleave_error(self, username, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await username.send('You have mention the store you want to leave!')
+
 
 def setup(client):
     client.add_cog(Shops(client))
