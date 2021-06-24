@@ -497,7 +497,7 @@ class Shops(commands.Cog):
 
         embedstores.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedstores.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedstores.add_field(name="Showing all item categories for the Store Listings", value=storeslist, inline=False)
+        embedstores.add_field(name="Showing all Stores for the Stores Category", value=storeslist, inline=False)
 
         await ctx.send(embed=embedstores)
 
