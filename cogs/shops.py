@@ -495,6 +495,9 @@ class Shops(commands.Cog):
         for row in data:
             storeslist = storeslist + str(row[0]) + "\n"
 
+        if storeslist == "":
+            storeslist = "There\'s no stores registered!"
+
         embedstores.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedstores.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
         embedstores.add_field(name="Showing all Stores for the Stores Category", value=storeslist, inline=False)
