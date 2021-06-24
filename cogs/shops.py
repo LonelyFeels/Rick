@@ -52,7 +52,7 @@ class Shops(commands.Cog):
     @storeregister.error
     async def storeregister_error(self, username, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await username.send('You have state your Username, Storename (and Location)!')
+            await username.send('You have state your Store Name (and Location)!')
 
     # !storeedit [storename] [item] [quantity] [price] [description] or !sedit [storename] [item] [quantity] [price] [description]
     @commands.command(aliases=['sedit'])
@@ -411,7 +411,7 @@ class Shops(commands.Cog):
                 await ctx.send("There is no store under that name. Try again.")
 
     @commands.command(aliases=['storeaddm'])
-    async def storeaddmember(self, ctx, member: discord.Member, username):
+    async def storeaddmember(self, ctx, member: discord.Member):
         db = mysql.connector.connect(
             host = credentials.host,
             port = credentials.port,
@@ -427,7 +427,7 @@ class Shops(commands.Cog):
         if len(data) != 0:
             storename = data[0][2]
             location = data[0][3]
-            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (f"{member.id}", username, storename, location))
+            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 0)", (f"{member.id}", f"{member.display_name}", storename, location))
             db.commit()
             await ctx.send(f'{member} successfully added to the {str(storename)} store.')
         else:
@@ -436,7 +436,7 @@ class Shops(commands.Cog):
     @storeaddmember.error
     async def storeaddmember_error(self, username, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await username.send('You have state the member\'s Discord ID and Username!')
+            await username.send('You have to mention the member you want to add to your store!')
 
     @commands.command(aliases=['storeremm','storeremmember'])
     async def storeremovemember(self, ctx, member: discord.Member):
@@ -467,7 +467,7 @@ class Shops(commands.Cog):
     @storeremovemember.error
     async def storeremovemember_error(self, username, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await username.send('You have state the member\'s Discord ID!')
+            await username.send('You have mention the member you want to remove from your store!')
 
 
 def setup(client):
