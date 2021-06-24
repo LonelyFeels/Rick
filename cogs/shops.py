@@ -12,7 +12,7 @@ class Shops(commands.Cog):
 
 
     #Commands
-    @commands.command()
+    @commands.command(aliases=['sreg'])
     async def storeregister(self, ctx, storename, location=None):
         db = mysql.connector.connect(
             host = credentials.host,
