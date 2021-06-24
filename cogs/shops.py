@@ -25,25 +25,29 @@ class Shops(commands.Cog):
         owner = ctx.message.author
 
         # Rejection reasons: Store already exists under another owner OR the user is making another new store and they're already the owner of one
-
-        mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
-        data = mycursor.fetchall()
-        if len(data)==0:
-            mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", username, storename, location))
-            db.commit()
-            await ctx.send(f'{storename} successfully registered into Stores database.')
+        mycursor.execute(f"SELECT * FROM Store_Directory WHERE StoreName='{str(storename)}'")
+        alreadyexists = mycursor.fetchall()
+        if len(alreadyexists) > 0:
+            await ctx.send(f'{storename} with such name already exists in Stores database!')
         else:
-            mycursor.execute(f"SELECT IsOwner FROM Store_Directory WHERE UserID={str(owner.id)}")
-            isowner = mycursor.fetchall()
-            if len(isowner) > 1:
-                await ctx.send('Your store is already registered in Stores database!')
+            mycursor.execute(f"SELECT * FROM Store_Directory WHERE UserID={str(owner.id)}")
+            data = mycursor.fetchall()
+            if len(data)==0:
+                mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", username, storename, location))
+                db.commit()
+                await ctx.send(f'{storename} successfully registered into Stores database.')
             else:
-                if isowner[0][0] == 1:
+                mycursor.execute(f"SELECT IsOwner FROM Store_Directory WHERE UserID={str(owner.id)}")
+                isowner = mycursor.fetchall()
+                if len(isowner) > 1:
                     await ctx.send('Your store is already registered in Stores database!')
                 else:
-                    mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", username, storename, location))
-                    db.commit()
-                    await ctx.send(f'{storename} successfully registered into Stores database.')
+                    if isowner[0][0] == 1:
+                        await ctx.send('Your store is already registered in Stores database!')
+                    else:
+                        mycursor.execute("INSERT INTO Store_Directory (UserID, Username, StoreName, Location, IsOwner) VALUES (%s, %s, %s, %s, 1)", (f"{owner.id}", username, storename, location))
+                        db.commit()
+                        await ctx.send(f'{storename} successfully registered into Stores database.')
 
     @storeregister.error
     async def storeregister_error(self, username, error):
