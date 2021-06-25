@@ -56,7 +56,7 @@ class Shops(commands.Cog):
 
     # !storeedit [storename] [item] [quantity] [price] [description] or !sedit [storename] [item] [quantity] [price] [description]
     @commands.command(aliases=['sedit'])
-    async def storeedit(self, ctx, storename, item, quantity:int, price:int, currency, description=None):
+    async def storeedit(self, ctx, storename, item, quantity:int, price:int, description=None):
         db = mysql.connector.connect(
             host = credentials.host,
             port = credentials.port,
@@ -89,26 +89,26 @@ class Shops(commands.Cog):
                 mycursor.execute("SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item=%s AND StoreName=%s)", (item, storename))
                 itemexists = mycursor.fetchall()
                 if itemexists[0][0]:
-                    mycursor.execute("UPDATE Item_Listings SET Quantity=%s, Price=%s, Currency=%s, Description=%s WHERE Item=%s AND StoreName=%s", (quantity, price, currency, description, item, storename))
+                    mycursor.execute("UPDATE Item_Listings SET Quantity=%s, Price=%s, Description=%s WHERE Item=%s AND StoreName=%s", (quantity, price, description, item, storename))
                     db.commit()
                     updateresult = mycursor.rowcount
                     if updateresult > 0:
-                        await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} {currency}(s) for the {storename} Store.')
+                        await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {storename} Store.')
                     else:
                         await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
                 else:
-                    mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Currency, Description) VALUES (%s, %s, %s, %s, %s, %s)", (item, storename, quantity, price, currency, description))
+                    mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Description) VALUES (%s, %s, %s, %s, %s)", (item, storename, quantity, price, description))
                     db.commit()
                     addresult = mycursor.rowcount
                     if addresult > 0:
-                        await ctx.send(f'A listing for {quantity}x {item} was successfully added at a price of {price} {currency}(s) for the {storename} Store.')
+                        await ctx.send(f'A listing for {quantity}x {item} was successfully added at a price of {price} Diamonds for the {storename} Store.')
                     else:
                         await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
 
     @storeedit.error
     async def storeedit_error(self, username, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await username.send('You have to provide the Store Name, Item Name, Quantity, Price and Currency!')
+            await username.send('You have to provide the Store Name, Item Name, Quantity, and Price (in Diamonds)!')
 
     # !storeitemlookup [item] or !itemlookup [item] or !slookup [item]
     @commands.command(aliases=['itemlookup','slookup'])
