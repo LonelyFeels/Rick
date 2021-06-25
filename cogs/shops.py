@@ -289,6 +289,11 @@ class Shops(commands.Cog):
                 embedcitems.add_field(name=f"{str(category)} {str(section)}", value=currentstring, inline=False)
 
             await ctx.send(embed=embedcitems)
+    
+    @categoriesitems.error
+    async def categoriesitems_error(self, category, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await category.send('You have to state the Category you want to see Items in.')
 
     # !storeunregister or !sunreg
     @commands.command(aliases=['sunreg'])
@@ -391,7 +396,7 @@ class Shops(commands.Cog):
                 data = mycursor.fetchall()
 
                 if data[0][0]:
-                    mycursor.execute("SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName=%s", (ownerid,))
+                    mycursor.execute("SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName=%s", (storename,))
                     data = mycursor.fetchall()
                     embedstoreup = discord.Embed(
                         title = 'Store Lookup',
