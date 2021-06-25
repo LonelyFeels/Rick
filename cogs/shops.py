@@ -65,6 +65,7 @@ class Shops(commands.Cog):
                 database = credentials.database
         )
         mycursor = db.cursor()
+        print(mycursor._last_executed)
         try:
             owner = ctx.message.author
             mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s", (str(owner.id), storename))
@@ -106,7 +107,7 @@ class Shops(commands.Cog):
                         else:
                             await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
         except mysql.connector.Error as err:
-            print("Something went wrong: {}".format(err) + " " + str(mycursor._last_executed))
+            print("Something went wrong: {}".format(err))
 
     @storeedit.error
     async def storeedit_error(self, username, error):
