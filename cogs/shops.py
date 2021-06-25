@@ -55,7 +55,7 @@ class Shops(commands.Cog):
 
     # !storeedit [storename] [item] [quantity] [price] [description] or !sedit [storename] [item] [quantity] [price] [description]
     @commands.command(aliases=['sedit'])
-    async def storeedit(self, ctx, storename, item, quantity:int, price:int, description=None):
+    async def storeedit(self, ctx, storename, item, quantity:int, price:int, currency, description=None):
         db = mysql.connector.connect(
                 host = credentials.host,
                 port = credentials.port,
@@ -90,7 +90,7 @@ class Shops(commands.Cog):
                     mycursor.execute("SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item=%s AND StoreName=%s)", (item, storename))
                     itemexists = mycursor.fetchall()
                     if itemexists[0][0]:
-                        mycursor.execute("UPDATE Item_Listings SET Quantity=%s, Price=%s, Description=%s WHERE Item=%s AND StoreName=%s", (quantity, price, description, item, storename))
+                        mycursor.execute("UPDATE Item_Listings SET Quantity=%s, Price=%s, Currency=%s, Description=%s WHERE Item=%s AND StoreName=%s", (quantity, price, currency, description, item, storename))
                         db.commit()
                         updateresult = mycursor.rowcount
                         if updateresult > 0:
@@ -98,7 +98,7 @@ class Shops(commands.Cog):
                         else:
                             await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
                     else:
-                        mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Description) VALUES (%s, %s, %s, %s, %s)", (item, storename, quantity, price, description))
+                        mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Currency, Description) VALUES (%s, %s, %s, %s, %s, %s)", (item, storename, quantity, price, currency, description))
                         db.commit()
                         addresult = mycursor.rowcount
                         if addresult > 0:
