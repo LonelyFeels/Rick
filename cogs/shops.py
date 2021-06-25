@@ -56,65 +56,59 @@ class Shops(commands.Cog):
 
     # !storeedit [storename] [item] [quantity] [price] [description] or !sedit [storename] [item] [quantity] [price] [description]
     @commands.command(aliases=['sedit'])
-    async def storeedit(self, ctx, storename, item, quantity:int, price:int, description=None):
+    async def storeedit(self, ctx, storename, item, quantity:int, price:int, currency, description=None):
         db = mysql.connector.connect(
-                host = credentials.host,
-                port = credentials.port,
-                user = credentials.user,
-                password = credentials.password,
-                database = credentials.database
+            host = credentials.host,
+            port = credentials.port,
+            user = credentials.user,
+            password = credentials.password,
+            database = credentials.database
         )
         mycursor = db.cursor()
-        try:
-            owner = ctx.message.author
-            mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s;", (owner.id, storename))
+        owner = ctx.message.author
+        mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s", (owner.id, storename))
+        data = mycursor.fetchall()
+        dataempty = [] == data
+        if len(data) == 0:
+            await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
+        else:
+            # Checks if Item is in Library of Minecraft Items
+            mycursor.execute("SELECT EXISTS (SELECT Item FROM Item_List WHERE Item=%s", (item,))
             data = mycursor.fetchall()
-            dataempty = [] == data
-            if len(data) == 0:
-                await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
-            else:
-                # Checks if Item is in Library of Minecraft Items
-                mycursor.execute("SELECT EXISTS (SELECT Item FROM Item_List WHERE Item=%s)", (item,))
+
+            if not data[0][0]:
+                # Assume the user did a misspell, and suggests an item from the list
+                mycursor.execute("SELECT Item FROM Item_List WHERE Item SOUNDS LIKE %s LIMIT 1", (item,))
                 data = mycursor.fetchall()
-                print(mycursor.statement)
-                print(data)
-                if not data[0][0]:
-                    # Assume the user did a misspell, and suggests an item from the list
-                    mycursor.execute("SELECT Item FROM Item_List WHERE Item SOUNDS LIKE %s LIMIT 1", (item,))
-                    data = mycursor.fetchall()
-                    if len(data) != 0:
-                        await ctx.send(f"Did you mean to update or add \"{str(data[0][0])}\" to your store? Try running this command: `!storeedit <store name> \"{str(data[0][0])}\" <quantity> <price>`")
-                    else:
-                        await ctx.send("I\'m not sure what you're trying to update or add. Try another search term.")
+                if len(data) != 0:
+                    await ctx.send(f"Did you mean to update or add \"{str(data[0][0])}\" to your store? Try running this command: `!storeedit <store name> \"{str(data[0][0])}\" <quantity> <price>`")
                 else:
-                    #try to update or add item to store
-                    mycursor.execute("SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item=%s AND StoreName=%s)", (item, storename))
-                    itemexists = mycursor.fetchall()
-                    if itemexists[0][0]:
-                        mycursor.execute("UPDATE Item_Listings SET Quantity=%s, Price=%s, Description=%s WHERE Item=%s AND StoreName=%s", (quantity, price, description, item, storename))
-                        db.commit()
-                        updateresult = mycursor.rowcount
-                        if updateresult > 0:
-                            await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {storename} Store.')
-                        else:
-                            await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
+                    await ctx.send("I\'m not sure what you're trying to update or add. Try another search term.")
+            else:
+                #try to update or add item to store
+                mycursor.execute("SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item=%s AND StoreName=%s)", (item, storename))
+                itemexists = mycursor.fetchall()
+                if itemexists[0][0]:
+                    mycursor.execute("UPDATE Item_Listings SET Quantity=%s, Price=%s, Currency=%s, Description=%s WHERE Item=%s AND StoreName=%s", (quantity, price, currency, description, item, storename))
+                    db.commit()
+                    updateresult = mycursor.rowcount
+                    if updateresult > 0:
+                        await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} {currency}(s) for the {storename} Store.')
                     else:
-                        mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Description) VALUES (%s, %s, %s, %s, %s)", (item, storename, quantity, price, description))
-                        db.commit()
-                        addresult = mycursor.rowcount
-                        if addresult > 0:
-                            await ctx.send(f'A listing for {quantity}x {item} was successfully added at a price of {price} Diamonds for the {storename} Store.')
-                        else:
-                            await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
-        except mysql.connector.Error as err:
-            print("Something went wrong: {}".format(err))
-            print(mycursor.statement)
-            print(mycursor.fetchwarnings())
+                        await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
+                else:
+                    mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Currency, Description) VALUES (%s, %s, %s, %s, %s, %s)", (item, storename, quantity, price, currency, description))
+                    db.commit()
+                    addresult = mycursor.rowcount
+                    if addresult > 0:
+                        await ctx.send(f'A listing for {quantity}x {item} was successfully added at a price of {price} {currency}(s) for the {storename} Store.')
+                    else:
+                        await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
 
     @storeedit.error
     async def storeedit_error(self, username, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await username.send('You have to provide the Store Name, Item Name, Quantity, and Price (in Diamonds)!')
+            await username.send('You have to provide the Store Name, Item Name, Quantity, Price and Currency!')
 
     # !storeitemlookup [item] or !itemlookup [item] or !slookup [item]
     @commands.command(aliases=['itemlookup','slookup'])
@@ -364,7 +358,7 @@ class Shops(commands.Cog):
             ownerid = storereference[3:21]
             mycursor.execute("SELECT EXISTS (SELECT * FROM Store_Directory WHERE UserID=%s AND IsOwner=1)", (ownerid,))
             data = mycursor.fetchall()
-            if len(data) == 0:
+            if not data[0][0]:
                 await ctx.send("I could not find a store that is owned by that player.")
             else:
                 mycursor.execute("SELECT StoreName FROM Store_Directory WHERE UserID=%s AND IsOwner=1 LIMIT 1", (ownerid,))
