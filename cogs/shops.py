@@ -106,8 +106,7 @@ class Shops(commands.Cog):
                         else:
                             await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
         except mysql.connector.Error as err:
-            print("Something went wrong: {}".format(err))
-            print(mycursor._last_executed)
+            print("Something went wrong: {}".format(err) + " " + str(mycursor._last_executed))
 
     @storeedit.error
     async def storeedit_error(self, username, error):
