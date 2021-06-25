@@ -67,7 +67,7 @@ class Shops(commands.Cog):
         mycursor = db.cursor()
         try:
             owner = ctx.message.author
-            mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s", (owner.id, storename))
+            mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s", (str(owner.id), storename))
             data = mycursor.fetchall()
             dataempty = [] == data
             if len(data) == 0:
