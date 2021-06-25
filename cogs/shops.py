@@ -57,16 +57,16 @@ class Shops(commands.Cog):
     # !storeedit [storename] [item] [quantity] [price] [description] or !sedit [storename] [item] [quantity] [price] [description]
     @commands.command(aliases=['sedit'])
     async def storeedit(self, ctx, storename, item, quantity:int, price:int, description=None):
-        db = mysql.connector.connect(
+        try:
+            db = mysql.connector.connect(
                 host = credentials.host,
                 port = credentials.port,
                 user = credentials.user,
                 password = credentials.password,
                 database = credentials.database
-        )
-        mycursor = db.cursor()
-        print(mycursor._last_executed)
-        try:
+            )
+            mycursor = db.cursor()
+            print(mycursor._last_executed)
             owner = ctx.message.author
             mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s", (str(owner.id), storename))
             data = mycursor.fetchall()
