@@ -392,11 +392,11 @@ class Shops(commands.Cog):
 
             if data[0][0]:
                 # Store exists, display all listings for said item lookup
-                mycursor.execute("SELECT EXISTS (SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName=%s)", (storename,))
+                mycursor.execute("SELECT EXISTS (SELECT Item, Quantity, Price, Currency, Description FROM Item_Listings WHERE StoreName=%s)", (storename,))
                 data = mycursor.fetchall()
 
                 if data[0][0]:
-                    mycursor.execute("SELECT Item, Quantity, Price, Description FROM Item_Listings WHERE StoreName=%s", (storename,))
+                    mycursor.execute("SELECT Item, Quantity, Price, Currency, Description FROM Item_Listings WHERE StoreName=%s", (storename,))
                     data = mycursor.fetchall()
                     embedstoreup = discord.Embed(
                         title = 'Store Lookup',
@@ -406,7 +406,7 @@ class Shops(commands.Cog):
                     for row in data:
                         embedstoreup.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
                         embedstoreup.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-                        embedstoreup.add_field(name=f"{str(row[0])}", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} Diamond(s) \n Description: {str(row[3])}", inline=False)
+                        embedstoreup.add_field(name=f"{str(row[0])}", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} {str(row[3])}(s) \n Description: {str(row[4])}", inline=False)
                     await ctx.send(embed=embedstoreup)
                 else:
                     await ctx.send(f"The {storename} store currently does not have any items for sale.")
