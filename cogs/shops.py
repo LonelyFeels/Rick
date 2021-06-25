@@ -364,7 +364,7 @@ class Shops(commands.Cog):
             ownerid = storereference[3:21]
             mycursor.execute("SELECT EXISTS (SELECT * FROM Store_Directory WHERE UserID=%s AND IsOwner=1)", (ownerid,))
             data = mycursor.fetchall()
-            if not data[0][0]:
+            if len(data) == 0:
                 await ctx.send("I could not find a store that is owned by that player.")
             else:
                 mycursor.execute("SELECT StoreName FROM Store_Directory WHERE UserID=%s AND IsOwner=1 LIMIT 1", (ownerid,))
