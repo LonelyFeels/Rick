@@ -57,15 +57,15 @@ class Shops(commands.Cog):
     # !storeedit [storename] [item] [quantity] [price] [description] or !sedit [storename] [item] [quantity] [price] [description]
     @commands.command(aliases=['sedit'])
     async def storeedit(self, ctx, storename, item, quantity:int, price:int, description=None):
-        try:
-            db = mysql.connector.connect(
+        db = mysql.connector.connect(
                 host = credentials.host,
                 port = credentials.port,
                 user = credentials.user,
                 password = credentials.password,
                 database = credentials.database
-            )
-            mycursor = db.cursor()
+        )
+        mycursor = db.cursor()
+        try:
             owner = ctx.message.author
             mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s", (owner.id, storename))
             data = mycursor.fetchall()
@@ -107,6 +107,7 @@ class Shops(commands.Cog):
                             await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
         except mysql.connector.Error as err:
             print("Something went wrong: {}".format(err))
+            print(mycursor.statement)
 
     @storeedit.error
     async def storeedit_error(self, username, error):
