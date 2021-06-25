@@ -73,7 +73,7 @@ class Shops(commands.Cog):
             await ctx.send('Either I could not find a store with that name or you are not a member of that store.')
         else:
             # Checks if Item is in Library of Minecraft Items
-            mycursor.execute("SELECT EXISTS (SELECT Item FROM Item_List WHERE Item=%s", (item,))
+            mycursor.execute("SELECT EXISTS (SELECT Item FROM Item_List WHERE Item=%s)", (item,))
             data = mycursor.fetchall()
 
             if not data[0][0]:
