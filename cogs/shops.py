@@ -94,7 +94,7 @@ class Shops(commands.Cog):
                         db.commit()
                         updateresult = mycursor.rowcount
                         if updateresult > 0:
-                            await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} Diamonds for the {storename} Store.')
+                            await ctx.send(f'The listing for {quantity}x {item}\'s price was successfully updated to {price} {currency}(s) for the {storename} Store.')
                         else:
                             await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
                     else:
@@ -102,7 +102,7 @@ class Shops(commands.Cog):
                         db.commit()
                         addresult = mycursor.rowcount
                         if addresult > 0:
-                            await ctx.send(f'A listing for {quantity}x {item} was successfully added at a price of {price} Diamonds for the {storename} Store.')
+                            await ctx.send(f'A listing for {quantity}x {item} was successfully added at a price of {price} {currency}(s) for the {storename} Store.')
                         else:
                             await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
         except mysql.connector.Error as err:
