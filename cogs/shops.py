@@ -76,7 +76,8 @@ class Shops(commands.Cog):
                 # Checks if Item is in Library of Minecraft Items
                 mycursor.execute("SELECT EXISTS (SELECT Item FROM Item_List WHERE Item=%s", (item,))
                 data = mycursor.fetchall()
-
+                print(mycursor.statement)
+                print(data)
                 if not data[0][0]:
                     # Assume the user did a misspell, and suggests an item from the list
                     mycursor.execute("SELECT Item FROM Item_List WHERE Item SOUNDS LIKE %s LIMIT 1", (item,))
