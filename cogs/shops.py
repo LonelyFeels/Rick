@@ -66,7 +66,7 @@ class Shops(commands.Cog):
         )
         mycursor = db.cursor()
         owner = ctx.message.author
-        mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s", (owner.id, storename))
+        mycursor.execute("SELECT * FROM Store_Directory WHERE UserID=%s AND StoreName=%s", (str(owner.id), storename))
         data = mycursor.fetchall()
         dataempty = [] == data
         if len(data) == 0:
@@ -89,7 +89,7 @@ class Shops(commands.Cog):
                 mycursor.execute("SELECT EXISTS (SELECT * FROM Item_Listings WHERE Item=%s AND StoreName=%s)", (item, storename))
                 itemexists = mycursor.fetchall()
                 if itemexists[0][0]:
-                    mycursor.execute("UPDATE Item_Listings SET Quantity=%s, Price=%s, Description=%s WHERE Item=%s AND StoreName=%s", (quantity, price, description, item, storename))
+                    mycursor.execute("UPDATE Item_Listings SET Quantity=%d, Price=%d, Description=%s WHERE Item=%s AND StoreName=%s", (quantity, price, description, item, storename))
                     db.commit()
                     updateresult = mycursor.rowcount
                     if updateresult > 0:
@@ -97,7 +97,7 @@ class Shops(commands.Cog):
                     else:
                         await ctx.send("Something happened when trying to add an item from your store. Contact an Admin for help.")
                 else:
-                    mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Description) VALUES (%s, %s, %s, %s, %s)", (item, storename, quantity, price, description))
+                    mycursor.execute("INSERT INTO Item_Listings (Item, StoreName, Quantity, Price, Description) VALUES (%s, %s, %d, %d, %s)", (item, storename, quantity, price, description))
                     db.commit()
                     addresult = mycursor.rowcount
                     if addresult > 0:
