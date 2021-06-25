@@ -343,7 +343,7 @@ class Shops(commands.Cog):
                     await ctx.send("Something happened when trying to remove items from your store. Contact an Admin for help.")
 
     # !store
-    @commands.command()
+    @commands.command(aliases=['shop'])
     async def store(self, ctx, storereference):
         db = mysql.connector.connect(
             host = credentials.host,
@@ -478,7 +478,7 @@ class Shops(commands.Cog):
             await username.send('You have mention the member you want to remove from your store!')
 
     # !stores
-    @commands.command()
+    @commands.command(aliases=['shops'])
     async def stores(self, ctx):
         db = mysql.connector.connect(
             host = credentials.host,
