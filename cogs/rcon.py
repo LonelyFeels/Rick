@@ -190,7 +190,7 @@ class RCON(commands.Cog):
 
         if ctx.channel.id == channel.id:
             if colour == 'GOLD':
-                if member.has_role(role):
+                if role in member.roles:
                     await ctx.send('You have only access to PINK color!')
                 else:
                     server = Server(ip, port, password, connect_on_send=True)
@@ -198,7 +198,7 @@ class RCON(commands.Cog):
                     await ctx.send(f'{ign} changed their color to GOLD.')
                     await server.close()
             elif colour == 'DARK_GREEN':
-                if member.has_role(role):
+                if role in member.roles:
                     await ctx.send('You have only access to PINK color!')
                 else:
                     server = Server(ip, port, password, connect_on_send=True)
@@ -206,7 +206,7 @@ class RCON(commands.Cog):
                     await ctx.send(f'{ign} changed their color to DARK GREEN.')
                     await server.close()
             elif colour == 'DARK_PURPLE':
-                if member.has_role(role):
+                if role in member.roles:
                     await ctx.send('You have only access to PINK color!')
                 else:
                     server = Server(ip, port, password, connect_on_send=True)
@@ -219,7 +219,7 @@ class RCON(commands.Cog):
                 await ctx.send(f'{ign} changed their color to LIGHT PURPLE.')
                 await server.close()
             elif colour == 'DARK_AQUA':
-                if member.has_role(role):
+                if role in member.roles:
                     await ctx.send('You have only access to PINK color!')
                 else:
                     server = Server(ip, port, password, connect_on_send=True)
@@ -227,7 +227,7 @@ class RCON(commands.Cog):
                     await ctx.send(f'{ign} changed their color to DARK AQUA.')
                     await server.close()
             elif colour == 'AQUA':
-                if member.has_role(role):
+                if role in member.roles:
                     await ctx.send('You have only access to PINK color!')
                 else:
                     server = Server(ip, port, password, connect_on_send=True)
@@ -235,7 +235,7 @@ class RCON(commands.Cog):
                     await ctx.send(f'{ign} changed their color to AQUA.')
                     await server.close()
             elif colour == 'GREEN':
-                if member.has_role(role):
+                if role in member.roles:
                     await ctx.send('You have only access to PINK color!')
                 else:
                     server = Server(ip, port, password, connect_on_send=True)
@@ -243,7 +243,7 @@ class RCON(commands.Cog):
                     await ctx.send(f'{ign} changed their color to GREEN.')
                     await server.close()
             elif colour == 'DARK_BLUE':
-                if member.has_role(role):
+                if role in member.roles:
                     await ctx.send('You have only access to PINK color!')
                 else:
                     server = Server(ip, port, password, connect_on_send=True)
