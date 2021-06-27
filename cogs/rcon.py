@@ -177,7 +177,7 @@ class RCON(commands.Cog):
             await ctx.send("You don't have the permissions to do that!")
 
     @commands.command()
-    @commands.has_role('Donators', 'Contributor', 'Nitro Booster')
+    @commands.has_any_role('Donators', 'Contributor', 'Nitro Booster')
     async def color(self, ctx, colour):
         ign = ctx.message.author.display_name
         channel = self.client.get_channel(737029420493045800)
