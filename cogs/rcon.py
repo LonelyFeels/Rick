@@ -177,10 +177,12 @@ class RCON(commands.Cog):
             await ctx.send("You don't have the permissions to do that!")
 
     @commands.command()
-    @commands.has_role('Donators')
+    @commands.has_role('Donators', 'Contributor', 'Nitro Booster')
     async def color(self, ctx, colour):
         ign = ctx.message.author.display_name
         channel = self.client.get_channel(737029420493045800)
+        role = discord.utils.find(lambda r: r.name == 'Nitro Booster', ctx.message.server.roles)
+        member = ctx.message.author
 
         ip = rconcredentials.ip
         port = rconcredentials.port
@@ -188,45 +190,66 @@ class RCON(commands.Cog):
 
         if ctx.channel.id == channel.id:
             if colour == 'GOLD':
-                server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator GOLD {ign}'))
-                await ctx.send(f'{ign} changed their color to GOLD.')
-                await server.close()
+                if member.has_role(role):
+                    await ctx.send('You have only access to PINK color!')
+                else:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator GOLD {ign}'))
+                    await ctx.send(f'{ign} changed their color to GOLD.')
+                    await server.close()
             elif colour == 'DARK_GREEN':
-                server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator DARK_GREEN {ign}'))
-                await ctx.send(f'{ign} changed their color to DARK GREEN.')
-                await server.close()
+                if member.has_role(role):
+                    await ctx.send('You have only access to PINK color!')
+                else:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator DARK_GREEN {ign}'))
+                    await ctx.send(f'{ign} changed their color to DARK GREEN.')
+                    await server.close()
             elif colour == 'DARK_PURPLE':
-                server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator DARK_PURPLE {ign}'))
-                await ctx.send(f'{ign} changed their color to DARK PURPLE.')
-                await server.close()
+                if member.has_role(role):
+                    await ctx.send('You have only access to PINK color!')
+                else:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator DARK_PURPLE {ign}'))
+                    await ctx.send(f'{ign} changed their color to DARK PURPLE.')
+                    await server.close()
             elif colour == 'LIGHT_PURPLE':
                 server = Server(ip, port, password, connect_on_send=True)
                 print(await server.send(f'donator LIGHT_PURPLE {ign}'))
                 await ctx.send(f'{ign} changed their color to LIGHT PURPLE.')
                 await server.close()
             elif colour == 'DARK_AQUA':
-                server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator DARK_AQUA {ign}'))
-                await ctx.send(f'{ign} changed their color to DARK AQUA.')
-                await server.close()
+                if member.has_role(role):
+                    await ctx.send('You have only access to PINK color!')
+                else:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator DARK_AQUA {ign}'))
+                    await ctx.send(f'{ign} changed their color to DARK AQUA.')
+                    await server.close()
             elif colour == 'AQUA':
-                server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator AQUA {ign}'))
-                await ctx.send(f'{ign} changed their color to AQUA.')
-                await server.close()
+                if member.has_role(role):
+                    await ctx.send('You have only access to PINK color!')
+                else:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator AQUA {ign}'))
+                    await ctx.send(f'{ign} changed their color to AQUA.')
+                    await server.close()
             elif colour == 'GREEN':
-                server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator GREEN {ign}'))
-                await ctx.send(f'{ign} changed their color to GREEN.')
-                await server.close()
+                if member.has_role(role):
+                    await ctx.send('You have only access to PINK color!')
+                else:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator GREEN {ign}'))
+                    await ctx.send(f'{ign} changed their color to GREEN.')
+                    await server.close()
             elif colour == 'DARK_BLUE':
-                server = Server(ip, port, password, connect_on_send=True)
-                print(await server.send(f'donator DARK_BLUE {ign}'))
-                await ctx.send(f'{ign} changed their color to DARK BLUE.')
-                await server.close()
+                if member.has_role(role):
+                    await ctx.send('You have only access to PINK color!')
+                else:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator DARK_BLUE {ign}'))
+                    await ctx.send(f'{ign} changed their color to DARK BLUE.')
+                    await server.close()
             else:
                 await ctx.send(f'You don\'t have permissions to use such color!')
         else:
