@@ -65,7 +65,7 @@ class Fun(commands.Cog):
         soup = bs(page.content, features='html.parser')
         url = str(soup.find_all(class_="center-fit")[0])[-18:][:15]
         name = str(soup.find_all(align="center")[0]).split(' from')[0][55:]
-        channel = self.client.get_channel(771725747480035358)
+        channel = self.client.get_channel(859119453903781908)
 
         if ctx.channel.id == channel.id:
             embedwaifu = discord.Embed(
