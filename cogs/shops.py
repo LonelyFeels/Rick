@@ -154,7 +154,10 @@ class Shops(commands.Cog):
                 for row in data:
                     embeditemlookup.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
                     embeditemlookup.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-                    embeditemlookup.add_field(name=row[0], value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} {str(row[3])}(s) \n Description: {str(row[4])}", inline=False)
+                    if row[4] == None:
+                        embeditemlookup.add_field(name=row[0], value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} {str(row[3])}(s)", inline=False)
+                    else:
+                        embeditemlookup.add_field(name=row[0], value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} {str(row[3])}(s) \n Description: {str(row[4])}", inline=False)
                 await ctx.send(embed=embeditemlookup)
             else:
                 await ctx.send(f"No one is currently selling any {str(item)}s.")
@@ -380,7 +383,10 @@ class Shops(commands.Cog):
                     for row in data:
                         embedstoreup.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
                         embedstoreup.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-                        embedstoreup.add_field(name=f"{str(row[0])}", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} {str(row[3])}(s) \n Description: {str(row[4])}", inline=False)
+                        if row[4] == None:
+                            embedstoreup.add_field(name=f"{str(row[0])}", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} {str(row[3])}(s)", inline=False)
+                        else:
+                            embedstoreup.add_field(name=f"{str(row[0])}", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} {str(row[3])}(s) \n Description: {str(row[4])}", inline=False)
                     await ctx.send(embed=embedstoreup)
                 else:
                     await ctx.send(f"The {storename} store currently does not have any items for sale.")
@@ -406,7 +412,10 @@ class Shops(commands.Cog):
                     for row in data:
                         embedstoreup.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
                         embedstoreup.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-                        embedstoreup.add_field(name=f"{str(row[0])}", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} {str(row[3])}(s) \n Description: {str(row[4])}", inline=False)
+                        if row[4] == None:
+                            embedstoreup.add_field(name=f"{str(row[0])}", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} {str(row[3])}(s)", inline=False)
+                        else:
+                            embedstoreup.add_field(name=f"{str(row[0])}", value=f"Quantity: {str(row[1])} \n Price: {str(row[2])} {str(row[3])}(s) \n Description: {str(row[4])}", inline=False)
                     await ctx.send(embed=embedstoreup)
                 else:
                     await ctx.send(f"The {storename} store currently does not have any items for sale.")
