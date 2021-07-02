@@ -193,7 +193,12 @@ class RCON(commands.Cog):
 
         if ctx.channel.id == channel.id:
             if colour == 'GOLD':
-                if donator or contributor in member.roles:
+                if donator in member.roles:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator GOLD {ign}'))
+                    await ctx.send(f'{ign} changed their color to GOLD.')
+                    await server.close()
+                if contributor in member.roles:
                     server = Server(ip, port, password, connect_on_send=True)
                     print(await server.send(f'donator GOLD {ign}'))
                     await ctx.send(f'{ign} changed their color to GOLD.')
@@ -201,7 +206,12 @@ class RCON(commands.Cog):
                 else:
                     await ctx.send('You don\'t have permissions to use such color!')
             elif colour == 'DARK_GREEN':
-                if donator or contributor in member.roles:
+                if donator in member.roles:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator DARK_GREEN {ign}'))
+                    await ctx.send(f'{ign} changed their color to DARK GREEN.')
+                    await server.close()
+                if contributor in member.roles:
                     server = Server(ip, port, password, connect_on_send=True)
                     print(await server.send(f'donator DARK_GREEN {ign}'))
                     await ctx.send(f'{ign} changed their color to DARK GREEN.')
@@ -209,7 +219,12 @@ class RCON(commands.Cog):
                 else:
                     await ctx.send('You don\'t have permissions to use such color!')
             elif colour == 'DARK_PURPLE':
-                if donator or contributor in member.roles:
+                if donator in member.roles:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator DARK_PURPLE {ign}'))
+                    await ctx.send(f'{ign} changed their color to DARK PURPLE.')
+                    await server.close()
+                if contributor in member.roles:
                     server = Server(ip, port, password, connect_on_send=True)
                     print(await server.send(f'donator DARK_PURPLE {ign}'))
                     await ctx.send(f'{ign} changed their color to DARK PURPLE.')
@@ -222,7 +237,12 @@ class RCON(commands.Cog):
                 await ctx.send(f'{ign} changed their color to LIGHT PURPLE.')
                 await server.close()
             elif colour == 'DARK_AQUA':
-                if donator or contributor in member.roles:
+                if donator in member.roles:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator DARK_AQUA {ign}'))
+                    await ctx.send(f'{ign} changed their color to DARK AQUA.')
+                    await server.close()
+                if contributor in member.roles:
                     server = Server(ip, port, password, connect_on_send=True)
                     print(await server.send(f'donator DARK_AQUA {ign}'))
                     await ctx.send(f'{ign} changed their color to DARK AQUA.')
@@ -230,7 +250,12 @@ class RCON(commands.Cog):
                 else:
                     await ctx.send('You don\'t have permissions to use such color!')
             elif colour == 'AQUA':
-                if donator or contributor in member.roles:
+                if donator in member.roles:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator AQUA {ign}'))
+                    await ctx.send(f'{ign} changed their color to AQUA.')
+                    await server.close()
+                if contributor in member.roles:
                     server = Server(ip, port, password, connect_on_send=True)
                     print(await server.send(f'donator AQUA {ign}'))
                     await ctx.send(f'{ign} changed their color to AQUA.')
@@ -238,7 +263,12 @@ class RCON(commands.Cog):
                 else:
                     await ctx.send('You don\'t have permissions to use such color!')
             elif colour == 'GREEN':
-                if donator or contributor in member.roles:
+                if donator in member.roles:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator GREEN {ign}'))
+                    await ctx.send(f'{ign} changed their color to GREEN.')
+                    await server.close()
+                if contributor in member.roles:
                     server = Server(ip, port, password, connect_on_send=True)
                     print(await server.send(f'donator GREEN {ign}'))
                     await ctx.send(f'{ign} changed their color to GREEN.')
@@ -246,7 +276,12 @@ class RCON(commands.Cog):
                 else:
                     await ctx.send('You don\'t have permissions to use such color!')
             elif colour == 'DARK_BLUE':
-                if donator or contributor in member.roles:
+                if donator in member.roles:
+                    server = Server(ip, port, password, connect_on_send=True)
+                    print(await server.send(f'donator DARK_BLUE {ign}'))
+                    await ctx.send(f'{ign} changed their color to DARK BLUE.')
+                    await server.close()
+                if contributor in member.roles:
                     server = Server(ip, port, password, connect_on_send=True)
                     print(await server.send(f'donator DARK_BLUE {ign}'))
                     await ctx.send(f'{ign} changed their color to DARK BLUE.')
