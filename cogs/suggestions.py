@@ -34,6 +34,8 @@ class Suggestions(commands.Cog):
     async def suggest_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send('You have to suggest something in order to use this command.')
+        else:
+            raise error
 
 def setup(client):
     client.add_cog(Suggestions(client))
