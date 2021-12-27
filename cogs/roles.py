@@ -34,11 +34,7 @@ class Roles(commands.Cog):
             guild = discord.utils.find(lambda g : g.id == guild_id, self.client.guilds)
             member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
 
-            if payload.emoji.name == 'Hydropepecglock':
-                role = discord.utils.get(guild.roles, name='True Server Crasher...')
-            elif payload.emoji.name == 'tehlo':
-                role = discord.utils.get(guild.roles, name="'Story of Teflon'")
-            elif payload.emoji.name == 'blamenate':
+            if payload.emoji.name == 'blamenate':
                 role = discord.utils.get(guild.roles, name='#PraiseNate')
             elif payload.emoji.name == '🛒':
                 role = discord.utils.get(guild.roles, name='Shopaholics')
@@ -48,10 +44,16 @@ class Roles(commands.Cog):
                 role = discord.utils.get(guild.roles, name='Dutchie')
             elif payload.emoji.name == '🍰':
                 role = discord.utils.get(guild.roles, name='Food Addicts')
-            elif payload.emoji.name == 'reddit':
-                role = discord.utils.get(guild.roles, name='Subreddit Member')
+            elif payload.emoji.name == '🎨':
+                role = discord.utils.get(guild.roles, name='Art')
+            elif payload.emoji.name == '🔞':
+                role = discord.utils.get(guild.roles, name='NSFW')
+            elif payload.emoji.name == 'HydroPing1':
+                role = discord.utils.get(guild.roles, name='Survey')
             elif payload.emoji.name == 'HydroTwitch':
                 role = discord.utils.get(guild.roles, name='Stream Fans')
+            elif payload.emoji.name == 'Hydrohypers':
+                role = discord.utils.get(guild.roles, name='Memester')
             elif payload.emoji.name == '1️⃣':
                 role = discord.utils.get(guild.roles, name='Season 1 OG')
             elif payload.emoji.name == '2️⃣':
@@ -66,6 +68,8 @@ class Roles(commands.Cog):
                 role = discord.utils.get(guild.roles, name='Season 6 OG')
             elif payload.emoji.name == 'Hydro69':
                 role = discord.utils.get(guild.roles, name='Season 6.9 OG')
+            elif payload.emoji.name == '7️⃣':
+                role = discord.utils.get(guild.roles, name='Season 7 OG')
             else:
                 role = discord.utils.get(guild.roles, name=payload.emoji.name)
 
@@ -89,11 +93,7 @@ class Roles(commands.Cog):
             guild = discord.utils.find(lambda g: g.id == guild_id, self.client.guilds)
             member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
 
-            if payload.emoji.name == 'Hydropepecglock':
-                role = discord.utils.get(guild.roles, name='True Server Crasher...')
-            elif payload.emoji.name == 'tehlo':
-                role = discord.utils.get(guild.roles, name="'Story of Teflon'")
-            elif payload.emoji.name == 'blamenate':
+            if payload.emoji.name == 'blamenate':
                 role = discord.utils.get(guild.roles, name='#PraiseNate')
             elif payload.emoji.name == '🛒':
                 role = discord.utils.get(guild.roles, name='Shopaholics')
@@ -103,10 +103,16 @@ class Roles(commands.Cog):
                 role = discord.utils.get(guild.roles, name='Dutchie')
             elif payload.emoji.name == '🍰':
                 role = discord.utils.get(guild.roles, name='Food Addicts')
-            elif payload.emoji.name == 'reddit':
-                role = discord.utils.get(guild.roles, name='Subreddit Member')
+            elif payload.emoji.name == '🎨':
+                role = discord.utils.get(guild.roles, name='Art')
+            elif payload.emoji.name == '🔞':
+                role = discord.utils.get(guild.roles, name='NSFW')
+            elif payload.emoji.name == 'HydroPing1':
+                role = discord.utils.get(guild.roles, name='Survey')
             elif payload.emoji.name == 'HydroTwitch':
                 role = discord.utils.get(guild.roles, name='Stream Fans')
+            elif payload.emoji.name == 'Hydrohypers':
+                role = discord.utils.get(guild.roles, name='Memester')
             elif payload.emoji.name == '1️⃣':
                 role = discord.utils.get(guild.roles, name='Season 1 OG')
             elif payload.emoji.name == '2️⃣':
@@ -119,6 +125,10 @@ class Roles(commands.Cog):
                 role = discord.utils.get(guild.roles, name='Season 5 OG')
             elif payload.emoji.name == '6️⃣':
                 role = discord.utils.get(guild.roles, name='Season 6 OG')
+            elif payload.emoji.name == 'Hydro69':
+                role = discord.utils.get(guild.roles, name='Season 6.9 OG')
+            elif payload.emoji.name == '7️⃣':
+                role = discord.utils.get(guild.roles, name='Season 7 OG')
             else:
                 role = discord.utils.get(guild.roles, name=payload.emoji.name)
 
@@ -147,7 +157,7 @@ class Roles(commands.Cog):
         info = '<#584773749497266199>'
         await member.remove_roles(applicants)
         await member.add_roles(members)
-        await channel.send(f'Please welcome {member.mention} to **Hydro Vanilla SMP**! Our IP and Information can be found in {info}! :smiley:\nAnd no, @W1ckeDMetaL is not an admin... he is just an asshole with too much income 💸\nDue to some problems with server domain, please us the following IP address: `148.251.211.70:25565`')
+        await channel.send(f'Please welcome {member.mention} to **Hydro Vanilla SMP**! Our IP and Information can be found in {info}! :smiley:\nAnd no, @W1ckeDMetaL is not an admin... he is just an asshole with too much income 💸')
 
     @accept.error
     async def accept_error(self, member, error):
