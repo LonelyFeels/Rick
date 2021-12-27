@@ -27,7 +27,7 @@ class Status(commands.Cog):
 
         embedstatus.set_footer(text=f'@ Hydro Vanilla SMP', icon_url='https://i.imgur.com/VkgebnW.png')
         embedstatus.set_thumbnail(url='https://i.imgur.com/VkgebnW.png')
-        embedstatus.add_field(name='Hydro Vanilla SMP Season 6.9 is online!', value=f'Currently there are {server.online_players} / {server.max_players} playing.', inline=False)
+        embedstatus.add_field(name='Hydro Vanilla SMP Season 7 is online!', value=f'Currently there are {server.online_players} / {server.max_players} playing.', inline=False)
         embedstatus.add_field(name='_ _', value='_ _', inline=False)
         pl1 = server.players_list
         if pl1:
